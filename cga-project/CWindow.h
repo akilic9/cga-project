@@ -2,13 +2,14 @@
 #include "SFML/System/Vector2.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
 
+// Wrapper for SFML Window
 class CWindow
 {
-
 public:
 	// -------------- Constructor/Destructor --------------
 	CWindow();
-	CWindow(const char* title, const sf::Vector2u windowSize = sf::Vector2u(1600, 900));
+	CWindow(const char* title);
+	CWindow(const char* title, const sf::Vector2u windowSize);
 	~CWindow();
 
 	// -------------- Public Methods --------------
@@ -17,14 +18,14 @@ public:
 	void EndDraw() { m_window.display(); }
 	void Draw(sf::Drawable& drawable) { m_window.draw(drawable); }
 
-	// -------------- Getter Methods --------------
+	// -------------- Helper Methods --------------
 	const sf::Vector2u& GetWindowSize() { return m_window.getSize(); }
+	const bool& IsOpen() { return m_window.isOpen(); }
 
 private:
 	// -------------- Private Methods --------------
 	void CreateWindow(const char* title, const sf::Vector2u& windowSize);
 	void ToggleFullscreen();
-	void Destroy();
 
 	// -------------- Variables --------------
 	bool m_isFullscreen;

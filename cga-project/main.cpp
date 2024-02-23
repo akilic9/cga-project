@@ -1,21 +1,31 @@
 #include <SFML/Graphics.hpp>
-//https://www.sfml-dev.org/tutorials/2.6/start-vc.php
+#include "Game.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1600, 900), "CGA Project");
+    Game game;
+    game.Init();
+    sf::Clock clock;
+    
+    float elapsedTime = clock.restart().asMilliseconds();
 
-    while (window.isOpen())
+    const float& fixedFrameTime = 1.f / 60.f;
+
+    //Game loop
+    while (game.GetWindow().IsOpen())
     {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
+        float deltaTime = clock.restart().asMilliseconds();
+        game.HandleInput();
+        game.Update(deltaTime);
+
+        elapsedTime += deltaTime;
+        if (elapsedTime >= fixedFrameTime) {
+            game.FixedUpdate();
+            elapsedTime -= fixedFrameTime;
         }
 
-        window.clear(sf::Color::Black);
-        window.display();
+        game.FixedUpdate();
+        game.Render();
     }
 
     return 0;

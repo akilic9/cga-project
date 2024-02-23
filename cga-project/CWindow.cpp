@@ -11,6 +11,12 @@ CWindow::CWindow() :
 	CreateWindow(DEFAULT_TITLE, DEFAULT_WINDOWED_SIZE);
 }
 
+CWindow::CWindow(const char* title) :
+	m_isFullscreen(DEFAULT_FULLSCREEN)
+{
+	CreateWindow(title, DEFAULT_WINDOWED_SIZE);
+}
+
 CWindow::CWindow(const char* title, const sf::Vector2u windowSize) :
 	m_isFullscreen(DEFAULT_FULLSCREEN)
 {
@@ -19,7 +25,7 @@ CWindow::CWindow(const char* title, const sf::Vector2u windowSize) :
 
 CWindow::~CWindow()
 {
-	Destroy();
+	m_window.close();
 }
 
 void CWindow::Update()
@@ -27,7 +33,7 @@ void CWindow::Update()
 	sf::Event event;
 	while (m_window.pollEvent(event)) {
 		if (event.type == sf::Event::Closed) {
-			//m_isClosed = true;
+			m_window.close();
 		}
 		else if (event.type == sf::Event::KeyPressed &&
 			event.key.code == sf::Keyboard::P)
@@ -48,12 +54,7 @@ void CWindow::ToggleFullscreen()
 {
 	auto size = m_window.getSize();
 	m_isFullscreen = !m_isFullscreen;
-	Destroy();
+	m_window.close();
 	// TODO: Adjust size here to fullscreen specific if m_isFullscreen == true.
 	CreateWindow(m_title, size);
-}
-
-void CWindow::Destroy()
-{
-	m_window.close();
 }
