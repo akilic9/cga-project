@@ -7,6 +7,7 @@ int main()
     game.Init();
     sf::Clock clock;
     
+    //TODO: asMiliseconds uses int32? Maybe switch to seconds?
     float elapsedTime = clock.restart().asMilliseconds();
 
     const float& fixedFrameTime = 1.f / 60.f;
