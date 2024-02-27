@@ -2,7 +2,7 @@
 #include "SFML/Window/Event.hpp"
 
 const sf::Vector2u DEFAULT_WINDOWED_SIZE = sf::Vector2u(1600, 900);
-const char* DEFAULT_TITLE = "SFML Window";
+const std::string DEFAULT_TITLE = "SFML Window";
 const bool DEFAULT_FULLSCREEN = false;
 
 CWindow::CWindow() :
@@ -11,13 +11,13 @@ CWindow::CWindow() :
 	CreateWindow(DEFAULT_TITLE, DEFAULT_WINDOWED_SIZE);
 }
 
-CWindow::CWindow(const char* title) :
+CWindow::CWindow(const std::string& title) :
 	m_isFullscreen(DEFAULT_FULLSCREEN)
 {
 	CreateWindow(title, DEFAULT_WINDOWED_SIZE);
 }
 
-CWindow::CWindow(const char* title, const sf::Vector2u windowSize) :
+CWindow::CWindow(const std::string& title, const sf::Vector2u windowSize) :
 	m_isFullscreen(DEFAULT_FULLSCREEN)
 {
 	CreateWindow(title, windowSize);
@@ -43,7 +43,7 @@ void CWindow::Update()
 	}
 }
 
-void CWindow::CreateWindow(const char* title, const sf::Vector2u& windowSize)
+void CWindow::CreateWindow(const std::string& title, const sf::Vector2u& windowSize)
 {
 	auto windowStyle = m_isFullscreen ? sf::Style::Fullscreen : sf::Style::Default;
 

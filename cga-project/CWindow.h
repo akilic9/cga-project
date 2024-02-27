@@ -8,8 +8,8 @@ class CWindow
 public:
 	// -------------- Constructor/Destructor --------------
 	CWindow();
-	CWindow(const char* title);
-	CWindow(const char* title, const sf::Vector2u windowSize);
+	CWindow(const std::string& title);
+	CWindow(const std::string& title, const sf::Vector2u windowSize);
 	~CWindow();
 
 	// -------------- Public Methods --------------
@@ -24,12 +24,12 @@ public:
 
 private:
 	// -------------- Private Methods --------------
-	void CreateWindow(const char* title, const sf::Vector2u& windowSize);
+	void CreateWindow(const std::string& title, const sf::Vector2u& windowSize);
 	void ToggleFullscreen();
 
 	// -------------- Variables --------------
 	bool m_isFullscreen;
-	const char* m_title;
+	const std::string m_title;
 	sf::RenderWindow m_window;
 };
 

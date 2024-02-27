@@ -136,11 +136,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CWindow.cpp" />
+    <ClCompile Include="EventManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CWindow.h" />
+    <ClInclude Include="EventManager.h" />
     <ClInclude Include="Game.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
