@@ -7,15 +7,14 @@ int main()
     game.Init();
     sf::Clock clock;
     
-    //TODO: asMiliseconds uses int32? Maybe switch to seconds?
-    float elapsedTime = clock.restart().asMilliseconds();
+    float elapsedTime = clock.restart().asSeconds();
 
     const float& fixedFrameTime = 1.f / 60.f;
 
     //Game loop
     while (game.GetWindow().IsOpen())
     {
-        float deltaTime = clock.restart().asMilliseconds();
+        float deltaTime = clock.restart().asSeconds();
         game.HandleInput();
         game.Update(deltaTime);
 

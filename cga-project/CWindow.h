@@ -6,28 +6,28 @@
 class CWindow
 {
 public:
-	// -------------- Constructor/Destructor --------------
+// -------------- Constructor/Destructor --------------
 	CWindow();
 	CWindow(const std::string& title);
 	CWindow(const std::string& title, const sf::Vector2u windowSize);
 	~CWindow();
+// ----------------------------------------------------
 
-	// -------------- Public Methods --------------
 	void Update();
 	void BeginDraw() { m_window.clear(sf::Color::Black); }
 	void EndDraw() { m_window.display(); }
 	void Draw(sf::Drawable& drawable) { m_window.draw(drawable); }
 
-	// -------------- Helper Methods --------------
+// -------------- Helper Methods ----------------------
 	const sf::Vector2u& GetWindowSize() { return m_window.getSize(); }
 	const bool& IsOpen() { return m_window.isOpen(); }
 
 private:
-	// -------------- Private Methods --------------
+// -------------- Private Methods ---------------------
 	void CreateWindow(const std::string& title, const sf::Vector2u& windowSize);
 	void ToggleFullscreen();
 
-	// -------------- Variables --------------
+// -------------- Variables ---------------------------
 	bool m_isFullscreen;
 	const std::string m_title;
 	sf::RenderWindow m_window;

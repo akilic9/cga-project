@@ -1,22 +1,21 @@
 #pragma once
 #include "CWindow.h"
-
+//Aybike: Doesn't makes sense to me that game owns the window, but seems like the structure will change in the later chapters of the book. Just rolling with it atm.
 class Game
 {
 public:
-	// -------------- Constructor/Destructor --------------
+// -------------- Constructor/Destructor --------------
 	Game();
 	~Game();
+// ----------------------------------------------------
 
-	// -------------- Public Methods --------------
 	void Init();
 	void Update(float deltaTime);
 	void FixedUpdate();
 	void Render();
 	void HandleInput();
 
-
-	// -------------- Helper Methods --------------
+// -------------- Helper Methods --------------
 	CWindow& GetWindow() { return m_window; }
 
 private:
