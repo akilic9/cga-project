@@ -78,7 +78,7 @@ public:
 
 	void SetFocus(const bool& isFocused);
 
-	void HandleEvent(sf::Event& event);
+	void HandleEvent(sf::Event& newEvent);
 
 	void Update();
 
