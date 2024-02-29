@@ -22,8 +22,7 @@ enum class EventType {
 	Closed = sf::Event::Closed,
 	TextEntered = sf::Event::TextEntered,
 	Keyboard = sf::Event::Count + 1,
-	Mouse,
-	Joystick
+	Mouse
 };
 
 struct EventInfo {
@@ -73,10 +72,10 @@ public:
 	EventManager();
 	~EventManager();
 
-	void AddBinding(EventBinding* eventBinding);
+	bool AddBinding(EventBinding* eventBinding);
 	void RemoveBinding(std::string bindingName);
 
-	void SetFocus(const bool& isFocused);
+	void SetHasFocus(const bool& isFocused);
 
 	void HandleEvent(sf::Event& newEvent);
 
