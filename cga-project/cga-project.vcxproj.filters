@@ -27,9 +27,6 @@
     <ClCompile Include="EventManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParsingUtils.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -41,7 +38,7 @@
     <ClInclude Include="EventManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ParsingUtils.h">
+    <ClInclude Include="LoggerUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
