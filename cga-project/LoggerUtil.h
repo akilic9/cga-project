@@ -3,6 +3,14 @@
 #include <iostream>
 #include <Windows.h>
 
+/*
+************************************************************************REFERENCES************************************************************************
+* https://cppcodetips.wordpress.com/2020/10/25/different-ways-to-get-the-name-of-the-calling-function-in-c/
+* https://cplusplus.com/forum/beginner/92586/
+* ********************************************************************************************************************************************************
+*/
+
+//TODO: Needs expanding for multiple types and formatting.
 class LoggerUtil {
 public:
 	inline static void CustomErrorLog(std::string &msg, const char* func)
@@ -10,21 +18,43 @@ public:
 		SetConsoleColor(4);
 		std::cout <<  "ERROR: " << msg << " : [" << func << " ]" << std::endl;
 	}
-	#define CE_OUTPUT_ERROR(msg) CustomErrorLog(msg, __FUNCSIG__)
+
+	inline static void CustomErrorLog(const char* msg, const char* func)
+	{
+		SetConsoleColor(4);
+		std::cout << "ERROR: " << msg << " : [" << func << " ]" << std::endl;
+	}
+#define CE_OUTPUT_ERROR(msg) LoggerUtil::CustomErrorLog(msg, __FUNCSIG__)
 
 	inline static void CustomWarningLog(std::string& msg, const char* func)
 	{
 		SetConsoleColor(6);
 		std::cout << "WARNING: " << msg << " : [" << func << " ]" << std::endl;
 	}
-	#define CE_OUTPUT_WARNING(msg) CustomWarningLog(msg, __FUNCSIG__)
+
+	inline static void CustomWarningLog(const char* msg, const char* func)
+	{
+		SetConsoleColor(6);
+		std::cout << "WARNING: " << msg << " : [" << func << " ]" << std::endl;
+	}
+#define CE_OUTPUT_WARNING(msg) LoggerUtil::CustomWarningLog(msg, __FUNCSIG__)
 
 	inline static void CustomDebugLog(std::string& msg, const char* func)
 	{
+#ifdef _DEBUG
 		SetConsoleColor(3);
 		std::cout << "DEBUG: " << msg << " : [" << func << " ]" << std::endl;
+#endif // _DEBUG
 	}
-	#define CE_OUTPUT_DEBUG(msg) CustomDebugLog(msg, __FUNCSIG__)
+
+	inline static void CustomDebugLog(const char* msg, const char* func)
+	{
+#ifdef _DEBUG
+		SetConsoleColor(3);
+		std::cout << "DEBUG: " << msg << " : [" << func << " ]" << std::endl;
+#endif // _DEBUG
+	}
+#define CE_OUTPUT_DEBUG(msg) LoggerUtil::CustomDebugLog(msg, __FUNCSIG__)
 
 private:
 	//COLORS LIST

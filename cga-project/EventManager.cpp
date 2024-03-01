@@ -2,6 +2,7 @@
 #include "LoggerUtil.h"
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 EventManager::EventManager() :
 	m_hasFocus(true)
@@ -43,7 +44,6 @@ void EventManager::SetHasFocus(const bool& isFocused)
 	m_hasFocus = isFocused;
 }
 
-/*Aybike: Some stuff I don't understand here. Check it out again later.*/
 void EventManager::HandleEvent(sf::Event& newEvent)
 {
 
@@ -58,22 +58,43 @@ void EventManager::Update()
 void EventManager::LoadBindings()
 {
 	std::ifstream bindingsStream;
-	bindingsStream.open("Data/InputBindings.cfg");
+	std::string filePath = "Data/InputBindings.cfg";
+	bindingsStream.open(filePath);
 
 	// Can't open file.
 	if (!bindingsStream.is_open()) {
-		std::cout << "Could not read Data/InputBindings.cfg." << std::endl;
+		CE_OUTPUT_ERROR("Could not read the input bindings file!");
 		return;
 	}
 
 	std::string line;
 	while (std::getline(bindingsStream, line)) {
-#ifdef _DEBUG
-		LoggerUtil::CE_OUTPUT_ERROR(line);
-		LoggerUtil::CE_OUTPUT_WARNING(line);
-		LoggerUtil::CE_OUTPUT_DEBUG(line);
+		std::string eqSep = "=";		
 
-#endif // _DEBUG
+		if (int sepIndex = line.find(eqSep); sepIndex != std::string::npos) {
+			std::string actionName = line.substr(0, sepIndex);
+			std::string actionCodes = line.substr(sepIndex + eqSep.length(), line.length());
+
+			std::string actionSep = "/";
+			int index = actionCodes.find(actionSep);
+
+			while (index != std::string::npos) {
+				std::string actionEvent = actionCodes.substr(0, index);
+				std::string eventSep = ":";
+
+				actionCodes = actionCodes.substr(index + actionSep.length(), actionCodes.length());
+				index = actionCodes.find(actionSep);
+
+				if (int i = actionEvent.find(eventSep); i != std::string::npos) {
+					int eventType = stoi(actionEvent.substr(0, i));
+					int eventData = stoi(actionEvent.substr(i + eventSep.length(), actionEvent.length()));
+				}
+				else
+					CE_OUTPUT_ERROR("Faulty expression in input bindings!");
+			}
+		}
+		else
+			CE_OUTPUT_ERROR("Faulty expression in input bindings!");
 	}
 	bindingsStream.close();
 }
