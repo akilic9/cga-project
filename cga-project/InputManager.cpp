@@ -1,61 +1,58 @@
-#include "EventManager.h"
+#include "InputManager.h"
 #include "LoggerUtil.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
 
-EventManager::EventManager() :
+InputManager::InputManager() :
 	m_hasFocus(true)
 {
 	LoadBindings();
 }
 
-EventManager::~EventManager()
+InputManager::~InputManager()
 {
-	for (auto &binding : m_eventBindings) {
-		delete binding.second;
-		binding.second = nullptr;
-	}
 }
 
-bool EventManager::AddBinding(EventBinding* eventBinding)
-{
-	if (m_eventBindings.find(eventBinding->m_name) != m_eventBindings.end())
-		return false;
-
-	m_eventBindings[eventBinding->m_name] = eventBinding;
-	return true;
-}
-
-void EventManager::RemoveBinding(std::string bindingName)
-{
-	if (auto binding = m_eventBindings.find(bindingName); binding != m_eventBindings.end()) {
-		delete binding->second;
-		binding->second = nullptr;
-		m_eventBindings.erase(binding);
-	}
-}
-
-void EventManager::SetHasFocus(const bool& isFocused)
-{
-	if (isFocused == m_hasFocus)
-		return;
-
-	m_hasFocus = isFocused;
-}
-
-void EventManager::HandleEvent(sf::Event& newEvent)
-{
-
-}
-
-void EventManager::Update()
+void InputManager::HandleInputs(sf::Event event)
 {
 	if (!m_hasFocus)
 		return;
+
+	for (auto& b : m_inputBindings) {
+		if (b.second->m_inputMap.first == (InputType)event.type && b.second->m_inputMap.second == event.key.code) {
+			if (auto itr = m_callbacks.find(b.first); itr != m_callbacks.end())
+				(*itr).second(b.second);
+		}
+	}
+
 }
 
-void EventManager::LoadBindings()
+bool InputManager::AddBinding(std::string name, std::pair<InputType, int> map)
+{
+	if (m_inputBindings.find(name) != m_inputBindings.end())
+		return false;
+	else {
+		InputBinding *binding = new InputBinding(name, map);
+		m_inputBindings[name] = binding;
+		return true;
+	}
+}
+
+bool InputManager::RemoveBinding(std::string bindingName)
+{
+	if (auto binding = m_inputBindings.find(bindingName); binding == m_inputBindings.end()) {
+		return false;
+	}
+	else {
+		delete binding->second;
+		binding->second = nullptr;
+		m_inputBindings.erase(binding);
+		return true;
+	}
+}
+
+void InputManager::LoadBindings()
 {
 	std::ifstream bindingsStream;
 	std::string filePath = "Data/InputBindings.cfg";
@@ -69,7 +66,7 @@ void EventManager::LoadBindings()
 
 	std::string line;
 	while (std::getline(bindingsStream, line)) {
-		std::string eqSep = "=";		
+		std::string eqSep = "=";
 
 		if (int sepIndex = line.find(eqSep); sepIndex != std::string::npos) {
 			std::string actionName = line.substr(0, sepIndex);
@@ -88,6 +85,8 @@ void EventManager::LoadBindings()
 				if (int i = actionEvent.find(eventSep); i != std::string::npos) {
 					int eventType = stoi(actionEvent.substr(0, i));
 					int eventData = stoi(actionEvent.substr(i + eventSep.length(), actionEvent.length()));
+
+					AddBinding(actionName, std::make_pair((InputType)eventType, eventData));
 				}
 				else
 					CE_OUTPUT_ERROR("Faulty expression in input bindings!");

@@ -1,7 +1,7 @@
 #pragma once
 #include "SFML/System/Vector2.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
-#include "EventManager.h"
+#include "InputManager.h"
 
 // Wrapper for SFML Window
 class CWindow
@@ -19,22 +19,26 @@ public:
 	void BeginDraw() { m_window.clear(sf::Color::Black); }
 	void EndDraw() { m_window.display(); }
 	void Draw(sf::Drawable& drawable) { m_window.draw(drawable); }
-	void CloseWindow(EventDetails* eventDetails);
+	void CloseWindow(InputBinding*);
 
 // -------------- Helper Methods ----------------------
 	const sf::Vector2u& GetWindowSize() { return m_window.getSize(); }
 	const bool& IsOpen() { return m_window.isOpen(); }
-	EventManager* GetEventManager() { return m_eventManager; }
+	InputManager* GetInputManager() { return m_inputManager; }
 
 private:
 // -------------- Private Methods ---------------------
 	void CreateWindow(const std::string& title, const sf::Vector2u& windowSize);
-	void ToggleFullscreen(EventDetails* eventDetails);
+	void ToggleFullscreen(InputBinding*);
 
 // -------------- Variables ---------------------------
 	bool m_isFullscreen;
 	const std::string m_title;
 	sf::RenderWindow m_window;
-	EventManager* m_eventManager;
+	InputManager* m_inputManager;
+
+	inline static const sf::Vector2u DEFAULT_WINDOWED_SIZE = sf::Vector2u(1600, 900);
+	inline static const std::string DEFAULT_TITLE = "SFML Window";
+	inline static const bool DEFAULT_FULLSCREEN = false;
 };
 
