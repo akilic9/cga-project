@@ -138,6 +138,7 @@
     <ClCompile Include="CWindow.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="IntroState.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="StateManager.cpp" />
   </ItemGroup>
@@ -145,6 +146,7 @@
     <ClInclude Include="CWindow.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="IntroState.h" />
     <ClInclude Include="LoggerUtil.h" />
     <ClInclude Include="StateBase.h" />
     <ClInclude Include="StateManager.h" />

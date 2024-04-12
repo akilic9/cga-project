@@ -35,7 +35,7 @@ void StateManagerBase::SwitchState(int& stateId)
 	m_states[m_activeState]->OnEnter();
 }
 
-void StateManagerBase::CreateState(int& stateId)
+void StateManagerBase::CreateState(const int& stateId)
 {
 	if (auto s = m_factory.find(stateId); s != m_factory.end()) {
 		StateBase* state = s->second();
@@ -46,9 +46,9 @@ void StateManagerBase::CreateState(int& stateId)
 
 void StateManagerBase::RemoveState(int& stateId)
 {
-	if (auto s = m_factory.find(stateId); s != m_factory.end()) {
-		s->second()->OnDelete();
-		delete s->second();
+	if (auto s = m_states.find(stateId); s != m_states.end()) {
+		s->second->OnDelete();
+		delete s->second;
 		m_states.erase(s->first);
 	}
 }

@@ -4,7 +4,7 @@
 class StateBase
 {
 public:
-	StateBase(std::string name, int id) : m_name(name), m_id(id) {};
+	StateBase() : m_name(""), m_id(-1) {};
 	virtual ~StateBase() {};
 
 	virtual void OnCreate() = 0;

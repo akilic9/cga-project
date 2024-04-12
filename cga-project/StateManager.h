@@ -1,10 +1,11 @@
 #pragma once
 #include <unordered_map>
+#include <functional>
 #include "StateBase.h"
 
 using StateList = std::unordered_map<int, StateBase*>;
 
-using StateFactory = std::unordered_map<int, StateBase* (void)>;
+using StateFactory = std::unordered_map<int, std::function<StateBase* (void)>>;
 
 class StateManagerBase
 {
@@ -19,13 +20,13 @@ public:
 	void SwitchState(int &stateId);
 
 private:
-	void CreateState(int &stateId);
+	void CreateState(const int& stateId);
 	void RemoveState(int& stateId);
 
 	template<class T>
 	void RegisterState(std::string stateName) {
-		static int stateId = m_states.size()++;
-		m_stateFactory[stateId] = [this](stateName, stateId) -> BaseState*
+		static int stateId = m_states.size() + 1;
+		m_factory[stateId] = [this]() -> StateBase*
 		{
 			return new T(this);
 		};
