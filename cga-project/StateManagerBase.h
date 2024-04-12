@@ -17,7 +17,7 @@ public:
 	void Render();
 
 	
-	void SwitchState(int &stateId);
+	void SwitchState(int stateId);
 
 private:
 	void CreateState(const int& stateId);
@@ -26,9 +26,9 @@ private:
 	template<class T>
 	void RegisterState(std::string stateName) {
 		static int stateId = m_states.size() + 1;
-		m_factory[stateId] = [this]() -> StateBase*
+		m_factory[stateId] = [stateName, stateId, this]() -> StateBase*
 		{
-			return new T(this);
+			return new T(stateName, stateId, this);
 		};
 	}
 

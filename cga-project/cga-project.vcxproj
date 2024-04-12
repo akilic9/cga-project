@@ -138,18 +138,18 @@
     <ClCompile Include="CWindow.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="IntroState.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="StateManager.cpp" />
+    <ClCompile Include="StateMachines\Scenes\MainMenuState.cpp" />
+    <ClCompile Include="StateManagerBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CWindow.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="IntroState.h" />
     <ClInclude Include="LoggerUtil.h" />
     <ClInclude Include="StateBase.h" />
-    <ClInclude Include="StateManager.h" />
+    <ClInclude Include="StateMachines\Scenes\MainMenuState.h" />
+    <ClInclude Include="StateManagerBase.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,4 @@
-#include "StateManager.h"
+#include "StateManagerBase.h"
 
 StateManagerBase::StateManagerBase() : m_activeState(-1)
 {
@@ -28,7 +28,7 @@ void StateManagerBase::Render()
 	m_states[m_activeState]->Render();
 }
 
-void StateManagerBase::SwitchState(int& stateId)
+void StateManagerBase::SwitchState(int stateId)
 {
 	m_states[m_activeState]->OnExit();
 	m_activeState = stateId;
