@@ -47,7 +47,7 @@ void CWindow::Update()
 	}
 }
 
-void CWindow::CloseWindow(InputBinding*)
+void CWindow::CloseWindow(InputBinding* binding)
 {
 	m_window.close();
 }
@@ -59,7 +59,7 @@ void CWindow::CreateWindow(const std::string& title, const sf::Vector2u& windowS
 	m_window.create(sf::VideoMode(windowSize.x, windowSize.y), title, windowStyle);
 }
 
-void CWindow::ToggleFullscreen(InputBinding*)
+void CWindow::ToggleFullscreen(InputBinding* binding)
 {
 	auto size = m_window.getSize();
 	m_isFullscreen = !m_isFullscreen;

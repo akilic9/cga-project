@@ -17,7 +17,7 @@ public:
 	void BeginDraw() { m_window.clear(sf::Color::Black); }
 	void EndDraw() { m_window.display(); }
 	void Draw(sf::Drawable& drawable) { m_window.draw(drawable); }
-	void CloseWindow(InputBinding*);
+	void CloseWindow(InputBinding* binding);
 
 	const sf::Vector2u& GetWindowSize() { return m_window.getSize(); }
 	const bool& IsOpen() { return m_window.isOpen(); }
@@ -25,7 +25,7 @@ public:
 
 private:
 	void CreateWindow(const std::string& title, const sf::Vector2u& windowSize);
-	void ToggleFullscreen(InputBinding*);
+	void ToggleFullscreen(InputBinding* binding);
 
 	bool m_isFullscreen;
 	const std::string m_title;
