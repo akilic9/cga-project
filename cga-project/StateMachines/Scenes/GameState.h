@@ -1,11 +1,11 @@
 #pragma once
 #include "../../StateBase.h"
 
-class MainMenuState : public StateBase
+class GameState : public StateBase
 {
 public:
-	MainMenuState(std::string name, int id, StateManagerBase* stateManager);
-	~MainMenuState();
+	GameState(std::string name, int id, StateManagerBase* stateManager);
+	~GameState();
 
 	void OnCreate();
 	void OnEnter();

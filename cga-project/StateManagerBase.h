@@ -19,26 +19,29 @@ public:
 	void Update(float deltaTime);
 	void Render();
 
+	template<class T>
+	void RegisterState(std::string stateName) {
+		int stateId = m_stateCount++;
+		m_nameToIdMap[stateName] = stateId;
+		m_factory[stateId] = [stateName, stateId, this]() -> StateBase*
+			{
+				return new T(stateName, stateId, this);
+			};
+	}
 	
 	void SwitchState(int stateId);
 	void SwitchState(std::string stateName);
 
+	SharedContext* GetSharedContext() { return m_sc; };
+
 private:
 	void CreateState(const int& stateId);
 	void RemoveState(int& stateId);
-
-	template<class T>
-	void RegisterState(std::string stateName) {
-		static int stateId = m_states.size() + 1;
-		m_factory[stateId] = [stateName, stateId, this]() -> StateBase*
-		{
-			return new T(stateName, stateId, this);
-		};
-	}
 
 	StateList m_states;
 	StateFactory m_factory;
 	NameToId m_nameToIdMap;
 	int m_activeState;
 	SharedContext* m_sc;
+	int m_stateCount = 0;
 };

@@ -22,6 +22,7 @@ public:
 	const sf::Vector2u& GetWindowSize() { return m_window.getSize(); }
 	const bool& IsOpen() { return m_window.isOpen(); }
 	InputManager& GetInputManager() { return m_inputManager; }
+	inline sf::RenderWindow* GetRenderWindow() { return &m_window; }
 
 private:
 	void CreateWindow(const std::string& title, const sf::Vector2u& windowSize);

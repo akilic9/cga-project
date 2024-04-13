@@ -1,12 +1,13 @@
 #pragma once
 #include <string>
+#include "SFML/Graphics/Text.hpp"
 
 class StateManagerBase;
 
 class StateBase
 {
 public:
-	StateBase(std::string name, int id, StateManagerBase* stateManager) : m_name(name), m_id(id), m_stateManager(stateManager) {};
+	StateBase(const std::string name, const int id, StateManagerBase* stateManager) : m_name(name), m_id(id), m_stateManager(stateManager) {};
 	virtual ~StateBase() {};
 
 	virtual void OnCreate() = 0;

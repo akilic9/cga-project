@@ -37,6 +37,10 @@ void StateManagerBase::SwitchState(int stateId)
 		m_activeState = stateId;
 		m_states[m_activeState]->OnEnter();
 	}
+	else {
+		CreateState(stateId);
+		m_activeState = stateId;
+	}
 }
 
 void StateManagerBase::SwitchState(std::string stateName)
@@ -50,7 +54,6 @@ void StateManagerBase::CreateState(const int& stateId)
 	if (auto s = m_factory.find(stateId); s != m_factory.end()) {
 		StateBase* state = s->second();
 		m_states[stateId] = state;
-		m_nameToIdMap[state->GetName()] = stateId;
 		state->OnCreate();
 	}
 }
