@@ -6,6 +6,8 @@
 
 using StateList = std::unordered_map<int, StateBase*>;
 
+using NameToId = std::unordered_map<std::string, int>;
+
 using StateFactory = std::unordered_map<int, std::function<StateBase* (void)>>;
 
 class StateManagerBase
@@ -19,6 +21,7 @@ public:
 
 	
 	void SwitchState(int stateId);
+	void SwitchState(std::string stateName);
 
 private:
 	void CreateState(const int& stateId);
@@ -35,6 +38,7 @@ private:
 
 	StateList m_states;
 	StateFactory m_factory;
+	NameToId m_nameToIdMap;
 	int m_activeState;
 	SharedContext* m_sc;
 };

@@ -16,8 +16,10 @@ public:
 	virtual void OnExit() = 0;
 	virtual void OnDelete() = 0;
 
+	const std::string& GetName() const { return m_name; }
+
 protected:
-	std::string m_name;
+	const std::string m_name;
 	int m_id;
 	StateManagerBase* m_stateManager;
 };
