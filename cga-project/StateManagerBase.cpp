@@ -14,6 +14,7 @@ StateManagerBase::~StateManagerBase()
 	}
 }
 
+/*Update current state.*/
 void StateManagerBase::Update(float deltaTime)
 {
 	if (m_states.empty())
@@ -22,6 +23,7 @@ void StateManagerBase::Update(float deltaTime)
 	m_states[m_activeState]->Update(deltaTime);
 }
 
+/*Render current state.*/
 void StateManagerBase::Render()
 {
 	if (m_states.empty())
@@ -30,6 +32,7 @@ void StateManagerBase::Render()
 	m_states[m_activeState]->Render();
 }
 
+/*Switch to another state*/
 void StateManagerBase::SwitchState(const int& stateId)
 {
 	if (auto s = m_states.find(stateId); s != m_states.end()) {
@@ -43,17 +46,20 @@ void StateManagerBase::SwitchState(const int& stateId)
 	}
 }
 
+/*Switch to another state.*/
 void StateManagerBase::SwitchState(const std::string& stateName)
 {
 	if (auto itr = m_nameToIdMap.find(stateName); itr != m_nameToIdMap.end())
 		SwitchState(m_nameToIdMap[stateName]);
 }
 
+/*Queue a state to be removed.*/
 void StateManagerBase::QueueForRemoval(const int& stateId)
 {
 	m_removalQueue.push_back(stateId);
 }
 
+/*Handle removals.*/
 void StateManagerBase::ProcessRemovals()
 {
 	while (m_removalQueue.begin() != m_removalQueue.end()) {
@@ -62,6 +68,7 @@ void StateManagerBase::ProcessRemovals()
 	}
 }
 
+/*Add a state and add it to the states list.*/
 void StateManagerBase::CreateState(const int& stateId)
 {
 	if (auto s = m_factory.find(stateId); s != m_factory.end()) {
@@ -71,6 +78,7 @@ void StateManagerBase::CreateState(const int& stateId)
 	}
 }
 
+/*Remove a state from the list.*/
 void StateManagerBase::RemoveState(const int& stateId)
 {
 	if (auto s = m_states.find(stateId); s != m_states.end()) {

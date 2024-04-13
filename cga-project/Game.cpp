@@ -9,6 +9,7 @@ Game::Game()
 	m_sharedContext.m_window = &m_window;
 	m_sharedContext.m_inputManager = &m_window.GetInputManager();
 
+	//Register and set the scenes.
 	m_gameStateManager.RegisterState<MainMenuState>("MainMenu");
 	m_gameStateManager.RegisterState<GameState>("Game");
 	m_gameStateManager.SwitchState("MainMenu");
