@@ -3,6 +3,8 @@
 Game::Game() : 
 	m_window("CGA Project")
 {
+	m_context.m_window = &m_window;
+	m_context.m_inputManager = &m_window.GetInputManager();
 }
 
 Game::~Game()

@@ -2,6 +2,7 @@
 #include <unordered_map>
 #include <functional>
 #include "StateBase.h"
+#include "SharedContext.h"
 
 using StateList = std::unordered_map<int, StateBase*>;
 
@@ -10,7 +11,7 @@ using StateFactory = std::unordered_map<int, std::function<StateBase* (void)>>;
 class StateManagerBase
 {
 public:
-	StateManagerBase();
+	StateManagerBase(SharedContext* sc);
 	~StateManagerBase();
 
 	void Update(float deltaTime);
@@ -35,4 +36,5 @@ private:
 	StateList m_states;
 	StateFactory m_factory;
 	int m_activeState;
+	SharedContext* m_sc;
 };

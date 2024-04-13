@@ -27,10 +27,10 @@
     <ClCompile Include="InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StateManager.cpp">
+    <ClCompile Include="StateMachines\Scenes\MainMenuState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StateMachines\Scenes\MainMenuState.cpp">
+    <ClCompile Include="StateManagerBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,10 +50,13 @@
     <ClInclude Include="StateBase.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StateManager.h">
+    <ClInclude Include="StateMachines\Scenes\MainMenuState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="StateMachines\Scenes\MainMenuState.h">
+    <ClInclude Include="StateManagerBase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SharedContext.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

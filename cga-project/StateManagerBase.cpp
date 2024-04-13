@@ -1,6 +1,8 @@
 #include "StateManagerBase.h"
 
-StateManagerBase::StateManagerBase() : m_activeState(-1)
+StateManagerBase::StateManagerBase(SharedContext* sc)
+	: m_activeState(-1)
+	, m_sc(sc)
 {
 }
 

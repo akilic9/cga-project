@@ -147,6 +147,7 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="LoggerUtil.h" />
+    <ClInclude Include="SharedContext.h" />
     <ClInclude Include="StateBase.h" />
     <ClInclude Include="StateMachines\Scenes\MainMenuState.h" />
     <ClInclude Include="StateManagerBase.h" />
