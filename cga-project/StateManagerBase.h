@@ -20,7 +20,7 @@ public:
 	void Render();
 
 	template<class T>
-	void RegisterState(std::string stateName) {
+	void RegisterState(const std::string& stateName) {
 		int stateId = m_stateCount++;
 		m_nameToIdMap[stateName] = stateId;
 		m_factory[stateId] = [stateName, stateId, this]() -> StateBase*
@@ -29,14 +29,17 @@ public:
 			};
 	}
 	
-	void SwitchState(int stateId);
-	void SwitchState(std::string stateName);
+	void SwitchState(const int& stateId);
+	void SwitchState(const std::string& stateName);
+
+	void QueueForRemoval(const int& stateId);
+	void ProcessRemovals();
 
 	SharedContext* GetSharedContext() { return m_sc; };
 
 private:
 	void CreateState(const int& stateId);
-	void RemoveState(int& stateId);
+	void RemoveState(const int& stateId);
 
 	StateList m_states;
 	StateFactory m_factory;
@@ -44,4 +47,5 @@ private:
 	int m_activeState;
 	SharedContext* m_sc;
 	int m_stateCount = 0;
+	std::vector<int> m_removalQueue;
 };

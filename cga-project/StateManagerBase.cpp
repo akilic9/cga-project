@@ -30,7 +30,7 @@ void StateManagerBase::Render()
 	m_states[m_activeState]->Render();
 }
 
-void StateManagerBase::SwitchState(int stateId)
+void StateManagerBase::SwitchState(const int& stateId)
 {
 	if (auto s = m_states.find(stateId); s != m_states.end()) {
 		m_states[m_activeState]->OnExit();
@@ -43,10 +43,23 @@ void StateManagerBase::SwitchState(int stateId)
 	}
 }
 
-void StateManagerBase::SwitchState(std::string stateName)
+void StateManagerBase::SwitchState(const std::string& stateName)
 {
 	if (auto itr = m_nameToIdMap.find(stateName); itr != m_nameToIdMap.end())
 		SwitchState(m_nameToIdMap[stateName]);
+}
+
+void StateManagerBase::QueueForRemoval(const int& stateId)
+{
+	m_removalQueue.push_back(stateId);
+}
+
+void StateManagerBase::ProcessRemovals()
+{
+	while (m_removalQueue.begin() != m_removalQueue.end()) {
+		RemoveState(*m_removalQueue.begin());
+		m_removalQueue.erase(m_removalQueue.begin());
+	}
 }
 
 void StateManagerBase::CreateState(const int& stateId)
@@ -58,7 +71,7 @@ void StateManagerBase::CreateState(const int& stateId)
 	}
 }
 
-void StateManagerBase::RemoveState(int& stateId)
+void StateManagerBase::RemoveState(const int& stateId)
 {
 	if (auto s = m_states.find(stateId); s != m_states.end()) {
 		s->second->OnDelete();
