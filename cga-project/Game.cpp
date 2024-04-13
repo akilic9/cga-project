@@ -32,6 +32,11 @@ void Game::FixedUpdate()
 {
 }
 
+void Game::LateUpdate()
+{
+	m_gameStateManager.ProcessRemovals();
+}
+
 void Game::Render()
 {
 	m_window.BeginDraw();

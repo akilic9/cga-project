@@ -35,7 +35,10 @@ struct InputBinding {
 using InputBindings = std::unordered_map<std::string, InputBinding*>;
 
 //Input name -> target function
-using Callbacks = std::unordered_map<std::string, std::function<void(InputBinding*)>>;
+using Callback = std::unordered_map<std::string, std::function<void(InputBinding*)>>;
+
+//Scene id -> scene's callbacks
+using SceneCallbacks = std::unordered_map<int, Callback>;
 
 class InputManager
 {
@@ -48,25 +51,34 @@ public:
 	bool AddBinding(std::string name, std::pair<InputType, int> map);
 	bool RemoveBinding(std::string bindingName);
 
+	//Add a callback - ie register to a keybind trigger event on a scene basis.
 	template<class T>
-	bool AddCallback(const std::string& callbackName, void(T::* func)(InputBinding*), T* instance)
+	bool AddCallback(const int sceneId, const std::string& callbackName, void(T::* func)(InputBinding*), T* instance)
 	{
+		//Create a [sceneId, default constructor callback] element
+		auto itr = m_callbacks.emplace(sceneId, Callback()).first;
+		//Black magic https://en.cppreference.com/w/cpp/utility/functional/placeholders
 		auto temp = std::bind(func, instance, std::placeholders::_1);
-		return m_callbacks.emplace(callbackName, temp).second;
+		//Store the bound function and callback name into the previously default callback
+		return itr->second.emplace(callbackName, temp).second;
 	}
 
-	void RemoveCallback(const std::string& callbackName) { m_callbacks.erase(callbackName); }
+	//Remove a callback ie unregister from a keybind on a scene basis.
+	void RemoveCallback(int sceneId, const std::string& callbackName);
 
 	/*If not passed a window, this function will return the mouse position relative to desktop origin.
 	Window MUST be passed in to get the position within the window.*/
 	sf::Vector2i GetMousePos(sf::RenderWindow* window = nullptr) { return (window ? sf::Mouse::getPosition(*window) : sf::Mouse::getPosition()); }
 
+	//Set window focus flag.
 	void SetHasFocus(bool isFocused) { if (isFocused == m_hasFocus) return; m_hasFocus = isFocused; }
 	
 private:
+	//Load keybinds from cfg file.
 	void LoadBindings();
 
 	bool m_hasFocus;
 	InputBindings m_inputBindings;
-	Callbacks m_callbacks;
+	SceneCallbacks m_callbacks;
+	int m_currentSceneId;
 };

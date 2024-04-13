@@ -30,8 +30,8 @@ CWindow::~CWindow()
 
 void CWindow::InitWindowEvents()
 {
-	m_inputManager.AddCallback("fullscreen_toggle", &CWindow::ToggleFullscreen, this);
-	m_inputManager.AddCallback("window_close", &CWindow::CloseWindow, this);
+	m_inputManager.AddCallback(-1, "fullscreen_toggle", &CWindow::ToggleFullscreen, this);
+	m_inputManager.AddCallback(-1, "window_close", &CWindow::CloseWindow, this);
 }
 
 void CWindow::Update()

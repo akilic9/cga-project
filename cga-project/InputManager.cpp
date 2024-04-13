@@ -1,11 +1,11 @@
 #include "InputManager.h"
-#include "LoggerUtil.h"
 #include <iostream>
 #include <fstream>
 #include <sstream>
 
-InputManager::InputManager() :
-	m_hasFocus(true)
+InputManager::InputManager()
+	: m_hasFocus(true)
+	, m_currentSceneId(-2)
 {
 	LoadBindings();
 }
@@ -21,11 +21,18 @@ void InputManager::HandleInputs(sf::Event event)
 
 	for (auto& b : m_inputBindings) {
 		if (b.second->m_inputMap.first == (InputType)event.type && b.second->m_inputMap.second == event.key.code) {
-			if (auto itr = m_callbacks.find(b.first); itr != m_callbacks.end())
-				(*itr).second(b.second);
+			auto sceneItr = m_callbacks.find(m_currentSceneId);
+			if (sceneItr != m_callbacks.end())
+				if (auto key = sceneItr->second.find(b.first); key != sceneItr->second.end())
+					key->second(b.second);
+
+			auto indItr = m_callbacks.find(-1); //-1 is callbacks that are scene independent.
+			if (indItr != m_callbacks.end())
+				if (auto key = indItr->second.find(b.first); key != indItr->second.end())
+					key->second(b.second);
+
 		}
 	}
-
 }
 
 bool InputManager::AddBinding(std::string name, std::pair<InputType, int> map)
@@ -52,6 +59,23 @@ bool InputManager::RemoveBinding(std::string bindingName)
 	}
 }
 
+void InputManager::RemoveCallback(int sceneId, const std::string& callbackName)
+{
+	//Check if callbacks for this scene exist.
+	auto sceneItr = m_callbacks.find(sceneId);
+	if (sceneItr == m_callbacks.end())
+		return; //If not return.
+
+	//Check if a keybind by this name exist in this scene's callbacks.
+	auto keyItr = sceneItr->second.find(callbackName);
+	if (keyItr == sceneItr->second.end())
+		return; //If not return.
+
+	//Finally delete the binding callback you found.
+	sceneItr->second.erase(callbackName);
+
+}
+
 void InputManager::LoadBindings()
 {
 	std::ifstream bindingsStream;
@@ -60,7 +84,6 @@ void InputManager::LoadBindings()
 
 	// Can't open file.
 	if (!bindingsStream.is_open()) {
-		CE_OUTPUT_ERROR("Could not read the input bindings file!");
 		return;
 	}
 
@@ -88,12 +111,8 @@ void InputManager::LoadBindings()
 
 					AddBinding(actionName, std::make_pair((InputType)eventType, eventData));
 				}
-				else
-					CE_OUTPUT_ERROR("Faulty expression in input bindings!");
 			}
 		}
-		else
-			CE_OUTPUT_ERROR("Faulty expression in input bindings!");
 	}
 	bindingsStream.close();
 }

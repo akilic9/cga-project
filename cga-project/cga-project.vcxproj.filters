@@ -44,9 +44,6 @@
     <ClInclude Include="CWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LoggerUtil.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="InputManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>

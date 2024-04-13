@@ -26,6 +26,7 @@ int main()
 
         game.FixedUpdate();
         game.Render();
+        game.LateUpdate();
     }
 
     return 0;

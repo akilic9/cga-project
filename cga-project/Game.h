@@ -16,6 +16,7 @@ public:
 	void Init();
 	void Update(float deltaTime);
 	void FixedUpdate();
+	void LateUpdate();
 	void Render();
 	void HandleInput();
 
