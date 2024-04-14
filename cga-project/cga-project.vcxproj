@@ -156,7 +156,7 @@
     <ClInclude Include="StateMachines\Scenes\GameState.h" />
     <ClInclude Include="StateMachines\Scenes\MainMenuState.h" />
     <ClInclude Include="StateManagerBase.h" />
-    <ClInclude Include="SpriteLoader.h" />
+    <ClInclude Include="TextureLoader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

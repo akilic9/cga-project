@@ -1,6 +1,6 @@
 #include "Sprite.h"
 
-Sprite::Sprite(SpriteLoader* texLoader)
+Sprite::Sprite(TextureLoader* texLoader)
 	: m_spriteId("")
 	, m_spriteSize(32, 32)
 	, m_spriteScale(1.0f, 1.0f)
@@ -74,13 +74,13 @@ bool Sprite::Load(const std::string& path)
 					std::cerr << "Multiple textures in:" << path << std::endl;
 					continue;
 				}
-				std::string spriteId;
-				keystream >> spriteId;
-				if (!m_textureLoader->AllocateResource(spriteId)) {
-					std::cerr << "Texture loader can't load the texture: " << spriteId << std::endl;
+				std::string textureId;
+				keystream >> textureId;
+				if (!m_textureLoader->AllocateResource(textureId)) {
+					std::cerr << "Texture loader can't load the texture: " << textureId << std::endl;
 					continue;
 				}
-				m_spriteId = spriteId;
+				m_spriteId = textureId;
 				m_sprite.setTexture(*m_textureLoader->GetResource(m_spriteId));
 			}
 			else if (dataType == "Size" || dataType == "Scale" || dataType == "Location") {

@@ -1,5 +1,5 @@
 #pragma once
-#include "SpriteLoader.h"
+#include "TextureLoader.h"
 #include "SFML/Graphics/Sprite.hpp"
 #include "Direction.h"
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -7,7 +7,7 @@
 class Sprite
 {
 public:
-	Sprite(SpriteLoader* texLoader);
+	Sprite(TextureLoader* texLoader);
 	~Sprite();
 
 	void CropSprite(sf::IntRect& rectangle);
@@ -27,5 +27,5 @@ private:
 	sf::Vector2i m_spriteSize;
 	sf::Vector2f m_spriteScale;
 	Direction m_spriteDirection;
-	SpriteLoader* m_textureLoader;
+	TextureLoader* m_textureLoader;
 };
