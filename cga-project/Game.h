@@ -4,7 +4,6 @@
 #include "InputManager.h"
 #include "StateManagerBase.h"
 
-//Aybike: Doesn't makes sense to me that game owns the window, but seems like the structure will change in the later chapters of the book. Just rolling with it atm.
 class Game
 {
 public:
