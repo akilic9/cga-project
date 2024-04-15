@@ -3,6 +3,8 @@
 #include "InputManager.h"
 #include "TextureLoader.h"
 
+class GameMap;
+
 struct SharedContext {
     SharedContext()
         : m_window(nullptr)
@@ -13,4 +15,5 @@ struct SharedContext {
     CWindow * m_window;
     InputManager* m_inputManager;
     TextureLoader* m_textureLoader;
+    GameMap* m_mapManager;
 };

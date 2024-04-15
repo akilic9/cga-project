@@ -5,11 +5,11 @@
 class TextureLoader : public ResourceManager<TextureLoader, sf::Texture>
 {
 public:
-    TextureLoader() : ResourceManager("spritesheetPaths.cfg") {}
+    TextureLoader() : ResourceManager("ResourcePaths.cfg") {}
 
     sf::Texture* Load(const std::string& path) {
         sf::Texture* texture = new sf::Texture();
-        if (!texture->loadFromFile("Resources/" + path))
+        if (!texture->loadFromFile(path))
         {
             delete texture;
             texture = nullptr;

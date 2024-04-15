@@ -89,7 +89,7 @@ bool Sprite::Load(const std::string& path)
                 std::string dataSep = ":";
                 int index = data.find(dataSep);
                 if (index == std::string::npos) {
-                    std::cerr << "Error in size specification: " << path << std::endl;
+                    std::cerr << "Error in sprite specifications: " << line << std::endl;
                     continue;
                 }
                 if (dataType == "Size") {

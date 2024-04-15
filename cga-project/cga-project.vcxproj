@@ -139,7 +139,7 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="StateMachines\Scenes\GameState.cpp" />
     <ClCompile Include="StateMachines\Scenes\MainMenuState.cpp" />
@@ -150,7 +150,7 @@
     <ClInclude Include="Direction.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="Map.h" />
+    <ClInclude Include="GameMap.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SharedContext.h" />
     <ClInclude Include="Sprite.h" />

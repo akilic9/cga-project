@@ -5,14 +5,15 @@
 Game::Game()
     : m_window("CGA Project")
     , m_gameStateManager(&m_sharedContext)
+    , m_textureLoader()
 {
     m_sharedContext.m_window = &m_window;
     m_sharedContext.m_inputManager = &m_window.GetInputManager();
+    m_sharedContext.m_textureLoader = &m_textureLoader;
 
     //Register and set the scenes.
-    m_gameStateManager.RegisterState<MainMenuState>("MainMenu");
     m_gameStateManager.RegisterState<GameState>("Game");
-    m_gameStateManager.SwitchState("MainMenu");
+    m_gameStateManager.SwitchState("Game");
 }
 
 Game::~Game()

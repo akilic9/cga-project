@@ -19,7 +19,7 @@ public:
     void Draw(sf::Drawable& drawable) { m_window.draw(drawable); }
     void CloseWindow(InputBinding* binding);
 
-    const sf::Vector2u& GetWindowSize() { return m_window.getSize(); }
+    const sf::Vector2u GetWindowSize() { return m_window.getSize(); }
     const bool IsOpen() { return m_window.isOpen(); }
     InputManager& GetInputManager() { return m_inputManager; }
     inline sf::RenderWindow* GetRenderWindow() { return &m_window; }

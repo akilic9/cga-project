@@ -1,5 +1,6 @@
 #pragma once
 #include "../../StateBase.h"
+#include "../../GameMap.h"
 
 class GameState : public StateBase
 {
@@ -15,9 +16,6 @@ public:
     void OnDelete();
 
 private:
-    sf::Text m_text;
-    sf::Font m_font;
-    float m_switchTime;
-    float m_switchCounter;
+    GameMap* m_map;
 };
 

@@ -76,6 +76,7 @@ void InputManager::RemoveCallback(int sceneId, const std::string& callbackName)
 
 }
 
+//FIXME: we are not loading multiple binds anymore.
 void InputManager::LoadBindings()
 {
     std::ifstream bindingsStream;

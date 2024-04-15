@@ -39,7 +39,7 @@
     <ClCompile Include="Sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp">
+    <ClCompile Include="GameMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -80,7 +80,7 @@
     <ClInclude Include="Direction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h">
+    <ClInclude Include="GameMap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
