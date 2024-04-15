@@ -3,6 +3,7 @@
 #include "SharedContext.h"
 #include "InputManager.h"
 #include "StateManagerBase.h"
+#include "TextureLoader.h"
 
 class Game
 {
@@ -26,5 +27,6 @@ private:
 	CWindow m_window;
 	SharedContext m_sharedContext;
 	StateManagerBase m_gameStateManager;
+	TextureLoader m_textureLoader;
 };
 
