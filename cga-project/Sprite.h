@@ -22,7 +22,7 @@ public:
     void Render(sf::RenderWindow* window) const;
 
 private:
-    std::string m_spriteId;
+    std::string m_textureId;
     sf::Sprite m_sprite;
     sf::Vector2i m_spriteSize;
     sf::Vector2f m_spriteScale;

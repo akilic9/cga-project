@@ -1,7 +1,7 @@
 #include "Sprite.h"
 
 Sprite::Sprite(TextureLoader* texLoader)
-    : m_spriteId("")
+    : m_textureId("")
     , m_spriteSize(32, 32)
     , m_spriteScale(1.0f, 1.0f)
     , m_spriteDirection(Direction::Down)
@@ -70,7 +70,7 @@ bool Sprite::Load(const std::string& path)
             keystream >> dataType;
 
             if (dataType == "Texture") { //TODO: make it case insensitive.
-                if (m_spriteId != "") {
+                if (m_textureId != "") {
                     std::cerr << "Multiple textures in:" << path << std::endl;
                     continue;
                 }
@@ -80,8 +80,8 @@ bool Sprite::Load(const std::string& path)
                     std::cerr << "Texture loader can't load the texture: " << textureId << std::endl;
                     continue;
                 }
-                m_spriteId = textureId;
-                m_sprite.setTexture(*m_textureLoader->GetResource(m_spriteId));
+                m_textureId = textureId;
+                m_sprite.setTexture(*m_textureLoader->GetResource(m_textureId));
             }
             else if (dataType == "Size" || dataType == "Scale" || dataType == "Location") {
                 std::string data;
@@ -118,7 +118,7 @@ bool Sprite::Load(const std::string& path)
 
 void Sprite::Release()
 {
-    m_textureLoader->ReleaseResource(m_spriteId);
+    m_textureLoader->ReleaseResource(m_textureId);
 }
 
 void Sprite::Update(float deltaTime)
