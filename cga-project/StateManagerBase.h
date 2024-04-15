@@ -13,40 +13,40 @@ using StateFactory = std::unordered_map<int, std::function<StateBase* (void)>>;
 class StateManagerBase
 {
 public:
-	StateManagerBase(SharedContext* sc);
-	~StateManagerBase();
+    StateManagerBase(SharedContext* sc);
+    ~StateManagerBase();
 
-	void Update(float deltaTime);
-	void Render();
+    void Update(float deltaTime);
+    void Render();
 
-	/*Register a state to create the state object.*/
-	template<class T>
-	void RegisterState(const std::string& stateName) {
-		int stateId = m_stateCount++;
-		m_nameToIdMap[stateName] = stateId;
-		m_factory[stateId] = [stateName, stateId, this]() -> StateBase*
-			{
-				return new T(stateName, stateId, this);
-			};
-	}
-	
-	void SwitchState(const int& stateId);
-	void SwitchState(const std::string& stateName);
+    /*Register a state to create the state object.*/
+    template<class T>
+    void RegisterState(const std::string& stateName) {
+        int stateId = m_stateCount++;
+        m_nameToIdMap[stateName] = stateId;
+        m_factory[stateId] = [stateName, stateId, this]() -> StateBase*
+            {
+                return new T(stateName, stateId, this);
+            };
+    }
+    
+    void SwitchState(const int& stateId);
+    void SwitchState(const std::string& stateName);
 
-	void QueueForRemoval(const int& stateId);
-	void ProcessRemovals();
+    void QueueForRemoval(const int& stateId);
+    void ProcessRemovals();
 
-	SharedContext* GetSharedContext() { return m_sc; };
+    SharedContext* GetSharedContext() { return m_sc; };
 
 private:
-	void CreateState(const int& stateId);
-	void RemoveState(const int& stateId);
+    void CreateState(const int& stateId);
+    void RemoveState(const int& stateId);
 
-	StateList m_states;
-	StateFactory m_factory;
-	NameToId m_nameToIdMap;
-	int m_activeState;
-	SharedContext* m_sc;
-	int m_stateCount = 0;
-	std::vector<int> m_removalQueue;
+    StateList m_states;
+    StateFactory m_factory;
+    NameToId m_nameToIdMap;
+    int m_activeState;
+    SharedContext* m_sc;
+    int m_stateCount = 0;
+    std::vector<int> m_removalQueue;
 };

@@ -9,24 +9,24 @@ class Game
 {
 public:
 // -------------- Constructor/Destructor --------------
-	Game();
-	~Game();
+    Game();
+    ~Game();
 // ----------------------------------------------------
 
-	void Init();
-	void Update(float deltaTime);
-	void FixedUpdate();
-	void LateUpdate();
-	void Render();
-	void HandleInput();
+    void Init();
+    void Update(float deltaTime);
+    void FixedUpdate();
+    void LateUpdate();
+    void Render();
+    void HandleInput();
 
 // -------------- Helper Methods --------------
-	CWindow& GetWindow() { return m_window; }
+    CWindow& GetWindow() { return m_window; }
 
 private:
-	CWindow m_window;
-	SharedContext m_sharedContext;
-	StateManagerBase m_gameStateManager;
-	TextureLoader m_textureLoader;
+    CWindow m_window;
+    SharedContext m_sharedContext;
+    StateManagerBase m_gameStateManager;
+    TextureLoader m_textureLoader;
 };
 
