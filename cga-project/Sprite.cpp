@@ -103,9 +103,9 @@ bool Sprite::Load(const std::string& path)
 					SetSpriteScale(m_spriteScale);
 				}
 				else if (dataType == "Location") {
-					int column = stoi(data.substr(0, index));
-					int row = stoi(data.substr(index + dataSep.length(), data.length()));
-					sf::IntRect rect(column * m_spriteSize.x, row * m_spriteSize.y, m_spriteSize.x, m_spriteSize.y);
+					int locX = stoi(data.substr(0, index));
+					int locY = stoi(data.substr(index + dataSep.length(), data.length()));
+					sf::IntRect rect(locX, locY, m_spriteSize.x, m_spriteSize.y);
 					CropSprite(rect);
 				}
 			}
