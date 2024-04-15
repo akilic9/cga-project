@@ -3,6 +3,8 @@
 #include <SFML/Graphics/Sprite.hpp>
 
 struct TileInfo {
+    
+    //Sheet info struct?
 
     TileInfo(SharedContext* sContext, const std::string& textureId,
              const sf::Vector2u& tileLocation = sf::Vector2u(0, 0), unsigned int tileId)
