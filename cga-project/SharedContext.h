@@ -9,6 +9,7 @@ struct SharedContext {
     SharedContext()
         : m_window(nullptr)
         , m_inputManager(nullptr)
+        , m_mapManager(nullptr)
         , m_textureLoader(nullptr)
     {}
 
