@@ -20,7 +20,9 @@ void InputManager::HandleInputs(sf::Event event)
         return;
 
     for (auto& b : m_inputBindings) {
-        if (b.second->m_inputMap.first == (InputType)event.type && b.second->m_inputMap.second == event.key.code) {
+        if (b.second->m_inputMap.first == (InputType)event.type) {
+            if (event.type != 0 && b.second->m_inputMap.second != event.key.code)
+                return;
             auto sceneItr = m_callbacks.find(m_currentSceneId);
             if (sceneItr != m_callbacks.end())
                 if (auto key = sceneItr->second.find(b.first); key != sceneItr->second.end())

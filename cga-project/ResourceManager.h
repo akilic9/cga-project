@@ -54,6 +54,8 @@ public:
 
     //Release a specific resource using id.
     bool ReleaseResource(const std::string& resId) {
+        if (m_resources.empty())
+            return true;
         auto res = Find(resId);
         if (!res) //There isn't any instance of this to release.
             return false;
