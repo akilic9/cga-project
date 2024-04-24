@@ -5,8 +5,11 @@ TODO:
 2. Add an event system.
 3. Complete the game side to be submitted for coursework.
 4. Implement ECS.
-5. Rework InputManager to handle multiple and different kinds of input for actions (currently only listening for keyboard input).
-6. Rework map loading system to make it more user friendly.
-8. Add physics.
+5. Add animation system.
+6. Implement audio system.
+7. Rework InputManager to handle multiple and different kinds of input for actions (currently only listening for keyboard input).
+6. Implement GUI system.
+8. Rework map loading system to make it more user friendly.
+9. Add physics.
 7. Add a logger utility.
 9. More comments.
