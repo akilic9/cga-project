@@ -136,6 +136,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CWindow.cpp" />
+    <ClCompile Include="EntityBase.cpp" />
+    <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="main.cpp" />
@@ -143,11 +145,13 @@
     <ClCompile Include="Sprite.cpp" />
     <ClCompile Include="StateMachines\Scenes\GameState.cpp" />
     <ClCompile Include="StateMachines\Scenes\MainMenuState.cpp" />
-    <ClCompile Include="StateManagerBase.cpp" />
+    <ClCompile Include="StateManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CWindow.h" />
     <ClInclude Include="Direction.h" />
+    <ClInclude Include="EntityBase.h" />
+    <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="GameMap.h" />
@@ -157,7 +161,7 @@
     <ClInclude Include="StateBase.h" />
     <ClInclude Include="StateMachines\Scenes\GameState.h" />
     <ClInclude Include="StateMachines\Scenes\MainMenuState.h" />
-    <ClInclude Include="StateManagerBase.h" />
+    <ClInclude Include="StateManager.h" />
     <ClInclude Include="TextureLoader.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

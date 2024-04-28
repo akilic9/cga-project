@@ -2,7 +2,6 @@
 
 GameMap::GameMap(SharedContext* context)
     : m_sharedContext(context)
-    , m_defaultTile(m_sharedContext, m_sheetInfo)
     , m_mapSize(0, 0)
     , m_playerStartLoc(0.f, 0.f)
     , m_tileCount(0)
@@ -21,15 +20,19 @@ GameMap::~GameMap()
     m_sharedContext->m_mapManager = nullptr;
 }
 
-Tile* GameMap::GetTileByLocation(sf::Vector2u location)
+Tile* GameMap::GetTileByLocation(sf::Vector2f location)
 {
-    //TODO
-    return nullptr;
+    std::string sId = std::to_string(floor(location.x / m_sheetInfo.m_tileSize.x)) +
+                      std::to_string(floor(location.y / m_sheetInfo.m_tileSize.y));
+
+    unsigned int id = stoi(sId);
+    auto itr = m_tileMap.find(id);
+    return itr == m_tileMap.end() ? nullptr : itr->second;
 }
 
-TileInfo* GameMap::GetDefaultTile()
+SheetInfo* GameMap::GetSheetInfo()
 {
-    return &m_defaultTile;
+    return &m_sheetInfo;
 }
 
 const sf::Vector2u& GameMap::GetMapSize() const

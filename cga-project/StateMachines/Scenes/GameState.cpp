@@ -1,7 +1,7 @@
 #include "GameState.h"
-#include "../../StateManagerBase.h"
+#include "../../StateManager.h"
 
-GameState::GameState(std::string name, int id, StateManagerBase* stateManager)
+GameState::GameState(std::string name, int id, StateManager* stateManager)
     : StateBase(name, id, stateManager)
 {
     m_map = new GameMap(m_stateManager->GetSharedContext());

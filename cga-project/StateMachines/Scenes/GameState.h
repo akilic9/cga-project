@@ -5,7 +5,7 @@
 class GameState : public StateBase
 {
 public:
-    GameState(std::string name, int id, StateManagerBase* stateManager);
+    GameState(std::string name, int id, StateManager* stateManager);
     ~GameState();
 
     void OnCreate();

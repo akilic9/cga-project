@@ -10,11 +10,11 @@ using NameToId = std::unordered_map<std::string, int>;
 
 using StateFactory = std::unordered_map<int, std::function<StateBase* (void)>>;
 
-class StateManagerBase
+class StateManager
 {
 public:
-    StateManagerBase(SharedContext* sc);
-    ~StateManagerBase();
+    StateManager(SharedContext* sc);
+    ~StateManager();
 
     void Update(float deltaTime);
     void Render();
@@ -39,9 +39,6 @@ public:
     SharedContext* GetSharedContext() { return m_sc; };
 
 private:
-    void CreateState(const int& stateId);
-    void RemoveState(const int& stateId);
-
     StateList m_states;
     StateFactory m_factory;
     NameToId m_nameToIdMap;
@@ -49,4 +46,7 @@ private:
     SharedContext* m_sc;
     int m_stateCount = 0;
     std::vector<int> m_removalQueue;
+
+    void CreateState(const int& stateId);
+    void RemoveState(const int& stateId);
 };

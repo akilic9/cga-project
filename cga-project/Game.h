@@ -2,7 +2,7 @@
 #include "CWindow.h"
 #include "SharedContext.h"
 #include "InputManager.h"
-#include "StateManagerBase.h"
+#include "StateManager.h"
 #include "TextureLoader.h"
 
 class Game
@@ -26,7 +26,7 @@ public:
 private:
     CWindow m_window;
     SharedContext m_sharedContext;
-    StateManagerBase m_gameStateManager;
+    StateManager m_gameStateManager;
     TextureLoader m_textureLoader;
 };
 

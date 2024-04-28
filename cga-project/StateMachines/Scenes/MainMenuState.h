@@ -4,7 +4,7 @@
 class MainMenuState : public StateBase
 {
 public:
-    MainMenuState(std::string name, int id, StateManagerBase* stateManager);
+    MainMenuState(std::string name, int id, StateManager* stateManager);
     ~MainMenuState();
 
     void OnCreate();

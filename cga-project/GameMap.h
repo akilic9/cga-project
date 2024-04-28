@@ -61,8 +61,8 @@ public:
     GameMap(SharedContext* context);
     ~GameMap();
 
-    Tile* GetTileByLocation(sf::Vector2u location);
-    TileInfo* GetDefaultTile();
+    Tile* GetTileByLocation(sf::Vector2f location);
+    SheetInfo* GetSheetInfo();
     const sf::Vector2u& GetMapSize() const;
     const sf::Vector2f& GetPlayerStartLocation() const;
     void LoadMap(const std::string& mapName);
@@ -75,7 +75,6 @@ private:
     TileSet m_tileSet;
     TileMap m_tileMap;
     SheetInfo m_sheetInfo;
-    TileInfo m_defaultTile;
     sf::Vector2u m_mapSize;
     sf::Vector2f m_playerStartLoc;
     unsigned int m_tileCount;

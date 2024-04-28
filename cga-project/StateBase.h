@@ -2,12 +2,12 @@
 #include <string>
 #include "SFML/Graphics/Text.hpp"
 
-class StateManagerBase;
+class StateManager;
 
 class StateBase
 {
 public:
-    StateBase(const std::string& name, const int& id, StateManagerBase* stateManager) : m_name(name), m_id(id), m_stateManager(stateManager) {};
+    StateBase(const std::string& name, const int& id, StateManager* stateManager) : m_name(name), m_id(id), m_stateManager(stateManager) {};
     virtual ~StateBase() {};
 
     virtual void OnCreate() = 0;
@@ -20,5 +20,5 @@ public:
 protected:
     const std::string m_name;
     int m_id;
-    StateManagerBase* m_stateManager;
+    StateManager* m_stateManager;
 };

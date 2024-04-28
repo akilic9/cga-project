@@ -74,11 +74,11 @@ public:
     void SetHasFocus(bool isFocused) { if (isFocused == m_hasFocus) return; m_hasFocus = isFocused; }
     
 private:
-    //Load keybinds from cfg file.
-    void LoadBindings();
-
     bool m_hasFocus;
     InputBindings m_inputBindings;
     SceneCallbacks m_callbacks;
     int m_currentSceneId;
+
+    //Load keybinds from cfg file.
+    void LoadBindings();
 };

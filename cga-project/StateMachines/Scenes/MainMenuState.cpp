@@ -1,7 +1,7 @@
 #include "MainMenuState.h"
-#include "../../StateManagerBase.h"
+#include "../../StateManager.h"
 
-MainMenuState::MainMenuState(std::string name, int id, StateManagerBase* stateManager)
+MainMenuState::MainMenuState(std::string name, int id, StateManager* stateManager)
     : StateBase(name, id, stateManager)
     , m_switchTime(5.0f)
     , m_switchCounter(0.f)
