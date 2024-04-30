@@ -77,6 +77,8 @@ private:
     SheetInfo m_sheetInfo;
     sf::Vector2u m_mapSize;
     sf::Vector2f m_playerStartLoc;
+    sf::Sprite m_background;
+    std::string m_backgroundSpriteID;
     unsigned int m_tileCount;
     unsigned int m_tileSetCount;
     std::string m_nextMapName;

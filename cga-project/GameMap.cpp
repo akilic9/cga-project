@@ -8,6 +8,7 @@ GameMap::GameMap(SharedContext* context)
     , m_tileSetCount(0)
     , m_nextMapName("")
     , m_loadNextMap(false)
+    , m_backgroundSpriteID("")
 {
     m_sharedContext->m_mapManager = this;
     LoadTileSet("TilesetData.cfg");
@@ -62,7 +63,24 @@ void GameMap::LoadMap(const std::string& mapName)
         std::string type;
         keystream >> type;
 
-        if (type == "TILE") {
+        //TODO: The whole if-else thing is ugly. Maybe get an enum system? Or something else that would make this part tidier.
+        if (type == "BACKGROUND") {
+            keystream >> m_backgroundSpriteID;
+            if (!m_sharedContext->m_textureLoader->AllocateResource(m_backgroundSpriteID)) {
+                m_backgroundSpriteID = "";
+                continue;
+            }
+            sf::Texture* texture = m_sharedContext->m_textureLoader->GetResource(m_backgroundSpriteID);
+            m_background.setTexture(*texture);
+            sf::Vector2u windowsSize = m_sharedContext->m_window->GetWindowSize();
+            sf::Vector2u textureSize = texture->getSize();
+            sf::Vector2f scaleAmount;
+            scaleAmount.x = (float)windowsSize.x / (float)textureSize.x;
+            scaleAmount.y = (float)windowsSize.y / (float)textureSize.y;
+            m_background.setScale(scaleAmount);
+            m_background.setPosition(0.f, 0.f);
+        }
+        else if (type == "TILE") {
             std::string tileType;
             keystream >> tileType;
 
@@ -124,7 +142,7 @@ void GameMap::Update(float deltaTime)
 void GameMap::Render()
 {
     sf::RenderWindow* window = m_sharedContext->m_window->GetRenderWindow();
-
+    window->draw(m_background);
     for (auto &t : m_tileMap) {
         sf::Sprite& sprite = t.second->m_info->m_sprite;
         sprite.setPosition(t.second->m_position.x, t.second->m_position.y);
@@ -180,6 +198,11 @@ void GameMap::PurgeMap()
         delete itr.second;
     }
     m_tileMap.clear();
+
+    if (m_backgroundSpriteID == "")
+        return;
+    m_sharedContext->m_textureLoader->ReleaseResource(m_backgroundSpriteID);
+    m_backgroundSpriteID = "";
 }
 
 void GameMap::PurgeTileSet()
