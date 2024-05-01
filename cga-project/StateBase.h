@@ -7,7 +7,10 @@ class StateManager;
 class StateBase
 {
 public:
-    StateBase(const std::string& name, const int& id, StateManager* stateManager) : m_name(name), m_id(id), m_stateManager(stateManager) {};
+    StateBase(const std::string& name, const int& id, StateManager* stateManager)
+        : m_name(name)
+        , m_id(id)
+        , m_stateManager(stateManager) {};
     virtual ~StateBase() {};
 
     virtual void OnCreate() = 0;

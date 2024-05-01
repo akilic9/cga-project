@@ -12,13 +12,9 @@ EntityBase::EntityBase(EntityManager* entityManager, std::string name, unsigned 
     , m_size(64.f, 64.f)
     , m_isCollidingX(false)
     , m_isCollidingY(false)
-    , m_entityManager(entityManager)
-{
-}
+    , m_entityManager(entityManager) {}
 
-EntityBase::~EntityBase()
-{
-}
+EntityBase::~EntityBase() {}
 
 void EntityBase::Move(sf::Vector2f& movement)
 {

@@ -4,13 +4,9 @@
 MainMenuState::MainMenuState(std::string name, int id, StateManager* stateManager)
     : StateBase(name, id, stateManager)
     , m_switchTime(5.0f)
-    , m_switchCounter(0.f)
-{
-}
+    , m_switchCounter(0.f) {}
 
-MainMenuState::~MainMenuState()
-{
-}
+MainMenuState::~MainMenuState() {}
 
 void MainMenuState::OnCreate()
 {
@@ -23,9 +19,7 @@ void MainMenuState::OnCreate()
     m_text.setPosition(100.f, 100.f);
 }
 
-void MainMenuState::OnEnter()
-{
-}
+void MainMenuState::OnEnter() {}
 
 void MainMenuState::Update(float deltaTime)
 {
@@ -44,10 +38,6 @@ void MainMenuState::Render()
     window->draw(m_text);
 }
 
-void MainMenuState::OnExit()
-{
-}
+void MainMenuState::OnExit() {}
 
-void MainMenuState::OnDelete()
-{
-}
+void MainMenuState::OnDelete() {}

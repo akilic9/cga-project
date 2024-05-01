@@ -10,8 +10,7 @@ struct SharedContext {
         : m_window(nullptr)
         , m_inputManager(nullptr)
         , m_mapManager(nullptr)
-        , m_textureLoader(nullptr)
-    {}
+        , m_textureLoader(nullptr) {}
 
     CWindow * m_window;
     InputManager* m_inputManager;

@@ -1,10 +1,8 @@
 #include "StateManager.h"
 
-StateManager::StateManager(SharedContext* sc)
+StateManager::StateManager(SharedContext* sharedContext)
     : m_activeState(-1)
-    , m_sc(sc)
-{
-}
+    , m_sharedContext(sharedContext) {}
 
 StateManager::~StateManager()
 {

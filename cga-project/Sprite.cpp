@@ -5,9 +5,7 @@ Sprite::Sprite(TextureLoader* texLoader)
     , m_spriteSize(32, 32)
     , m_spriteScale(1.0f, 1.0f)
     , m_spriteDirection(Direction::Down)
-    , m_textureLoader(texLoader)
-{
-}
+    , m_textureLoader(texLoader) {}
 
 Sprite::~Sprite()
 {
@@ -121,9 +119,7 @@ void Sprite::Release()
     m_textureLoader->ReleaseResource(m_textureId);
 }
 
-void Sprite::Update(float deltaTime)
-{
-}
+void Sprite::Update(float deltaTime) {}
 
 void Sprite::Render(sf::RenderWindow* window) const
 {

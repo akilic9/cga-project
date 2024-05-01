@@ -14,8 +14,7 @@ struct CollisionInfo {
     CollisionInfo(float area, TileInfo* tile, const sf::FloatRect& bounds)
         : m_area(area)
         , m_tile(tile)
-        , m_tileBounds(bounds)
-    {}
+        , m_tileBounds(bounds) {}
 
     float m_area;
     TileInfo* m_tile;

@@ -37,9 +37,7 @@ private:
     template<class T>void RegisterEntity(const EntityType& type, std::string name) {
         unsigned int id = m_entityCounter++;
         m_entityFactory[type] = [this, name, id]() -> EntityBase*
-            {
-                return new T(this, name, id);
-            };
+            { return new T(this, name, id); };
     }
     void ProcessRemovals();
     void EntityCollisionCheck();

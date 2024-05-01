@@ -8,10 +8,8 @@
 class Game
 {
 public:
-// -------------- Constructor/Destructor --------------
     Game();
     ~Game();
-// ----------------------------------------------------
 
     void Init();
     void Update(float deltaTime);
@@ -20,7 +18,6 @@ public:
     void Render();
     void HandleInput();
 
-// -------------- Helper Methods --------------
     CWindow& GetWindow() { return m_window; }
 
 private:

@@ -16,13 +16,9 @@ Game::Game()
     m_gameStateManager.SwitchState("Game");
 }
 
-Game::~Game()
-{
-}
+Game::~Game() {}
 
-void Game::Init()
-{
-}
+void Game::Init() {}
 
 void Game::Update(float deltaTime)
 {
@@ -30,9 +26,7 @@ void Game::Update(float deltaTime)
     m_gameStateManager.Update(deltaTime);
 }
 
-void Game::FixedUpdate()
-{
-}
+void Game::FixedUpdate() {}
 
 void Game::LateUpdate()
 {
@@ -46,6 +40,4 @@ void Game::Render()
     m_window.EndDraw();
 }
 
-void Game::HandleInput()
-{
-}
+void Game::HandleInput() {}

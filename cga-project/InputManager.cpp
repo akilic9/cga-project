@@ -10,9 +10,7 @@ InputManager::InputManager()
     LoadBindings();
 }
 
-InputManager::~InputManager()
-{
-}
+InputManager::~InputManager() {}
 
 void InputManager::HandleInputs(sf::Event event)
 {
@@ -50,9 +48,8 @@ bool InputManager::AddBinding(std::string name, std::pair<InputType, int> map)
 
 bool InputManager::RemoveBinding(std::string bindingName)
 {
-    if (auto binding = m_inputBindings.find(bindingName); binding == m_inputBindings.end()) {
+    if (auto binding = m_inputBindings.find(bindingName); binding == m_inputBindings.end())
         return false;
-    }
     else {
         delete binding->second;
         binding->second = nullptr;
@@ -75,7 +72,6 @@ void InputManager::RemoveCallback(int sceneId, const std::string& callbackName)
 
     //Finally delete the binding callback you found.
     sceneItr->second.erase(callbackName);
-
 }
 
 //FIXME: we are not loading multiple binds anymore.
@@ -86,9 +82,8 @@ void InputManager::LoadBindings()
     bindingsStream.open(filePath);
 
     // Can't open file.
-    if (!bindingsStream.is_open()) {
+    if (!bindingsStream.is_open())
         return;
-    }
 
     std::string line;
     while (std::getline(bindingsStream, line)) {

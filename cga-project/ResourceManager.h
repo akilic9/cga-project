@@ -7,7 +7,6 @@
 *    This class is for loading different type of resources; texture, sound, spritesheet, tilesheet etc.
 *    Source: Pupius, R. (2015) SFML Game Development By Example. Birmingham: Packt Publishing Ltd.
 */
-
 template<typename Derived, typename T>
 class ResourceManager {
 public:

@@ -25,9 +25,7 @@ void GameState::OnCreate()
     //m_text.setPosition(100.f, 100.f);
 }
 
-void GameState::OnEnter()
-{
-}
+void GameState::OnEnter() {}
 
 void GameState::Update(float deltaTime)
 {
@@ -39,10 +37,6 @@ void GameState::Render()
     m_map->Render();
 }
 
-void GameState::OnExit()
-{
-}
+void GameState::OnExit() {}
 
-void GameState::OnDelete()
-{
-}
+void GameState::OnDelete() {}

@@ -194,13 +194,14 @@ void GameMap::LoadTileSet(const std::string& path)
 void GameMap::PurgeMap()
 {
     m_tileCount = 0;
-    for (auto& itr : m_tileMap) {
+    for (auto& itr : m_tileMap)
         delete itr.second;
-    }
+
     m_tileMap.clear();
 
     if (m_backgroundSpriteID == "")
         return;
+
     m_sharedContext->m_textureLoader->ReleaseResource(m_backgroundSpriteID);
     m_backgroundSpriteID = "";
 }
@@ -208,8 +209,8 @@ void GameMap::PurgeMap()
 void GameMap::PurgeTileSet()
 {
     m_tileSetCount = 0;
-    for (auto& itr : m_tileSet) {
+    for (auto& itr : m_tileSet)
         delete itr.second;
-    }
+
     m_tileSet.clear();
 }

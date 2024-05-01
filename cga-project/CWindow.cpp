@@ -24,7 +24,6 @@ CWindow::CWindow(const std::string& title, const sf::Vector2u windowSize) :
 
 CWindow::~CWindow()
 {
-
     m_window.close();
 }
 

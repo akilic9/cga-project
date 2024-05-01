@@ -25,9 +25,7 @@ public:
         int stateId = m_stateCount++;
         m_nameToIdMap[stateName] = stateId;
         m_factory[stateId] = [stateName, stateId, this]() -> StateBase*
-            {
-                return new T(stateName, stateId, this);
-            };
+            { return new T(stateName, stateId, this); };
     }
     
     void SwitchState(const int& stateId);
@@ -36,14 +34,14 @@ public:
     void QueueForRemoval(const int& stateId);
     void ProcessRemovals();
 
-    SharedContext* GetSharedContext() { return m_sc; };
+    SharedContext* GetSharedContext() { return m_sharedContext; };
 
 private:
     StateList m_states;
     StateFactory m_factory;
     NameToId m_nameToIdMap;
     int m_activeState;
-    SharedContext* m_sc;
+    SharedContext* m_sharedContext;
     int m_stateCount = 0;
     std::vector<int> m_removalQueue;
 
