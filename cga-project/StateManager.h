@@ -34,7 +34,7 @@ public:
     void QueueForRemoval(const int& stateId);
     void ProcessRemovals();
 
-    SharedContext* GetSharedContext() { return m_sharedContext; };
+    inline SharedContext* GetSharedContext() { return m_sharedContext; };
 
 private:
     StateList m_states;

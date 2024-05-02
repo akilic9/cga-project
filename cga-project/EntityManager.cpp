@@ -4,6 +4,7 @@
 EntityManager::EntityManager(SharedContext* sContext, unsigned int maxEntities)
     : m_sContext(sContext)
     , m_maxEntities(maxEntities)
+    , m_entityCount(0)
 {
     //RegisterEntity<Player>(EntityType::Player);
 }
@@ -28,7 +29,7 @@ EntityBase* EntityManager::Find(const std::string& name)
     return nullptr;
 }
 
-void EntityManager::Add(const EntityType& type)
+void EntityManager::Add(const EntityType& type, const std::string name)
 {
     auto itr = m_entityFactory.find(type);
 
@@ -36,7 +37,10 @@ void EntityManager::Add(const EntityType& type)
         return;
 
     EntityBase* entity = itr->second();
-    m_entities.emplace(entity->GetID(), entity);
+    entity->SetID(m_entityCount);
+    entity->SetName(name);
+    m_entities.emplace(m_entityCount, entity);
+    ++m_entityCount;
 }
 
 void EntityManager::QueueForRemoval(unsigned int id)
@@ -67,7 +71,7 @@ void EntityManager::Purge()
         delete itr.second;
 
     m_entities.clear();
-    m_entityCounter = 0;
+    m_entityCount = 0;
 }
 
 void EntityManager::ProcessRemovals()
@@ -95,23 +99,9 @@ void EntityManager::EntityCollisionCheck()
             if (itr->first == itr2->first)
                 continue;
 
-            if (itr->second->m_AABB.intersects(itr2->second->m_AABB)) {
-                itr->second->OnEntityCollision(itr2->second, false);
-                itr2->second->OnEntityCollision(itr->second, false);
-            }
-            EntityType t1 = itr->second->GetType();
-            EntityType t2 = itr2->second->GetType();
-            if (t1 == EntityType::Player || t1 == EntityType::Enemy) {
-                Character* c1 = (Character*)itr->second;
-                if (c1->m_attackAABB.intersects(itr2->second->m_AABB)) {
-                    c1->OnEntityCollision(itr2->second, true);
-                }
-            }
-            if (t2 == EntityType::Player || t2 == EntityType::Enemy) {
-                Character* c2 = (Character*)itr2->second;
-                if (c2->m_attackAABB.intersects(itr->second->m_AABB)) {
-                    c2->OnEntityCollision(itr->second, true);
-                }
+            if (itr->second->GetBoundingBox().intersects(itr2->second->GetBoundingBox())) {
+                itr->second->OnEntityCollision(itr2->second);
+                itr2->second->OnEntityCollision(itr->second);
             }
         }
     }

@@ -8,6 +8,8 @@ struct TileInfo;
 enum class EntityType {
     Base,
     Player,
+    Enemy,
+    Bullet
 };
 
 struct CollisionInfo {
@@ -28,15 +30,21 @@ class EntityManager;
 class EntityBase
 {
 public:
-    EntityBase(EntityManager* entityManager, std::string name, unsigned int id);
+    EntityBase(EntityManager* entityManager);
     virtual ~EntityBase();
 
     void Move(sf::Vector2f& movement);
     void SetPosition(sf::Vector2f& pos);
     void SetSize(sf::Vector2f& size);
+    virtual void OnEntityCollision(EntityBase* collidingEntity) = 0;
 
-    inline unsigned int& GetID() { return m_id; }
-    inline std::string& GetName() { return m_name; }
+    inline unsigned int GetID() const { return m_id; }
+    inline std::string GetName() const { return m_name; }
+    inline sf::FloatRect GetBoundingBox() const { return m_boundingBox; }
+    inline EntityType GetType() const { return m_type; }
+
+    inline void SetID(const unsigned int id) { m_id = id; }
+    inline void SetName(const std::string name) { m_name = name; }
 
     virtual void Update(float deltaTime);
     virtual void Render(sf::RenderWindow* window) = 0;

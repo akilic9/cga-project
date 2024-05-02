@@ -2,10 +2,10 @@
 #include "GameMap.h"
 #include "EntityManager.h"
 
-EntityBase::EntityBase(EntityManager* entityManager, std::string name, unsigned int id)
-    : m_name(name)
+EntityBase::EntityBase(EntityManager* entityManager)
+    : m_name("")
     , m_type(EntityType::Base)
-    , m_id(id)
+    , m_id(0)
     , m_position(0.f, 0.f)
     , m_prevPosition(m_position)
     , m_movementSpeed(5.f)

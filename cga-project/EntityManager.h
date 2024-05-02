@@ -16,7 +16,7 @@ public:
     EntityBase* Find(unsigned int id);
     EntityBase* Find(const std::string& name);
 
-    void Add(const EntityType& type);
+    void Add(const EntityType& type, const std::string name);
     void QueueForRemoval(unsigned int id);
 
     void Update(float deltaTime);
@@ -29,15 +29,13 @@ private:
     EntityContainer m_entities;
     EntityFactory m_entityFactory;
     SharedContext* m_sContext;
-    unsigned int m_entityCounter = 0;
+    unsigned int m_entityCount;
     unsigned int m_maxEntities;
     std::vector<unsigned int> m_removalQueue;
 
-
-    template<class T>void RegisterEntity(const EntityType& type, std::string name) {
-        unsigned int id = m_entityCounter++;
-        m_entityFactory[type] = [this, name, id]() -> EntityBase*
-            { return new T(this, name, id); };
+    template<class T>void RegisterEntity(const EntityType& type) {
+        m_entityFactory[type] = [this]() -> EntityBase*
+            { return new T(this); };
     }
     void ProcessRemovals();
     void EntityCollisionCheck();
