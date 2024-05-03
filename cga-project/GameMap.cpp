@@ -23,8 +23,8 @@ GameMap::~GameMap()
 
 Tile* GameMap::GetTileByLocation(sf::Vector2f location)
 {
-    std::string sId = std::to_string(floor(location.x / m_sheetInfo.m_tileSize.x)) +
-                      std::to_string(floor(location.y / m_sheetInfo.m_tileSize.y));
+    std::string sId = std::to_string(floor(location.x / m_sheetInfo.m_defaultTileSize.x)) +
+                      std::to_string(floor(location.y / m_sheetInfo.m_defaultTileSize.y));
 
     unsigned int id = stoi(sId);
     auto itr = m_tileMap.find(id);
@@ -100,8 +100,8 @@ void GameMap::LoadMap(const std::string& mapName)
             tile->m_info = typeItr->second;
             std::string tileId = std::to_string(tilePosition.x) + std::to_string(tilePosition.y); //Id will be the row and column.
             tile->m_id = stoi(tileId);
-            tile->m_position = sf::Vector2u(tilePosition.x * m_sheetInfo.m_tileSize.x,
-                tilePosition.y * m_sheetInfo.m_tileSize.y);
+            tile->m_position = sf::Vector2u(tilePosition.x * m_sheetInfo.m_defaultTileSize.x,
+                tilePosition.y * m_sheetInfo.m_defaultTileSize.y);
 
             if (!m_tileMap.emplace(tile->m_id, tile).second) {
                 std::cerr << "Overlapping tiles: " << line << std::endl;
@@ -174,7 +174,7 @@ void GameMap::LoadTileSet(const std::string& path)
         else if (parameter == "TileSize") {
             sf::Vector2u tileSize;
             keystream >> tileSize.x >> tileSize.y;
-            m_sheetInfo.m_tileSize = tileSize;
+            m_sheetInfo.m_defaultTileSize = tileSize;
         }
         else if (parameter == "TileType") {
             sf::Vector2u location;

@@ -67,7 +67,5 @@ protected:
     void UpdateBoundingBox();
     void CheckCollisions();
     void ResolveCollisions();
-
-    virtual void OnEntityCollision(EntityBase* collider) = 0;
 };
 

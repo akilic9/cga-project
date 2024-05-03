@@ -5,7 +5,7 @@
 
 struct SheetInfo {
     sf::Vector2u m_sheetSize;
-    sf::Vector2u m_tileSize;
+    sf::Vector2u m_defaultTileSize;
 };
 
 struct TileInfo {
@@ -25,7 +25,7 @@ struct TileInfo {
         m_sprite.setTexture(*texLoader->GetResource(textureId));
         
         sf::IntRect tileBox(tilesheetLocation.x, tilesheetLocation.y,
-                            sInfo.m_tileSize.x, sInfo.m_tileSize.y);
+                            sInfo.m_defaultTileSize.x, sInfo.m_defaultTileSize.y);
         m_sprite.setTextureRect(tileBox);
     }
 

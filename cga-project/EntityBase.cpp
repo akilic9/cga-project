@@ -22,7 +22,7 @@ void EntityBase::Move(sf::Vector2f& movement)
     m_position += movement;
 
     sf::Vector2u mapSize = m_entityManager->GetSharedContext()->m_mapManager->GetMapSize();
-    unsigned int tileSize = m_entityManager->GetSharedContext()->m_mapManager->GetSheetInfo()->m_tileSize.x;
+    unsigned int tileSize = m_entityManager->GetSharedContext()->m_mapManager->GetSheetInfo()->m_defaultTileSize.x;
 
     if (m_position.x < 0)
         m_position.x = 0;
@@ -72,7 +72,7 @@ void EntityBase::UpdateBoundingBox()
 void EntityBase::CheckCollisions()
 {
     GameMap* gameMap = m_entityManager->GetSharedContext()->m_mapManager;
-    unsigned int tileSize = gameMap->GetSheetInfo()->m_tileSize.x;
+    unsigned int tileSize = gameMap->GetSheetInfo()->m_defaultTileSize.x;
     int fromX = floor(m_boundingBox.left / tileSize);
     int toX = floor((m_boundingBox.left + m_boundingBox.width) / tileSize);
     int fromY = floor(m_boundingBox.top / tileSize);
@@ -104,7 +104,7 @@ void EntityBase::ResolveCollisions()
             });
 
         GameMap* gameMap = m_entityManager->GetSharedContext()->m_mapManager;
-        unsigned int tileSize = gameMap->GetSheetInfo()->m_tileSize.x;
+        unsigned int tileSize = gameMap->GetSheetInfo()->m_defaultTileSize.x;
 
         for (auto& itr : m_collisions) {
             if (!m_boundingBox.intersects(itr.m_tileBounds))
