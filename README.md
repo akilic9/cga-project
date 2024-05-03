@@ -4,7 +4,7 @@ TODO:
 1. Complete GameObject systems.
 2. Add an event system.
 3. Complete the game side to be submitted for coursework.
-4. Implement ECS.
+4. Implement ECS fully.
 5. Add animation system.
 6. Implement audio system.
 7. Rework InputManager to handle multiple and different kinds of input for actions (currently only listening for keyboard input).
