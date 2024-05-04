@@ -13,7 +13,7 @@ using StateFactory = std::unordered_map<int, std::function<StateBase* (void)>>;
 class StateManager
 {
 public:
-    StateManager(SharedContext* sc);
+    StateManager(SharedContext* sharedContext);
     ~StateManager();
 
     void Update(float deltaTime);

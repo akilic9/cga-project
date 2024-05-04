@@ -92,16 +92,16 @@ void EntityManager::EntityCollisionCheck()
     if (m_entities.empty())
         return;
 
-    for (auto itr = m_entities.begin(); std::next(itr) != m_entities.end(); ++itr)
+    for (auto entity = m_entities.begin(); std::next(entity) != m_entities.end(); ++entity)
     {
-        for (auto itr2 = std::next(itr); itr2 != m_entities.end(); ++itr2)
+        for (auto nextEntity = std::next(entity); nextEntity != m_entities.end(); ++nextEntity)
         {
-            if (itr->first == itr2->first)
+            if (entity->first == nextEntity->first)
                 continue;
 
-            if (itr->second->GetBoundingBox().intersects(itr2->second->GetBoundingBox())) {
-                itr->second->OnEntityCollision(itr2->second);
-                itr2->second->OnEntityCollision(itr->second);
+            if (entity->second->GetBoundingBox().intersects(nextEntity->second->GetBoundingBox())) {
+                entity->second->OnEntityCollision(nextEntity->second);
+                nextEntity->second->OnEntityCollision(entity->second);
             }
         }
     }

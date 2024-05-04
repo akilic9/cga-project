@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="CWindow.cpp" />
     <ClCompile Include="EntityBase.cpp" />
     <ClCompile Include="EntityManager.cpp" />
@@ -148,6 +149,7 @@
     <ClCompile Include="StateManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Character.h" />
     <ClInclude Include="CWindow.h" />
     <ClInclude Include="Direction.h" />
     <ClInclude Include="EntityBase.h" />
