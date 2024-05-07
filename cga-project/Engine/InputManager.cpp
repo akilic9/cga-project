@@ -17,33 +17,35 @@ void InputManager::HandleInputs(sf::Event event)
     if (!m_hasFocus)
         return;
 
-    for (auto& b : m_inputBindings) {
-        if (b.second->m_inputMap.first == (InputType)event.type) {
-            if (event.type != 0 && b.second->m_inputMap.second != event.key.code)
-                return;
-            auto sceneItr = m_callbacks.find(m_currentSceneId);
-            if (sceneItr != m_callbacks.end())
-                if (auto key = sceneItr->second.find(b.first); key != sceneItr->second.end())
-                    key->second(b.second);
+    for (auto& binding : m_inputBindings) {
+        for (auto& b : binding.second) {
+            if (b->m_inputMap.first == (InputType)event.type) {
+                if (event.type == sf::Event::MouseButtonReleased)
+                    return;
+                if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased) {
+                    if (event.type != sf::Event::Closed && b->m_inputMap.second != event.key.code)
+                        return;
 
-            auto indItr = m_callbacks.find(-1); //-1 is callbacks that are scene independent.
-            if (indItr != m_callbacks.end())
-                if (auto key = indItr->second.find(b.first); key != indItr->second.end())
-                    key->second(b.second);
+                    auto sceneItr = m_callbacks.find(m_currentSceneId);
+                    if (sceneItr != m_callbacks.end())
+                        if (auto key = sceneItr->second.find(binding.first); key != sceneItr->second.end())
+                            key->second(b);
 
+                    auto indItr = m_callbacks.find(-1); //-1 is callbacks that are scene independent.
+                    if (indItr != m_callbacks.end())
+                        if (auto key = indItr->second.find(binding.first); key != indItr->second.end())
+                            key->second(b);
+                }
+            }
         }
     }
 }
 
 bool InputManager::AddBinding(std::string name, std::pair<InputType, int> map)
 {
-    if (m_inputBindings.find(name) != m_inputBindings.end())
-        return false;
-    else {
-        InputBinding *binding = new InputBinding(name, map);
-        m_inputBindings[name] = binding;
-        return true;
-    }
+    InputBinding *binding = new InputBinding(name, map);
+    m_inputBindings[name].push_back(binding);
+    return true;
 }
 
 bool InputManager::RemoveBinding(std::string bindingName)
@@ -51,9 +53,12 @@ bool InputManager::RemoveBinding(std::string bindingName)
     if (auto binding = m_inputBindings.find(bindingName); binding == m_inputBindings.end())
         return false;
     else {
-        delete binding->second;
-        binding->second = nullptr;
-        m_inputBindings.erase(binding);
+        for (auto& b : binding->second) { //Delete the binding pointers in vector.
+            delete b;
+            b = nullptr;
+        }
+        binding->second.clear(); //Clear vector.
+        m_inputBindings.erase(binding); //Erase map item.
         return true;
     }
 }
@@ -74,7 +79,6 @@ void InputManager::RemoveCallback(int sceneId, const std::string& callbackName)
     sceneItr->second.erase(callbackName);
 }
 
-//TODO: we are not loading multiple binds anymore.
 void InputManager::LoadBindings()
 {
     std::ifstream bindingsStream;
@@ -99,7 +103,7 @@ void InputManager::LoadBindings()
             while (index != std::string::npos) {
                 std::string actionEvent = actionCodes.substr(0, index);
                 std::string eventSep = ":";
-
+                
                 actionCodes = actionCodes.substr(index + actionSep.length(), actionCodes.length());
                 index = actionCodes.find(actionSep);
 

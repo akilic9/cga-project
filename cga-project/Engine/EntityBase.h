@@ -66,7 +66,7 @@ protected:
     EntityManager* m_entityManager;
 
     void UpdateBoundingBox();
-    void CheckCollisions();
-    void ResolveCollisions();
+    void CheckTileCollisions();
+    void ResolveTileCollisions();
 };
 

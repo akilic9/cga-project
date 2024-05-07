@@ -22,7 +22,7 @@ enum class InputType {
     Mouse
 };
 
-//TODO: Only designed for keyboard input as a start, needs to be expanded to work with other types above. Also expand so that multiple bindings can be stored under one name.
+//TODO: Only designed for keyboard input and close button as a start, needs to be expanded to work with other types.
 //Input type -> key code(if any)
 struct InputBinding {
     InputBinding(const std::string& name, std::pair<InputType, int> map) : m_name(name), m_inputMap(map) {}
@@ -32,7 +32,7 @@ struct InputBinding {
 };
 
 //Name -> binding
-using InputBindings = std::unordered_map<std::string, InputBinding*>;
+using InputBindings = std::unordered_map<std::string, std::vector<InputBinding*>>;
 
 //Input name -> target function
 using Callback = std::unordered_map<std::string, std::function<void(InputBinding*)>>;

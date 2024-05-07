@@ -60,8 +60,8 @@ void EntityBase::Update(float deltaTime)
 {
     m_isCollidingX = false;
     m_isCollidingY = false;
-    CheckCollisions();
-    ResolveCollisions();
+    CheckTileCollisions();
+    ResolveTileCollisions();
 }
 
 void EntityBase::UpdateBoundingBox()
@@ -69,7 +69,7 @@ void EntityBase::UpdateBoundingBox()
     m_boundingBox = sf::FloatRect(m_position.x - (m_size.x / 2.f), m_position.y - (m_size.y / 2.f), m_size.x, m_size.y);
 }
 
-void EntityBase::CheckCollisions()
+void EntityBase::CheckTileCollisions()
 {
     GameMap* gameMap = m_entityManager->GetSharedContext()->m_mapManager;
     unsigned int tileSize = gameMap->GetSheetInfo()->m_defaultTileSize.x;
@@ -95,7 +95,7 @@ void EntityBase::CheckCollisions()
     }
 }
 
-void EntityBase::ResolveCollisions()
+void EntityBase::ResolveTileCollisions()
 {
     if (!m_collisions.empty()) {
         std::sort(m_collisions.begin(), m_collisions.end(), [](CollisionInfo c1, CollisionInfo c2) 
