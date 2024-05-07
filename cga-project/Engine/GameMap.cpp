@@ -50,7 +50,7 @@ const sf::Vector2f& GameMap::GetPlayerStartLocation() const
 void GameMap::LoadMap(const std::string& mapName)
 {
     std::ifstream mapDataFile;
-    mapDataFile.open("Data/Maps/" + mapName);
+    mapDataFile.open("Game/Data/Maps/" + mapName);
     if (!mapDataFile.is_open()) {
         std::cerr << "Cannot open tileset config at: " << mapName << std::endl;
         return;
@@ -163,7 +163,7 @@ void GameMap::Render()
 void GameMap::LoadTileSet(const std::string& path)
 {
     std::ifstream tileSetfile;
-    tileSetfile.open("Data/" + path);
+    tileSetfile.open("Game/Data/" + path);
     if (!tileSetfile.is_open()) {
         std::cerr << "Cannot open tileset config at: " << path << std::endl;
         return;

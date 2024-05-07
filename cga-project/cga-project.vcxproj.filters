@@ -15,97 +15,85 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="Engine\Character.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="Engine\CWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CWindow.cpp">
+    <ClCompile Include="Engine\EntityBase.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
+    <ClCompile Include="Engine\EntityManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StateMachines\Scenes\MainMenuState.cpp">
+    <ClCompile Include="Engine\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StateManager.cpp">
+    <ClCompile Include="Engine\GameMap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="StateMachines\Scenes\GameState.cpp">
+    <ClCompile Include="Engine\InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
+    <ClCompile Include="Engine\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="GameMap.cpp">
+    <ClCompile Include="Engine\Sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EntityBase.cpp">
+    <ClCompile Include="Engine\StateManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EntityManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Character.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="Game\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\Character.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="CWindow.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\CWindow.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\Direction.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="StateBase.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\EntityBase.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="StateMachines\Scenes\MainMenuState.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\EntityManager.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="StateManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\Game.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="SharedContext.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\GameMap.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="StateMachines\Scenes\GameState.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\InputManager.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceManager.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\ResourceManager.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="TextureLoader.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\SharedContext.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\Sprite.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Direction.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\StateBase.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameMap.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\StateManager.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="EntityBase.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Engine\TextureLoader.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="EntityManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Character.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Game\Player.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,6 +1,6 @@
 #pragma once
-#include "../../StateBase.h"
-#include "../../GameMap.h"
+#include "../../Engine/StateBase.h"
+#include "../../Engine/GameMap.h"
 
 class GameState : public StateBase
 {

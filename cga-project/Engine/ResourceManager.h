@@ -106,7 +106,7 @@ private:
     //Load resource item's name(id) and path from file.
     void LoadFilePaths(const std::string& filePath) {
         std::ifstream pathsFile;
-        pathsFile.open("Data/" + filePath);
+        pathsFile.open("Game/Data/" + filePath);
         if (pathsFile.is_open()) {
             std::string line;
             while (std::getline(pathsFile, line)) {

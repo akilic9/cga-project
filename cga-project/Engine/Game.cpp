@@ -1,6 +1,6 @@
 #include "Game.h"
-#include "StateMachines/Scenes/MainMenuState.h"
-#include "StateMachines/Scenes/GameState.h"
+#include "../Game/StateMachines/Scenes/MainMenuState.h"
+#include "../Game/StateMachines/Scenes/GameState.h"
 
 Game::Game()
     : m_window("CGA Project")

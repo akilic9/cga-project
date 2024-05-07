@@ -78,7 +78,7 @@ void InputManager::RemoveCallback(int sceneId, const std::string& callbackName)
 void InputManager::LoadBindings()
 {
     std::ifstream bindingsStream;
-    std::string filePath = "Data/InputBindings.cfg";
+    std::string filePath = "Game/Data/InputBindings.cfg";
     bindingsStream.open(filePath);
 
     // Can't open file.

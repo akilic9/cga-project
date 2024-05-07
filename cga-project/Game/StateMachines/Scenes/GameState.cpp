@@ -1,11 +1,11 @@
 #include "GameState.h"
-#include "../../StateManager.h"
+#include "../../../Engine/StateManager.h"
 
 GameState::GameState(std::string name, int id, StateManager* stateManager)
     : StateBase(name, id, stateManager)
 {
     m_map = new GameMap(m_stateManager->GetSharedContext());
-    m_map->LoadMap("Map1.cfg");
+    m_map->LoadMap("Map1.map");
 }
 
 GameState::~GameState()
