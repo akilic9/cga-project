@@ -1,0 +1,4 @@
+Name Player
+SpriteID Player
+MovementSpeed 5
+AttackSpeed 2

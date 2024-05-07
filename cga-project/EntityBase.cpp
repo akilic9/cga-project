@@ -85,7 +85,7 @@ void EntityBase::CheckCollisions()
             if (!tile || !tile->m_info->m_isCollidable)
                 continue;
 
-            sf::FloatRect tileBounds(x * tileSize, y * tileSize, tileSize, tileSize);
+            sf::FloatRect tileBounds(tile->m_info->m_sprite.getGlobalBounds());
             sf::FloatRect intersection;
             m_boundingBox.intersects(tileBounds, intersection);
             float area = intersection.width * intersection.height;

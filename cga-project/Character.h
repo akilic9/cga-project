@@ -13,7 +13,7 @@ public:
 	void Die();
 	void Shoot();
 	
-	void LoadCharacterSpecs();
+	void LoadCharacterSpecs(std::string fileName);
 	void Update(float deltaTime);
 	void Render(sf::RenderWindow* window);
 

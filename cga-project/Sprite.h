@@ -16,7 +16,7 @@ public:
     void SetSpritePosition(sf::Vector2f& position);
     void SetSpriteDirection(Direction& dirention);
 
-    bool Load(const std::string& path);
+    bool Load(const std::string& spriteID);
     void Release();
     void Update(float deltaTime);
     void Render(sf::RenderWindow* window) const;

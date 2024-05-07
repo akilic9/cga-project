@@ -1,4 +1,5 @@
 #include "GameMap.h"
+#include <SFML/Graphics/RectangleShape.hpp>
 
 GameMap::GameMap(SharedContext* context)
     : m_sharedContext(context)
@@ -11,7 +12,7 @@ GameMap::GameMap(SharedContext* context)
     , m_backgroundSpriteID("")
 {
     m_sharedContext->m_mapManager = this;
-    LoadTileSet("TilesetData.cfg");
+    LoadTileSet("TilesetData.data");
 }
 
 GameMap::~GameMap()
@@ -147,6 +148,15 @@ void GameMap::Render()
         sf::Sprite& sprite = t.second->m_info->m_sprite;
         sprite.setPosition(t.second->m_position.x, t.second->m_position.y);
         window->draw(sprite);
+
+#ifdef _DEBUG
+        sf::RectangleShape rect = sf::RectangleShape(sf::Vector2f(sprite.getGlobalBounds().height, sprite.getGlobalBounds().width));
+        rect.setPosition(sf::Vector2f(t.second->m_position.x, t.second->m_position.y));
+        rect.setFillColor(sf::Color::Transparent);
+        rect.setOutlineColor(sf::Color::Cyan);
+        rect.setOutlineThickness(2.f);
+        window->draw(rect);
+#endif // _DEBUG
     }
 }
 
