@@ -2,11 +2,10 @@
 #include "Game.h"
 
 /******************************************************************************************************************
-*   This project's code heavily uses the book SFML Game Development By Example by Raimondas Pupius as source. 
-*   Reference: Pupius, R. (2015) SFML Game Development By Example. Birmingham: Packt Publishing Ltd.
+    This project's code heavily uses the book SFML Game Development By Example by Raimondas Pupius as source. 
+    Reference: Pupius, R. (2015) SFML Game Development By Example. Birmingham: Packt Publishing Ltd.
 ******************************************************************************************************************/
 
-//https://gafferongames.com/post/fix_your_timestep/
 int main()
 {
     Game game;
@@ -17,7 +16,7 @@ int main()
 
     const float& fixedFrameTime = 1.f / 60.f;
 
-    //Game loop
+    //Game loop https://gafferongames.com/post/fix_your_timestep/
     while (game.GetWindow().IsOpen())
     {
         float deltaTime = clock.restart().asSeconds();

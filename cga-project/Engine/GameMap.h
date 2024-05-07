@@ -45,14 +45,14 @@ struct TileInfo {
 };
 
 struct Tile {
-    unsigned int m_id; //Not really needed, but simplifies getting a specific tile via it's position.
+    unsigned int m_id;
     TileInfo* m_info;
     sf::Vector2u m_position;
 };
 
-//tileName - tile info instance
+//tileName - tile info object
 using TileSet = std::unordered_map<std::string, TileInfo*>;
-//id - tile
+//id - tile object
 using TileMap = std::unordered_map<unsigned int, Tile*>;
 
 class GameMap

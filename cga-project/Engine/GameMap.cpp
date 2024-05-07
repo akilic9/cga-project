@@ -165,7 +165,7 @@ void GameMap::LoadTileSet(const std::string& path)
     std::ifstream tileSetfile;
     tileSetfile.open("Game/Data/" + path);
     if (!tileSetfile.is_open()) {
-        std::cerr << "Cannot open tileset config at: " << path << std::endl;
+        std::cerr << "Cannot open tileset data at: " << path << std::endl;
         return;
     }
     std::string line;
@@ -193,7 +193,7 @@ void GameMap::LoadTileSet(const std::string& path)
             TileInfo* tile = new TileInfo(m_sharedContext, m_sheetInfo, tileName, location);
             keystream >> tile->m_isCollidable >> tile->m_isDestructible >> tile->m_isBase;
             if (!m_tileSet.emplace(tileName, tile).second) {
-                std::cerr << "A tile type was defined twice in tile config: " << tileName << std::endl;
+                std::cerr << "A tile type was defined twice in tile data: " << tileName << std::endl;
                 delete tile;
             }
         }

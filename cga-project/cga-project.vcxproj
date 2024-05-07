@@ -18,6 +18,40 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Engine\Character.h" />
+    <ClInclude Include="Engine\CWindow.h" />
+    <ClInclude Include="Engine\Direction.h" />
+    <ClInclude Include="Engine\EntityBase.h" />
+    <ClInclude Include="Engine\EntityManager.h" />
+    <ClInclude Include="Engine\Game.h" />
+    <ClInclude Include="Engine\GameMap.h" />
+    <ClInclude Include="Engine\InputManager.h" />
+    <ClInclude Include="Engine\ResourceManager.h" />
+    <ClInclude Include="Engine\SharedContext.h" />
+    <ClInclude Include="Engine\Sprite.h" />
+    <ClInclude Include="Engine\StateBase.h" />
+    <ClInclude Include="Engine\StateManager.h" />
+    <ClInclude Include="Engine\TextureLoader.h" />
+    <ClInclude Include="Game\Player.h" />
+    <ClInclude Include="Game\StateMachines\Scenes\GameState.h" />
+    <ClInclude Include="Game\StateMachines\Scenes\MainMenuState.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Engine\Character.cpp" />
+    <ClCompile Include="Engine\CWindow.cpp" />
+    <ClCompile Include="Engine\EntityBase.cpp" />
+    <ClCompile Include="Engine\EntityManager.cpp" />
+    <ClCompile Include="Engine\Game.cpp" />
+    <ClCompile Include="Engine\GameMap.cpp" />
+    <ClCompile Include="Engine\InputManager.cpp" />
+    <ClCompile Include="Engine\main.cpp" />
+    <ClCompile Include="Engine\Sprite.cpp" />
+    <ClCompile Include="Engine\StateManager.cpp" />
+    <ClCompile Include="Game\Player.cpp" />
+    <ClCompile Include="Game\StateMachines\Scenes\GameState.cpp" />
+    <ClCompile Include="Game\StateMachines\Scenes\MainMenuState.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -134,40 +168,6 @@
       <AdditionalDependencies>sfml-window-2.lib;sfml-system-2.lib;sfml-graphics-2.lib;sfml-audio-2.lib;sfml-main-2.lib;openal32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="Engine\Character.cpp" />
-    <ClCompile Include="Engine\CWindow.cpp" />
-    <ClCompile Include="Engine\EntityBase.cpp" />
-    <ClCompile Include="Engine\EntityManager.cpp" />
-    <ClCompile Include="Engine\Game.cpp" />
-    <ClCompile Include="Engine\InputManager.cpp" />
-    <ClCompile Include="Engine\main.cpp" />
-    <ClCompile Include="Engine\GameMap.cpp" />
-    <ClCompile Include="Game\Player.cpp" />
-    <ClCompile Include="Engine\Sprite.cpp" />
-    <ClCompile Include="Game\StateMachines\Scenes\GameState.cpp" />
-    <ClCompile Include="Game\StateMachines\Scenes\MainMenuState.cpp" />
-    <ClCompile Include="Engine\StateManager.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Engine\Character.h" />
-    <ClInclude Include="Engine\CWindow.h" />
-    <ClInclude Include="Engine\Direction.h" />
-    <ClInclude Include="Engine\EntityBase.h" />
-    <ClInclude Include="Engine\EntityManager.h" />
-    <ClInclude Include="Engine\Game.h" />
-    <ClInclude Include="Engine\InputManager.h" />
-    <ClInclude Include="Engine\GameMap.h" />
-    <ClInclude Include="Game\Player.h" />
-    <ClInclude Include="Engine\ResourceManager.h" />
-    <ClInclude Include="Engine\SharedContext.h" />
-    <ClInclude Include="Engine\Sprite.h" />
-    <ClInclude Include="Engine\StateBase.h" />
-    <ClInclude Include="Game\StateMachines\Scenes\GameState.h" />
-    <ClInclude Include="Game\StateMachines\Scenes\MainMenuState.h" />
-    <ClInclude Include="Engine\StateManager.h" />
-    <ClInclude Include="Engine\TextureLoader.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

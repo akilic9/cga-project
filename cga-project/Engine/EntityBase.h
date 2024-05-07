@@ -5,6 +5,7 @@
 
 struct TileInfo;
 
+//TODO: This depends on the game, how to generalize?
 enum class EntityType {
     Base,
     Player,
