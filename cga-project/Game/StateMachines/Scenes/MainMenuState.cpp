@@ -1,8 +1,8 @@
 #include "MainMenuState.h"
-#include "../../Engine/StateManager.h"
+#include "../../Engine/SceneManager.h"
 
-MainMenuState::MainMenuState(std::string name, int id, StateManager* stateManager)
-    : StateBase(name, id, stateManager)
+MainMenuState::MainMenuState(std::string name, int id, SceneManager* sceneManager)
+    : Scene(name, id, sceneManager)
     , m_switchTime(5.0f)
     , m_switchCounter(0.f) {}
 
@@ -28,13 +28,13 @@ void MainMenuState::Update(float deltaTime)
     if (m_switchCounter > m_switchTime)
     {
         m_switchCounter = 0.f;
-        m_stateManager->SwitchState(1);
+        m_sceneManager->SwitchState(1);
     }
 }
 
 void MainMenuState::Render()
 {
-    sf::RenderWindow* window = m_stateManager->GetSharedContext()->m_window->GetRenderWindow();
+    sf::RenderWindow* window = m_sceneManager->GetSharedContext()->m_window->GetRenderWindow();
     window->draw(m_text);
 }
 

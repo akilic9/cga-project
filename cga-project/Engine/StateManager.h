@@ -2,7 +2,6 @@
 #include <unordered_map>
 #include <functional>
 #include "StateBase.h"
-#include "SharedContext.h"
 
 using StateList = std::unordered_map<int, StateBase*>;
 
@@ -13,7 +12,7 @@ using StateFactory = std::unordered_map<int, std::function<StateBase* (void)>>;
 class StateManager
 {
 public:
-    StateManager(SharedContext* sharedContext);
+    StateManager();
     ~StateManager();
 
     void Update(float deltaTime);
@@ -28,20 +27,18 @@ public:
             { return new T(stateName, stateId, this); };
     }
     
-    void SwitchState(const int& stateId);
-    void SwitchState(const std::string& stateName);
+    virtual void SwitchState(const int& stateId);
+    virtual void SwitchState(const std::string& stateName);
 
     void QueueForRemoval(const int& stateId);
     void ProcessRemovals();
 
-    inline SharedContext* GetSharedContext() { return m_sharedContext; };
 
-private:
+protected:
     StateList m_states;
     StateFactory m_factory;
     NameToId m_nameToIdMap;
     int m_activeState;
-    SharedContext* m_sharedContext;
     int m_stateCount = 0;
     std::vector<int> m_removalQueue;
 

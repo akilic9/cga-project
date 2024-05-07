@@ -1,8 +1,7 @@
 #include "StateManager.h"
 
-StateManager::StateManager(SharedContext* sharedContext)
-    : m_activeState(-1)
-    , m_sharedContext(sharedContext) {}
+StateManager::StateManager()
+    : m_activeState(-1) {}
 
 StateManager::~StateManager()
 {
@@ -41,6 +40,7 @@ void StateManager::SwitchState(const int& stateId)
     else {
         CreateState(stateId);
         m_activeState = stateId;
+        m_states[m_activeState]->OnEnter();
     }
 }
 

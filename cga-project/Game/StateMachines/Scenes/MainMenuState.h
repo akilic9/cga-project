@@ -1,10 +1,10 @@
 #pragma once
-#include "../../Engine/StateBase.h"
+#include "../../Engine/Scene.h"
 
-class MainMenuState : public StateBase
+class MainMenuState : public Scene
 {
 public:
-    MainMenuState(std::string name, int id, StateManager* stateManager);
+    MainMenuState(std::string name, int id, SceneManager* sceneManager);
     ~MainMenuState();
 
     void OnCreate();

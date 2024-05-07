@@ -72,6 +72,7 @@ public:
 
     //Set window focus flag.
     void SetHasFocus(bool isFocused) { if (isFocused == m_hasFocus) return; m_hasFocus = isFocused; }
+    inline void SetCurrentSceneId(const int& id) { if (m_currentSceneId == id) return; m_currentSceneId = id; }
     
 private:
     bool m_hasFocus;

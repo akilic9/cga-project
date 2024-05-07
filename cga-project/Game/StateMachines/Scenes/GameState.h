@@ -1,11 +1,11 @@
 #pragma once
-#include "../../Engine/StateBase.h"
+#include "../../Engine/Scene.h"
 #include "../../Engine/GameMap.h"
 
-class GameState : public StateBase
+class GameState : public Scene
 {
 public:
-    GameState(std::string name, int id, StateManager* stateManager);
+    GameState(std::string name, int id, SceneManager* sceneManager);
     ~GameState();
 
     void OnCreate();

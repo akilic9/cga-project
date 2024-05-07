@@ -4,7 +4,7 @@
 
 Game::Game()
     : m_window("CGA Project")
-    , m_gameStateManager(&m_sharedContext)
+    , m_sceneManager(&m_sharedContext)
     , m_textureLoader()
 {
     m_sharedContext.m_window = &m_window;
@@ -12,8 +12,8 @@ Game::Game()
     m_sharedContext.m_textureLoader = &m_textureLoader;
 
     //Register and set the scenes.
-    m_gameStateManager.RegisterState<GameState>("Game");
-    m_gameStateManager.SwitchState("Game");
+    m_sceneManager.RegisterState<GameState>("Game");
+    m_sceneManager.SwitchState("Game");
 }
 
 Game::~Game() {}
@@ -23,20 +23,20 @@ void Game::Init() {}
 void Game::Update(float deltaTime)
 {
     m_window.Update();
-    m_gameStateManager.Update(deltaTime);
+    m_sceneManager.Update(deltaTime);
 }
 
 void Game::FixedUpdate() {}
 
 void Game::LateUpdate()
 {
-    m_gameStateManager.ProcessRemovals();
+    m_sceneManager.ProcessRemovals();
 }
 
 void Game::Render()
 {
     m_window.BeginDraw();
-    m_gameStateManager.Render();
+    m_sceneManager.Render();
     m_window.EndDraw();
 }
 
