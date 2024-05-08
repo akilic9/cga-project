@@ -9,7 +9,6 @@ Character::Character(EntityManager* entityManager)
 	, m_attackTimer(0)
 	, m_attackTimeCounter(0)
     , m_canShoot(true)
-    , m_spawnPosition(sf::Vector2f(0.f, 0.f))
     , m_defaultDirection(Direction::Down) {}
 
 Character::~Character() {}
@@ -63,17 +62,6 @@ void Character::LoadCharacterSpecs(std::string fileName)
 		else if (type == "AttackSpeed") {
 			keystream >> m_attackTimer;
 		}
-        else if (type == "SpawnPosition") {
-            float x = 0;
-            float y = 0;
-            std::string position;
-            keystream >> position;
-            if (int index = position.find(','); index != std::string::npos) {
-                x = std::stof(position.substr(0, index));
-                y = std::stof(position.substr(index + 1, position.length()));
-            }
-            m_spawnPosition = sf::Vector2f(x, y);
-        }
         else if (type == "Direction") {
             int direction = -1;
             keystream >> direction;

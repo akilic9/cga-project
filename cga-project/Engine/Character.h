@@ -27,7 +27,6 @@ protected:
 	float m_attackTimer;
 	float m_attackTimeCounter;
     bool m_canShoot;
-    sf::Vector2f m_spawnPosition;
     Direction m_defaultDirection;
 
     void Move(sf::Vector2f& movement, Direction direction);

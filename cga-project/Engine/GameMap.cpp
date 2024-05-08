@@ -4,7 +4,7 @@
 GameMap::GameMap(SharedContext* context)
     : m_sharedContext(context)
     , m_mapSize(0, 0)
-    , m_playerStartLoc(0.f, 0.f)
+    , m_playerSpawnLoc(0.f, 0.f)
     , m_tileCount(0)
     , m_tileSetCount(0)
     , m_nextMapName("")
@@ -44,7 +44,7 @@ const sf::Vector2u& GameMap::GetMapSize() const
 
 const sf::Vector2f& GameMap::GetPlayerStartLocation() const
 {
-    return m_playerStartLoc;
+    return m_playerSpawnLoc;
 }
 
 void GameMap::LoadMap(const std::string& mapName)
@@ -113,8 +113,15 @@ void GameMap::LoadMap(const std::string& mapName)
         }
         else if (type == "MAPSIZE")
             keystream >> m_mapSize.x >> m_mapSize.y;
-        else if (type == "PLAYERLOCATION")
-            keystream >> m_playerStartLoc.x >> m_playerStartLoc.y;
+        else if (type == "PLAYERSPAWN")
+            keystream >> m_playerSpawnLoc.x >> m_playerSpawnLoc.y;
+        else if (type == "ENEMYSPAWN") {
+            sf::Vector2f loc;
+            keystream >> loc.x >> loc.y;
+            for (auto &l : m_enemySpawnLocs)
+                if (l.x != loc.x && l.y != loc.y) //No duplicates
+                    m_enemySpawnLocs.push_back(l);
+        }
         else if (type == "NEXTMAP")
             keystream >> m_nextMapName;
         else
