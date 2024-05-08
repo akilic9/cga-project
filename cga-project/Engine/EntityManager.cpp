@@ -14,7 +14,7 @@ EntityManager::~EntityManager()
     Purge();
 }
 
-EntityBase* EntityManager::Find(unsigned int id)
+EntityBase* EntityManager::Find(unsigned int& id)
 {
     auto itr = m_entities.find(id);
     return itr == m_entities.end() ? nullptr : itr->second;
@@ -29,7 +29,7 @@ EntityBase* EntityManager::Find(const std::string& name)
     return nullptr;
 }
 
-void EntityManager::Add(const EntityType& type, const std::string name)
+void EntityManager::Add(const EntityType& type, const std::string& name)
 {
     auto itr = m_entityFactory.find(type);
 
@@ -43,7 +43,7 @@ void EntityManager::Add(const EntityType& type, const std::string name)
     ++m_entityCount;
 }
 
-void EntityManager::QueueForRemoval(unsigned int id)
+void EntityManager::QueueForRemoval(unsigned int& id)
 {
     m_removalQueue.push_back(id);
 }

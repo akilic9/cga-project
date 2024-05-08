@@ -13,17 +13,17 @@ public:
     EntityManager(SharedContext* sContext, unsigned int maxEntities);
     ~EntityManager();
 
-    EntityBase* Find(unsigned int id);
+    EntityBase* Find(unsigned int& id);
     EntityBase* Find(const std::string& name);
 
-    void Add(const EntityType& type, const std::string name);
-    void QueueForRemoval(unsigned int id);
+    void Add(const EntityType& type, const std::string& name);
+    void QueueForRemoval(unsigned int& id);
 
     void Update(float deltaTime);
     void Render();
     void Purge();
 
-    SharedContext* GetSharedContext() { return m_sContext; }
+    SharedContext* GetSharedContext() const { return m_sContext; }
 
 private:
     EntityContainer m_entities;

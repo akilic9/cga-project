@@ -12,15 +12,27 @@ Player::Player(EntityManager* entityManager)
 	m_type = EntityType::Player;
 	LoadCharacterSpecs("Player.char");
     auto id = m_entityManager->GetSharedContext()->m_sceneManager->GetIdFromName("Game");
-    for (auto& [action, movement] : m_inputToMovement)
-        m_entityManager->GetSharedContext()->m_inputManager->AddCallback(id, action, Player::OnMovementKeyPressed, this);
 
-    m_entityManager->GetSharedContext()->m_inputManager->AddCallback(id, "player_attack", Player::OnMovementKeyPressed, this);
+    if (id == -1) {
+        std::cerr << "Cannot find id for scene name!" << __FUNCSIG__ << std::endl;
+        return;
+    }
+
+    for (auto& [action, movement] : m_inputToMovement)
+        m_entityManager->GetSharedContext()->m_inputManager->AddCallback(id, action, &Player::OnMovementKeyPressed, this);
+
+    m_entityManager->GetSharedContext()->m_inputManager->AddCallback(id, "player_attack", &Player::OnMovementKeyPressed, this);
 }
 
 Player::~Player()
 {
     auto id = m_entityManager->GetSharedContext()->m_sceneManager->GetIdFromName("Game");
+
+    if (id == -1) {
+        std::cerr << "Cannot find id for scene name!" << __FUNCSIG__ << std::endl;
+        return;
+    }
+
     for (auto& [action, movement] : m_inputToMovement)
         m_entityManager->GetSharedContext()->m_inputManager->RemoveCallback(id, action);
 
@@ -86,7 +98,7 @@ void Player::Respawn()
     m_attackTimeCounter = 0;
 }
 
-void Player::LoadCharacterSpecs(std::string fileName)
+void Player::LoadCharacterSpecs(const std::string& fileName)
 {
     Character::LoadCharacterSpecs(fileName);
     std::ifstream file;

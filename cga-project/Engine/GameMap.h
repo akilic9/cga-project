@@ -61,10 +61,10 @@ public:
     GameMap(SharedContext* context);
     ~GameMap();
 
-    Tile* GetTileByLocation(sf::Vector2f location);
+    Tile* GetTileByLocation(sf::Vector2f location) const;
     SheetInfo* GetSheetInfo();
-    const sf::Vector2u& GetMapSize() const;
-    const sf::Vector2f& GetPlayerStartLocation() const;
+    sf::Vector2u& GetMapSize();
+    sf::Vector2f& GetPlayerStartLocation();
     void LoadMap(const std::string& mapName);
     void LoadNext();
     void Update(float deltaTime);

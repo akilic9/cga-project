@@ -30,7 +30,7 @@ public:
     virtual void SwitchState(const int& stateId);
     virtual void SwitchState(const std::string& stateName);
 
-    int GetIdFromName (const std::string& name) const;
+    int GetIdFromName (const std::string& name);
 
     void QueueForRemoval(const int& stateId);
     void ProcessRemovals();

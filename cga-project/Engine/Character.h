@@ -29,8 +29,8 @@ protected:
     bool m_canShoot;
     Direction m_defaultDirection;
 
-    void Move(sf::Vector2f& movement, Direction direction);
+    void Move(sf::Vector2f& movement, Direction& direction);
     void Shoot();
-    virtual void LoadCharacterSpecs(std::string fileName);
+    virtual void LoadCharacterSpecs(const std::string& fileName);
 };
 

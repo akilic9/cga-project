@@ -19,7 +19,7 @@ public:
     void SwitchState(const int& stateId) override;
     void SwitchState(const std::string& stateName) override;
 
-    inline SharedContext* GetSharedContext() { return m_sharedContext; }
+    inline SharedContext* GetSharedContext() const { return m_sharedContext; }
 
 private:
     SharedContext* m_sharedContext;

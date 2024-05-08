@@ -10,11 +10,11 @@ public:
     Sprite(TextureLoader* texLoader);
     ~Sprite();
 
-    void CropSprite(sf::IntRect& rectangle);
-    void SetSpriteSize(sf::Vector2i& size);
-    void SetSpriteScale(sf::Vector2f& scale);
-    void SetSpritePosition(sf::Vector2f& position);
-    void SetSpriteDirection(Direction& dirention);
+    void CropSprite(const sf::IntRect& rectangle);
+    void SetSpriteSize(const sf::Vector2i& size);
+    void SetSpriteScale(const sf::Vector2f& scale);
+    void SetSpritePosition(const sf::Vector2f& position);
+    void SetSpriteDirection(const Direction& dirention);
 
     bool Load(const std::string& spriteID);
     void Release();

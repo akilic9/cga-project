@@ -44,8 +44,8 @@ public:
     inline sf::FloatRect GetBoundingBox() const { return m_boundingBox; }
     inline EntityType GetType() const { return m_type; }
 
-    inline void SetID(const unsigned int id) { m_id = id; }
-    inline void SetName(const std::string name) { m_name = name; }
+    inline void SetID(const unsigned int& id) { m_id = id; }
+    inline void SetName(const std::string& name) { m_name = name; }
 
     virtual void Update(float deltaTime);
     virtual void Render(sf::RenderWindow* window) = 0;

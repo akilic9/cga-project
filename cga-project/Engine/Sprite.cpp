@@ -13,12 +13,12 @@ Sprite::~Sprite()
     Release();
 }
 
-void Sprite::CropSprite(sf::IntRect& rectangle)
+void Sprite::CropSprite(const sf::IntRect& rectangle)
 {
     m_sprite.setTextureRect(rectangle);
 }
 
-void Sprite::SetSpriteSize(sf::Vector2i& size) {
+void Sprite::SetSpriteSize(const sf::Vector2i& size) {
     if (m_spriteSize == size)
         return;
 
@@ -26,7 +26,7 @@ void Sprite::SetSpriteSize(sf::Vector2i& size) {
     m_sprite.setOrigin(m_spriteSize.x / 2.f, m_spriteSize.y / 2.f);
 }
 
-void Sprite::SetSpriteScale(sf::Vector2f& scale)
+void Sprite::SetSpriteScale(const sf::Vector2f& scale)
 {
     if (m_spriteScale == scale)
         return;
@@ -35,7 +35,7 @@ void Sprite::SetSpriteScale(sf::Vector2f& scale)
     m_sprite.setScale(scale);
 }
 
-void Sprite::SetSpritePosition(sf::Vector2f& position)
+void Sprite::SetSpritePosition(const sf::Vector2f& position)
 {
     if (m_sprite.getPosition() == position)
         return;
@@ -43,7 +43,7 @@ void Sprite::SetSpritePosition(sf::Vector2f& position)
     m_sprite.setPosition(position);    
 }
 
-void Sprite::SetSpriteDirection(Direction& direction)
+void Sprite::SetSpriteDirection(const Direction& direction)
 {
     if (m_spriteDirection == direction)
         return;

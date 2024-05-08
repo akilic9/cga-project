@@ -22,7 +22,7 @@ GameMap::~GameMap()
     m_sharedContext->m_mapManager = nullptr;
 }
 
-Tile* GameMap::GetTileByLocation(sf::Vector2f location)
+Tile* GameMap::GetTileByLocation(sf::Vector2f location) const
 {
     std::string sId = std::to_string(floor(location.x / m_sheetInfo.m_defaultTileSize.x)) +
                       std::to_string(floor(location.y / m_sheetInfo.m_defaultTileSize.y));
@@ -37,12 +37,12 @@ SheetInfo* GameMap::GetSheetInfo()
     return &m_sheetInfo;
 }
 
-const sf::Vector2u& GameMap::GetMapSize() const
+sf::Vector2u& GameMap::GetMapSize()
 {
     return m_mapSize;
 }
 
-const sf::Vector2f& GameMap::GetPlayerStartLocation() const
+sf::Vector2f& GameMap::GetPlayerStartLocation()
 {
     return m_playerSpawnLoc;
 }

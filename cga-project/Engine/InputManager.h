@@ -49,8 +49,8 @@ public:
     void HandleInputs(sf::Event event);
     void Update();
 
-    bool AddBinding(std::string name, std::pair<InputType, int> map);
-    bool RemoveBinding(std::string bindingName);
+    bool AddBinding(const std::string& name, std::pair<InputType, int> map);
+    bool RemoveBinding(const std::string& bindingName);
 
     //Add a callback - ie register to a keybind trigger event on a scene basis.
     template<class T>
@@ -65,14 +65,14 @@ public:
     }
 
     //Remove a callback ie unregister from a keybind on a scene basis.
-    void RemoveCallback(int sceneId, const std::string& callbackName);
+    void RemoveCallback(const int& sceneId, const std::string& callbackName);
 
     /*If not passed a window, this function will return the mouse position relative to desktop origin.
     Window MUST be passed in to get the position within the window.*/
-    sf::Vector2i GetMousePos(sf::RenderWindow* window = nullptr) { return (window ? sf::Mouse::getPosition(*window) : sf::Mouse::getPosition()); }
+    sf::Vector2i GetMousePos(sf::RenderWindow* window = nullptr) const { return (window ? sf::Mouse::getPosition(*window) : sf::Mouse::getPosition()); }
 
     //Set window focus flag.
-    void SetHasFocus(bool isFocused) { if (isFocused == m_hasFocus) return; m_hasFocus = isFocused; }
+    void SetHasFocus(const bool& isFocused) { if (isFocused == m_hasFocus) return; m_hasFocus = isFocused; }
     inline void SetCurrentSceneId(const int& id) { if (m_currentSceneId == id) return; m_currentSceneId = id; }
     
 private:

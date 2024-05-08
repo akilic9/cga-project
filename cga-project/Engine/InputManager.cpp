@@ -70,14 +70,14 @@ void InputManager::Update()
     }
 }
 
-bool InputManager::AddBinding(std::string name, std::pair<InputType, int> map)
+bool InputManager::AddBinding(const std::string& name, std::pair<InputType, int> map)
 {
     InputBinding *binding = new InputBinding(name, map);
     m_inputBindings[name].push_back(binding);
     return true;
 }
 
-bool InputManager::RemoveBinding(std::string bindingName)
+bool InputManager::RemoveBinding(const std::string& bindingName)
 {
     if (auto binding = m_inputBindings.find(bindingName); binding == m_inputBindings.end())
         return false;
@@ -92,7 +92,7 @@ bool InputManager::RemoveBinding(std::string bindingName)
     }
 }
 
-void InputManager::RemoveCallback(int sceneId, const std::string& callbackName)
+void InputManager::RemoveCallback(const int& sceneId, const std::string& callbackName)
 {
     //Check if callbacks for this scene exist.
     auto sceneItr = m_callbacks.find(sceneId);

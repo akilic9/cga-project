@@ -13,7 +13,7 @@ Character::Character(EntityManager* entityManager)
 
 Character::~Character() {}
 
-void Character::Move(sf::Vector2f& movementVector, Direction direction)
+void Character::Move(sf::Vector2f& movementVector, Direction& direction)
 {
     if (direction != Direction::None)
 	    m_sprite.SetSpriteDirection(direction);
@@ -33,7 +33,7 @@ void Character::Shoot() {
     m_canShoot = false;
 }
 
-void Character::LoadCharacterSpecs(std::string fileName)
+void Character::LoadCharacterSpecs(const std::string& fileName)
 {
 	std::ifstream file;
 	file.open("Game/Data/Characters" + fileName);

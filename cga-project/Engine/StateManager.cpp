@@ -51,10 +51,12 @@ void StateManager::SwitchState(const std::string& stateName)
         SwitchState(m_nameToIdMap[stateName]);
 }
 
-int StateManager::GetIdFromName(const std::string& name) const
+int StateManager::GetIdFromName(const std::string& name)
 {
     if (auto itr = m_nameToIdMap.find(name); itr != m_nameToIdMap.end())
         return m_nameToIdMap[name];
+    else
+        return -1;
 }
 
 //Queue a state to be removed.
