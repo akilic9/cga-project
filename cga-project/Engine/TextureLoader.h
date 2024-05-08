@@ -7,7 +7,7 @@ class TextureLoader : public ResourceManager<TextureLoader, sf::Texture>
 public:
     TextureLoader() : ResourceManager("ResourcePaths.data") {}
 
-    sf::Texture* Load(const std::string& path) {
+    sf::Texture* Load(const std::string& path) override {
         sf::Texture* texture = new sf::Texture();
         if (!texture->loadFromFile(path))
         {

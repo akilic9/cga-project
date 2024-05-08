@@ -3,25 +3,35 @@
 #include "Sprite.h"
 #include "Direction.h"
 
+enum class CharacterState {
+    None,
+    Dead,
+    Invincible
+};
+
 class Character : public EntityBase
 {
 public:
 	Character(EntityManager* entityManager);
 	virtual ~Character();
 
-	void Move(sf::Vector2f& movement, Direction direction);
-	void Die();
-	void Shoot();
-	
-	void LoadCharacterSpecs(std::string fileName);
-	void Update(float deltaTime);
+	virtual void Update(float deltaTime);
 	void Render(sf::RenderWindow* window);
+    virtual void Die();
 
 	virtual void OnEntityCollision(EntityBase* collidingEntity) = 0;
 
 protected:
 	Sprite m_sprite;
+    CharacterState m_state;
 	float m_attackTimer;
-	float m_attackTimeCount;
+	float m_attackTimeCounter;
+    bool m_canShoot;
+    sf::Vector2f m_spawnPosition;
+    Direction m_defaultDirection;
+
+    void Move(sf::Vector2f& movement, Direction direction);
+    void Shoot();
+    virtual void LoadCharacterSpecs(std::string fileName);
 };
 

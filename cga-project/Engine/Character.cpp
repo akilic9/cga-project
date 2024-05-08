@@ -5,20 +5,34 @@
 Character::Character(EntityManager* entityManager)
 	: EntityBase(entityManager)
 	, m_sprite(m_entityManager->GetSharedContext()->m_textureLoader)
-	, m_attackTimer(2)
-	, m_attackTimeCount(0) {}
+    , m_state(CharacterState::None)
+	, m_attackTimer(0)
+	, m_attackTimeCounter(0)
+    , m_canShoot(true)
+    , m_spawnPosition(sf::Vector2f(0.f, 0.f))
+    , m_defaultDirection(Direction::Down) {}
 
 Character::~Character() {}
 
-void Character::Move(sf::Vector2f& movement, Direction direction)
+void Character::Move(sf::Vector2f& movementVector, Direction direction)
 {
-	m_sprite.SetSpriteDirection(direction);
-	EntityBase::Move(movement);
+    if (direction != Direction::None)
+	    m_sprite.SetSpriteDirection(direction);
+    sf::Vector2f movementAmount = movementVector * m_movementSpeed;
+	EntityBase::Move(movementAmount);
 }
 
-void Character::Die() {}
+void Character::Die() {
+    m_state = CharacterState::Dead;
+}
 
-void Character::Shoot() {}
+void Character::Shoot() {
+    if (!m_canShoot)
+        return;
+
+    m_attackTimeCounter = 0.f;
+    m_canShoot = false;
+}
 
 void Character::LoadCharacterSpecs(std::string fileName)
 {
@@ -49,6 +63,23 @@ void Character::LoadCharacterSpecs(std::string fileName)
 		else if (type == "AttackSpeed") {
 			keystream >> m_attackTimer;
 		}
+        else if (type == "SpawnPosition") {
+            float x = 0;
+            float y = 0;
+            std::string position;
+            keystream >> position;
+            if (int index = position.find(','); index != std::string::npos) {
+                x = std::stof(position.substr(0, index));
+                y = std::stof(position.substr(index + 1, position.length()));
+            }
+            m_spawnPosition = sf::Vector2f(x, y);
+        }
+        else if (type == "Direction") {
+            int direction = -1;
+            keystream >> direction;
+            m_defaultDirection = (Direction)direction;
+            m_sprite.SetSpriteDirection(m_defaultDirection);
+        }
 		else {
 			std::cout << "Unknown specification parameter in character file: " << type << std::endl;
 		}
@@ -58,10 +89,22 @@ void Character::LoadCharacterSpecs(std::string fileName)
 
 void Character::Update(float deltaTime)
 {
+    if (m_state == CharacterState::Dead)
+        return;
+
+    if (!m_canShoot) {
+        m_attackTimeCounter += deltaTime;
+        if (m_attackTimeCounter >= m_attackTimer)
+            m_canShoot = true;
+    }
+
 	EntityBase::Update(deltaTime);
 }
 
 void Character::Render(sf::RenderWindow* window)
 {
+    if (m_state == CharacterState::Dead)
+        return;
+
 	m_sprite.Render(window);
 }

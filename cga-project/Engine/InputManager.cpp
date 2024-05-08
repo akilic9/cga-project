@@ -41,6 +41,35 @@ void InputManager::HandleInputs(sf::Event event)
     }
 }
 
+void InputManager::Update()
+{
+    if (!m_hasFocus)
+        return;
+
+    for (auto& binding : m_inputBindings) {
+        for (auto& b : binding.second) {
+            switch (b->m_inputMap.first)
+            {
+            case(InputType::Keyboard):
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(b->m_inputMap.second))) {
+                    auto sceneItr = m_callbacks.find(m_currentSceneId);
+                    if (sceneItr != m_callbacks.end())
+                        if (auto key = sceneItr->second.find(binding.first); key != sceneItr->second.end())
+                            key->second(b);
+
+                    auto indItr = m_callbacks.find(-1); //-1 is callbacks that are scene independent.
+                    if (indItr != m_callbacks.end())
+                        if (auto key = indItr->second.find(binding.first); key != indItr->second.end())
+                            key->second(b);
+                }
+                break;
+            default:
+                break;
+            }
+        }
+    }
+}
+
 bool InputManager::AddBinding(std::string name, std::pair<InputType, int> map)
 {
     InputBinding *binding = new InputBinding(name, map);

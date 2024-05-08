@@ -34,7 +34,7 @@ public:
     EntityBase(EntityManager* entityManager);
     virtual ~EntityBase();
 
-    void Move(sf::Vector2f& movement);
+    virtual void Move(sf::Vector2f& movement);
     void SetPosition(sf::Vector2f& pos);
     void SetSize(sf::Vector2f& size);
     virtual void OnEntityCollision(EntityBase* collidingEntity) = 0;
@@ -59,6 +59,7 @@ protected:
     float m_movementSpeed;
     sf::Vector2f m_size;
     sf::FloatRect m_boundingBox;
+    sf::Vector2f m_movement;
 
     bool m_isCollidingX;
     bool m_isCollidingY;

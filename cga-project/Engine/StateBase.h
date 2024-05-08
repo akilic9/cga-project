@@ -20,6 +20,8 @@ public:
     virtual void OnExit() = 0;
     virtual void OnDelete() = 0;
 
+    inline std::string GetName() const { return m_name; }
+
 protected:
     const std::string m_name;
     int m_id;

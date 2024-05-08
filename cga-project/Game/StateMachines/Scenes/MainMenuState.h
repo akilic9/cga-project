@@ -7,12 +7,12 @@ public:
     MainMenuState(std::string name, int id, SceneManager* sceneManager);
     ~MainMenuState();
 
-    void OnCreate();
-    void OnEnter();
-    void Update(float deltaTime);
-    void Render();
-    void OnExit();
-    void OnDelete();
+    void OnCreate() override;
+    void OnEnter() override;
+    void Update(float deltaTime) override;
+    void Render() override;
+    void OnExit() override;
+    void OnDelete() override;
 
 private:
     sf::Text m_text;

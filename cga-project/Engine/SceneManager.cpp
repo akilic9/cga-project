@@ -3,6 +3,7 @@
 SceneManager::SceneManager(SharedContext* sharedContext)
     : m_sharedContext(sharedContext)
 {
+    m_sharedContext->m_sceneManager = this;
 }
 
 SceneManager::~SceneManager() {}

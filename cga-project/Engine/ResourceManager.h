@@ -76,7 +76,7 @@ public:
     }
 
     //Override this method for type specific loading.
-    T* Load(const std::string& resPath) {
+    virtual T* Load(const std::string& resPath) {
         return static_cast<Derived*>(this)->Load(resPath);
     }
 

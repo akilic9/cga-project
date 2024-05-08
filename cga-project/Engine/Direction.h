@@ -5,7 +5,8 @@
     the difference between enums is used in sprite rotation calculations.
 */
 enum class Direction {
-    Down = 0,
+    None = -1,
+    Down,
     Left,
     Up,
     Right

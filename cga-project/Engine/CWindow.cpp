@@ -44,6 +44,8 @@ void CWindow::Update()
 
         m_inputManager.HandleInputs(event);
     }
+
+    m_inputManager.Update();
 }
 
 void CWindow::CloseWindow(InputBinding* binding)

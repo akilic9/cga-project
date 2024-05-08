@@ -10,6 +10,7 @@ EntityBase::EntityBase(EntityManager* entityManager)
     , m_prevPosition(m_position)
     , m_movementSpeed(5.f)
     , m_size(64.f, 64.f)
+    , m_movement(sf::Vector2f(0.f, 0.f))
     , m_isCollidingX(false)
     , m_isCollidingY(false)
     , m_entityManager(entityManager) {}
@@ -18,23 +19,7 @@ EntityBase::~EntityBase() {}
 
 void EntityBase::Move(sf::Vector2f& movement)
 {
-    m_prevPosition = m_position;
-    m_position += movement;
-
-    sf::Vector2u mapSize = m_entityManager->GetSharedContext()->m_mapManager->GetMapSize();
-    unsigned int tileSize = m_entityManager->GetSharedContext()->m_mapManager->GetSheetInfo()->m_defaultTileSize.x;
-
-    if (m_position.x < 0)
-        m_position.x = 0;
-    else if (m_position.x > mapSize.x * tileSize)
-        m_position.x = (mapSize.x - 1) * tileSize;
-
-    if (m_position.y < 0)
-        m_position.y = 0;
-    else if (m_position.y > mapSize.y * tileSize)
-        m_position.y = (mapSize.y - 1) * tileSize;
-
-    UpdateBoundingBox();
+    m_movement = movement;
 }
 
 void EntityBase::SetPosition(sf::Vector2f& pos)
@@ -58,6 +43,27 @@ void EntityBase::SetSize(sf::Vector2f& size)
 
 void EntityBase::Update(float deltaTime)
 {
+    if (m_movement.x != 0 && m_movement.y != 0) {
+        m_prevPosition = m_position;
+        m_position += (m_movement * deltaTime);
+
+        sf::Vector2u mapSize = m_entityManager->GetSharedContext()->m_mapManager->GetMapSize();
+        unsigned int tileSize = m_entityManager->GetSharedContext()->m_mapManager->GetSheetInfo()->m_defaultTileSize.x;
+
+        if (m_position.x < 0)
+            m_position.x = 0;
+        else if (m_position.x > mapSize.x * tileSize)
+            m_position.x = (mapSize.x - 1) * tileSize;
+
+        if (m_position.y < 0)
+            m_position.y = 0;
+        else if (m_position.y > mapSize.y * tileSize)
+            m_position.y = (mapSize.y - 1) * tileSize;
+
+        UpdateBoundingBox();
+        m_movement = sf::Vector2f(0.f, 0.f);
+    }
+
     m_isCollidingX = false;
     m_isCollidingY = false;
     CheckTileCollisions();

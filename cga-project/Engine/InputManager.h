@@ -47,6 +47,7 @@ public:
     ~InputManager();
 
     void HandleInputs(sf::Event event);
+    void Update();
 
     bool AddBinding(std::string name, std::pair<InputType, int> map);
     bool RemoveBinding(std::string bindingName);

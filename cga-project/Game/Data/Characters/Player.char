@@ -2,3 +2,5 @@ Name Player
 SpriteID Player
 MovementSpeed 5
 AttackSpeed 2
+SpawnPosition 0,0
+Direction 2
