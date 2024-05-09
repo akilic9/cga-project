@@ -10,7 +10,7 @@ EntityBase::EntityBase(EntityManager* entityManager)
     , m_prevPosition(m_position)
     , m_movementSpeed(5.f)
     , m_size(64.f, 64.f)
-    , m_movement(sf::Vector2f(0.f, 0.f))
+    , m_movement(0.f, 0.f)
     , m_isCollidingX(false)
     , m_isCollidingY(false)
     , m_entityManager(entityManager) {}

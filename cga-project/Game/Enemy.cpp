@@ -2,7 +2,6 @@
 
 Enemy::Enemy(EntityManager* entityManager)
     : Character(entityManager)
-    , m_target(Target::None)
 {
 }
 

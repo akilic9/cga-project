@@ -5,6 +5,7 @@ GameMap::GameMap(SharedContext* context)
     : m_sharedContext(context)
     , m_mapSize(0, 0)
     , m_playerSpawnLoc(0.f, 0.f)
+    , m_baseLoc(0.f, 0.f)
     , m_tileCount(0)
     , m_tileSetCount(0)
     , m_nextMapName("")
@@ -51,6 +52,7 @@ void GameMap::LoadMap(const std::string& mapName)
 {
     std::ifstream mapDataFile;
     mapDataFile.open("Game/Data/Maps/" + mapName);
+
     if (!mapDataFile.is_open()) {
         std::cerr << "Cannot open tileset config at: " << mapName << std::endl;
         return;
@@ -110,6 +112,10 @@ void GameMap::LoadMap(const std::string& mapName)
                 tile = nullptr;
                 continue;
             }
+
+            if (tileType == "Base")
+                m_baseLoc = sf::Vector2f(tile->m_position.x + (m_sheetInfo.m_defaultTileSize.x / 2.f),
+                                         tile->m_position.y - (m_sheetInfo.m_defaultTileSize.y / 2.f));
         }
         else if (type == "MAPSIZE")
             keystream >> m_mapSize.x >> m_mapSize.y;
@@ -127,6 +133,8 @@ void GameMap::LoadMap(const std::string& mapName)
         else
             std::cerr << "Unknown parameter type: " << line << std::endl;
     }
+
+    mapDataFile.close();
 }
 
 void GameMap::LoadNext()

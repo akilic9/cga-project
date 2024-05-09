@@ -8,11 +8,7 @@ GameState::GameState(std::string name, int id, SceneManager* sceneManager)
     m_map->LoadMap("Map1.map");
 }
 
-GameState::~GameState()
-{
-    delete m_map;
-    m_map = nullptr;
-}
+GameState::~GameState() {}
 
 void GameState::OnCreate()
 {
@@ -39,4 +35,7 @@ void GameState::Render()
 
 void GameState::OnExit() {}
 
-void GameState::OnDelete() {}
+void GameState::OnDelete() {
+    delete m_map;
+    m_map = nullptr;
+}

@@ -77,6 +77,7 @@ private:
     SheetInfo m_sheetInfo;
     sf::Vector2u m_mapSize;
     sf::Vector2f m_playerSpawnLoc;
+    sf::Vector2f m_baseLoc;
     std::vector<sf::Vector2f> m_enemySpawnLocs;
     sf::Sprite m_background;
     std::string m_backgroundSpriteID;
