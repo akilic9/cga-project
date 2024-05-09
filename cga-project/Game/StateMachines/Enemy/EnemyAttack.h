@@ -1,10 +1,10 @@
 #pragma once
 #include "EnemyStateBase.h"
-class EnemyBaseTarget : public EnemyStateBase
+class EnemyAttack : public EnemyStateBase
 {
 public:
-    EnemyBaseTarget(const std::string& name, const int& id, EnemyStateManager* stateManager);
-    ~EnemyBaseTarget();
+    EnemyAttack(const std::string& name, const int& id, EnemyStateManager* stateManager, Enemy* enemy);
+    ~EnemyAttack();
 
     void OnCreate() override;
     void OnEnter() override;

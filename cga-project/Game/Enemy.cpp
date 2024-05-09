@@ -1,5 +1,4 @@
 #include "Enemy.h"
-#include "StateMachines/Enemy/EnemyStateManager.h"
 #include "StateMachines/Enemy/EnemyIdle.h"
 
 Enemy::Enemy(EntityManager* entityManager)

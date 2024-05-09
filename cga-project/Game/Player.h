@@ -23,10 +23,10 @@ private:
     float m_invincibleTimeCounter;
 
     void Respawn();
-    virtual void LoadCharacterSpecs(const std::string& fileName) override;
+    void LoadCharacterSpecs(const std::string& fileName) override;
 
     std::unordered_map<std::string, std::pair<sf::Vector2f, Direction>> m_inputToMovement {{"player_move_left" , {sf::Vector2f(-1.f,  0.f), Direction::Left}},
-                                                                                           {"player_move_up"   , {sf::Vector2f( 0.f,  1.0f), Direction::Up}},
+                                                                                           {"player_move_up"   , {sf::Vector2f( 0.f, -1.0f), Direction::Up}},
                                                                                            {"player_move_right", {sf::Vector2f( 1.f,  0.f), Direction::Right}},
-                                                                                           {"player_move_down" , {sf::Vector2f( 0.f, -1.f), Direction::Down}}};
+                                                                                           {"player_move_down" , {sf::Vector2f( 0.f,  1.f), Direction::Down}}};
 };

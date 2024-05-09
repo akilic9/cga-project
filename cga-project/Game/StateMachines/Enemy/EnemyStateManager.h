@@ -1,7 +1,8 @@
 #pragma once
 #include "../../Engine/StateManager.h"
-#include "../../Enemy.h"
 #include "EnemyStateBase.h"
+
+class Enemy;
 
 class EnemyStateManager : public StateManager
 {
@@ -15,10 +16,8 @@ public:
         int stateId = m_stateCount++;
         m_nameToIdMap[stateName] = stateId;
         m_factory[stateId] = [stateName, stateId, this]() -> EnemyStateBase*
-            { return new T(stateName, stateId, this); };
+            { return new T(stateName, stateId, this, m_parent); };
     }
-
-    inline Enemy* GetParent() { return m_parent; }
 
 private:
     Enemy* m_parent;

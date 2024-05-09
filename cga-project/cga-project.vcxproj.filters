@@ -84,7 +84,7 @@
     <ClInclude Include="Game\StateMachines\Enemy\EnemyStateManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game\StateMachines\Enemy\EnemyBaseTarget.h">
+    <ClInclude Include="Game\StateMachines\Enemy\EnemyAttack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -140,7 +140,7 @@
     <ClCompile Include="Game\StateMachines\Enemy\EnemyStateManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\StateMachines\Enemy\EnemyBaseTarget.cpp">
+    <ClCompile Include="Game\StateMachines\Enemy\EnemyAttack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

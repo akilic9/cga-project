@@ -1,12 +1,11 @@
 #include "EntityManager.h"
 #include "SharedContext.h"
 
-EntityManager::EntityManager(SharedContext* sContext, unsigned int maxEntities)
+EntityManager::EntityManager(SharedContext* sContext)
     : m_sContext(sContext)
-    , m_maxEntities(maxEntities)
     , m_entityCount(0)
 {
-    //RegisterEntity<Player>(EntityType::Player);
+    RegisterEntity<Player>(EntityType::Player);
 }
 
 EntityManager::~EntityManager()

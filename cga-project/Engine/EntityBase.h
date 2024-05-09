@@ -62,8 +62,6 @@ protected:
     sf::FloatRect m_boundingBox;
     sf::Vector2f m_movement;
 
-    bool m_isCollidingX;
-    bool m_isCollidingY;
     Collisions m_collisions;
     EntityManager* m_entityManager;
 

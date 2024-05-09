@@ -11,8 +11,6 @@ EntityBase::EntityBase(EntityManager* entityManager)
     , m_movementSpeed(5.f)
     , m_size(64.f, 64.f)
     , m_movement(0.f, 0.f)
-    , m_isCollidingX(false)
-    , m_isCollidingY(false)
     , m_entityManager(entityManager) {}
 
 EntityBase::~EntityBase() {}
@@ -43,7 +41,7 @@ void EntityBase::SetSize(sf::Vector2f& size)
 
 void EntityBase::Update(float deltaTime)
 {
-    if (m_movement.x != 0 && m_movement.y != 0) {
+    if (m_movement.x != 0 || m_movement.y != 0) {
         m_prevPosition = m_position;
         m_position += (m_movement * deltaTime);
 
@@ -64,8 +62,6 @@ void EntityBase::Update(float deltaTime)
         m_movement = sf::Vector2f(0.f, 0.f);
     }
 
-    m_isCollidingX = false;
-    m_isCollidingY = false;
     CheckTileCollisions();
     ResolveTileCollisions();
 }
@@ -127,9 +123,8 @@ void EntityBase::ResolveTileCollisions()
                     resolve = -((m_boundingBox.left + m_boundingBox.width) - itr.m_tileBounds.left);
 
                 sf::Vector2f correction = sf::Vector2f(resolve, 0.f);
-                Move(correction);
-
-                m_isCollidingX = true;
+                m_position += correction;
+                UpdateBoundingBox();
             }
             else {
                 if (yDiff > 0)
@@ -138,12 +133,8 @@ void EntityBase::ResolveTileCollisions()
                     resolve = -((m_boundingBox.top + m_boundingBox.height) - itr.m_tileBounds.top);
 
                 sf::Vector2f correction = sf::Vector2f(0.f, resolve);
-                Move(correction);
-
-                if (m_isCollidingY)
-                    continue;
-
-                m_isCollidingY = true;
+                m_position += correction;
+                UpdateBoundingBox();
             }
         }
         m_collisions.clear();

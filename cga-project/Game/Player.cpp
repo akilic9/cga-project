@@ -87,8 +87,6 @@ void Player::Update(float deltaTime)
         if (m_respawnTimeCounter >= m_respawnTimer)
             Respawn();
     }
-    else
-        return;
 
     Character::Update(deltaTime);
 }
@@ -102,7 +100,7 @@ void Player::LoadCharacterSpecs(const std::string& fileName)
 {
     Character::LoadCharacterSpecs(fileName);
     std::ifstream file;
-    file.open("Game/Data/Characters" + fileName);
+    file.open("Game/Data/Characters/" + fileName);
     if (!file.is_open()) {
         std::cout << "Cannot open character file: " << fileName << std::endl;
         return;

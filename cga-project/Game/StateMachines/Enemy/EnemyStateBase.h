@@ -2,13 +2,15 @@
 #include "../../Engine/StateBase.h"
 
 class EnemyStateManager;
+class Enemy;
 
 class EnemyStateBase : public StateBase
 {
 public:
-    EnemyStateBase(const std::string& name, const int& id, EnemyStateManager* stateManager)
+    EnemyStateBase(const std::string& name, const int& id, EnemyStateManager* stateManager, Enemy* enemy)
         : StateBase(name, id)
-        , m_stateManager(stateManager) {}
+        , m_stateManager(stateManager)
+        , m_parent(enemy){}
     ~EnemyStateBase() {}
 
     virtual void OnCreate() = 0;
@@ -20,5 +22,6 @@ public:
 
 protected:
     EnemyStateManager* m_stateManager;
+    Enemy* m_parent;
 };
 

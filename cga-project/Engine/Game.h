@@ -4,6 +4,7 @@
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "TextureLoader.h"
+#include "EntityManager.h"
 
 class Game
 {
@@ -25,5 +26,6 @@ private:
     SharedContext m_sharedContext;
     SceneManager m_sceneManager;
     TextureLoader m_textureLoader;
+    EntityManager m_entityManager;
 };
 

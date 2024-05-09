@@ -6,6 +6,9 @@ GameState::GameState(std::string name, int id, SceneManager* sceneManager)
 {
     m_map = new GameMap(m_sceneManager->GetSharedContext());
     m_map->LoadMap("Map1.map");
+    EntityManager* eMng = m_sceneManager->GetSharedContext()->m_entityManager;
+    eMng->Add(EntityType::Player, "Player");
+    eMng->Find("Player")->SetPosition(m_map->GetPlayerStartLocation());
 }
 
 GameState::~GameState() {}

@@ -1,5 +1,4 @@
 #include "Sprite.h"
-#include <SFML/Graphics/RectangleShape.hpp>
 
 Sprite::Sprite(TextureLoader* texLoader)
     : m_textureId("")
@@ -52,6 +51,11 @@ void Sprite::SetSpriteDirection(const Direction& direction)
     m_sprite.setRotation(int(m_spriteDirection) * 90.f);
 }
 
+sf::Vector2i Sprite::GetSpriteSize()
+{
+    return m_spriteSize;
+}
+
 //Load the sprite data. Only one sprite and no animations for now. TODO: expand.
 bool Sprite::Load(const std::string& spriteID)
 {
@@ -61,6 +65,7 @@ bool Sprite::Load(const std::string& spriteID)
     }
     m_textureId = spriteID;
     m_sprite.setTexture(*m_textureLoader->GetResource(spriteID));
+    SetSpriteSize(m_sprite.getTextureRect().getSize());
     return true;
 
     //std::ifstream dataFile;
@@ -133,13 +138,4 @@ void Sprite::Update(float deltaTime) {}
 void Sprite::Render(sf::RenderWindow* window) const
 {
     window->draw(m_sprite);
-
-#ifdef _DEBUG
-    sf::RectangleShape rect = sf::RectangleShape(sf::Vector2f(m_sprite.getGlobalBounds().height, m_sprite.getGlobalBounds().width));
-    rect.setPosition(sf::Vector2f(m_sprite.getPosition().x, m_sprite.getPosition().y));
-    rect.setFillColor(sf::Color::Transparent);
-    rect.setOutlineColor(sf::Color::Green);
-    rect.setOutlineThickness(2.f);
-    window->draw(rect);
-#endif // _DEBUG
 }

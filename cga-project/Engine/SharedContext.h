@@ -2,6 +2,7 @@
 #include "CWindow.h"
 #include "InputManager.h"
 #include "TextureLoader.h"
+#include "EntityManager.h"
 
 class GameMap;
 class SceneManager;
@@ -19,4 +20,5 @@ struct SharedContext {
     TextureLoader* m_textureLoader;
     GameMap* m_mapManager;
     SceneManager* m_sceneManager;
+    EntityManager* m_entityManager;
 };

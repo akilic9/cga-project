@@ -5,7 +5,7 @@
 class EnemyIdle : public EnemyStateBase
 {
 public:
-    EnemyIdle(const std::string& name, const int& id, EnemyStateManager* stateManager);
+    EnemyIdle(const std::string& name, const int& id, EnemyStateManager* stateManager, Enemy* enemy);
     ~EnemyIdle();
 
     void OnCreate() override;

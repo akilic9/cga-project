@@ -1,8 +1,9 @@
 #include "EnemyIdle.h"
 #include "EnemyStateManager.h"
+#include "../../Enemy.h"
 
-EnemyIdle::EnemyIdle(const std::string& name, const int& id, EnemyStateManager* stateManager)
-    : EnemyStateBase(name, id, stateManager)
+EnemyIdle::EnemyIdle(const std::string& name, const int& id, EnemyStateManager* stateManager, Enemy* enemy)
+    : EnemyStateBase(name, id, stateManager, enemy)
     , m_cooldownTimer(0.f)
     , m_cooldownCounter(0.f)
 {
@@ -49,8 +50,8 @@ void EnemyIdle::SelectNextState()
     float distBase = 0.f;
 
 
-    sf::Vector2f distVecPlayer =  m_stateManager->GetParent()->GetPlayerPos() - m_stateManager->GetParent()->GetPosition();
-    sf::Vector2f distVecBase = m_stateManager->GetParent()->GetBasePos() - m_stateManager->GetParent()->GetPosition();
+    sf::Vector2f distVecPlayer =  m_parent->GetPlayerPos() - m_parent->GetPosition();
+    sf::Vector2f distVecBase = m_parent->GetBasePos() - m_parent->GetPosition();
 
     distPlayer = sqrt(pow(distVecPlayer.x, 2) + pow(distVecPlayer.y, 2));
     distBase = sqrt(pow(distVecBase.x, 2) + pow(distVecBase.y, 2));

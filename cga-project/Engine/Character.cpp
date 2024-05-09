@@ -1,6 +1,7 @@
 #include "Character.h"
 #include "EntityManager.h"
 #include "SharedContext.h"
+#include <SFML/Graphics/RectangleShape.hpp>
 
 Character::Character(EntityManager* entityManager)
 	: EntityBase(entityManager)
@@ -36,7 +37,7 @@ void Character::Shoot() {
 void Character::LoadCharacterSpecs(const std::string& fileName)
 {
 	std::ifstream file;
-	file.open("Game/Data/Characters" + fileName);
+	file.open("Game/Data/Characters/" + fileName);
 	if (!file.is_open()) {
 		std::cout << "Cannot open character file: " << fileName << std::endl;
 		return;
@@ -55,6 +56,8 @@ void Character::LoadCharacterSpecs(const std::string& fileName)
 			std::string id;
 			keystream >> id;
 			m_sprite.Load(id);
+            auto characterSize = sf::Vector2f(m_sprite.GetSpriteSize().x, m_sprite.GetSpriteSize().y);
+            SetSize(characterSize);
 		}
 		else if (type == "MovementSpeed") {
 			keystream >> m_movementSpeed;
@@ -85,7 +88,7 @@ void Character::Update(float deltaTime)
         if (m_attackTimeCounter >= m_attackTimer)
             m_canShoot = true;
     }
-    m_sprite.Update();
+    m_sprite.Update(deltaTime);
     m_sprite.SetSpritePosition(m_position);
 	EntityBase::Update(deltaTime);
 }
@@ -96,4 +99,13 @@ void Character::Render(sf::RenderWindow* window)
         return;
 
 	m_sprite.Render(window);
+
+#ifdef _DEBUG
+    sf::RectangleShape rect = sf::RectangleShape(m_boundingBox.getSize());
+    rect.setPosition(m_boundingBox.getPosition());
+    rect.setFillColor(sf::Color::Transparent);
+    rect.setOutlineColor(sf::Color::Green);
+    rect.setOutlineThickness(2.f);
+    window->draw(rect);
+#endif // _DEBUG
 }

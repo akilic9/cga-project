@@ -1,5 +1,6 @@
 #pragma once
 #include "../Engine/Character.h"
+#include "StateMachines/Enemy/EnemyStateManager.h"
 
 class EnemyStateManager;
 
