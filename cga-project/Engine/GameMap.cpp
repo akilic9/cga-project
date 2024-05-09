@@ -25,8 +25,8 @@ GameMap::~GameMap()
 
 Tile* GameMap::GetTileByLocation(sf::Vector2f location) const
 {
-    std::string sId = std::to_string(floor(location.x / m_sheetInfo.m_defaultTileSize.x)) +
-                      std::to_string(floor(location.y / m_sheetInfo.m_defaultTileSize.y));
+    std::string sId = std::to_string((int)location.x) +
+                      std::to_string((int)location.y);
 
     unsigned int id = stoi(sId);
     auto itr = m_tileMap.find(id);
