@@ -85,7 +85,8 @@ void Character::Update(float deltaTime)
         if (m_attackTimeCounter >= m_attackTimer)
             m_canShoot = true;
     }
-
+    m_sprite.Update();
+    m_sprite.SetSpritePosition(m_position);
 	EntityBase::Update(deltaTime);
 }
 

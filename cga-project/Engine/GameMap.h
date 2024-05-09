@@ -15,6 +15,7 @@ struct TileInfo {
         , m_isCollidable(false)
         , m_isDestructible(false)
         , m_isBase(false)
+        , m_tilePosition(0.f, 0.f)
     {
         TextureLoader* texLoader = sContext->m_textureLoader;
         
@@ -42,12 +43,14 @@ struct TileInfo {
     bool m_isDestructible;
     bool m_isBase;
     SharedContext* m_context;
+    sf::Vector2f m_tilePosition;
 };
 
 struct Tile {
     unsigned int m_id;
     TileInfo* m_info;
     sf::Vector2u m_position;
+    sf::Vector2f m_centerCoord;
 };
 
 //tileName - tile info object
@@ -74,6 +77,7 @@ private:
     SharedContext* m_sharedContext;
     TileSet m_tileSet;
     TileMap m_tileMap;
+    std::vector<sf::Vector2f> m_movableTiles;
     SheetInfo m_sheetInfo;
     sf::Vector2u m_mapSize;
     sf::Vector2f m_playerSpawnLoc;

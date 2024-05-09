@@ -37,6 +37,7 @@
     <ClInclude Include="Engine\TextureLoader.h" />
     <ClInclude Include="Game\Enemy.h" />
     <ClInclude Include="Game\Player.h" />
+    <ClInclude Include="Game\StateMachines\Enemy\EnemyBaseTarget.h" />
     <ClInclude Include="Game\StateMachines\Enemy\EnemyIdle.h" />
     <ClInclude Include="Game\StateMachines\Enemy\EnemyStateBase.h" />
     <ClInclude Include="Game\StateMachines\Enemy\EnemyStateManager.h" />
@@ -52,14 +53,13 @@
     <ClCompile Include="Engine\GameMap.cpp" />
     <ClCompile Include="Engine\InputManager.cpp" />
     <ClCompile Include="Engine\main.cpp" />
-    <ClCompile Include="Engine\Scene.cpp" />
     <ClCompile Include="Engine\SceneManager.cpp" />
     <ClCompile Include="Engine\Sprite.cpp" />
     <ClCompile Include="Engine\StateManager.cpp" />
     <ClCompile Include="Game\Enemy.cpp" />
     <ClCompile Include="Game\Player.cpp" />
+    <ClCompile Include="Game\StateMachines\Enemy\EnemyBaseTarget.cpp" />
     <ClCompile Include="Game\StateMachines\Enemy\EnemyIdle.cpp" />
-    <ClCompile Include="Game\StateMachines\Enemy\EnemyStateBase.cpp" />
     <ClCompile Include="Game\StateMachines\Enemy\EnemyStateManager.cpp" />
     <ClCompile Include="Game\StateMachines\Scenes\GameState.cpp" />
     <ClCompile Include="Game\StateMachines\Scenes\MainMenuState.cpp" />

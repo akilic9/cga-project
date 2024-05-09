@@ -104,7 +104,10 @@ void GameMap::LoadMap(const std::string& mapName)
             std::string tileId = std::to_string(tilePosition.x) + std::to_string(tilePosition.y); //Id will be the row and column.
             tile->m_id = stoi(tileId);
             tile->m_position = sf::Vector2u(tilePosition.x * m_sheetInfo.m_defaultTileSize.x,
-                tilePosition.y * m_sheetInfo.m_defaultTileSize.y);
+                                            tilePosition.y * m_sheetInfo.m_defaultTileSize.y);
+
+            tile->m_centerCoord = sf::Vector2f((tilePosition.x * m_sheetInfo.m_defaultTileSize.x) + (m_sheetInfo.m_defaultTileSize.x / 2.f),
+                                               (tilePosition.y * m_sheetInfo.m_defaultTileSize.y) - (m_sheetInfo.m_defaultTileSize.y / 2.f));
 
             if (!m_tileMap.emplace(tile->m_id, tile).second) {
                 std::cerr << "Overlapping tiles: " << line << std::endl;
@@ -114,8 +117,10 @@ void GameMap::LoadMap(const std::string& mapName)
             }
 
             if (tileType == "Base")
-                m_baseLoc = sf::Vector2f(tile->m_position.x + (m_sheetInfo.m_defaultTileSize.x / 2.f),
-                                         tile->m_position.y - (m_sheetInfo.m_defaultTileSize.y / 2.f));
+                m_baseLoc = tile->m_centerCoord;
+
+            if (!typeItr->second->m_isCollidable)
+                m_movableTiles.push_back(tile->m_centerCoord);
         }
         else if (type == "MAPSIZE")
             keystream >> m_mapSize.x >> m_mapSize.y;
