@@ -18,12 +18,18 @@ Enemy::~Enemy()
 
 void Enemy::Update(float deltaTime)
 {
+    if (m_state == CharacterState::Dead)
+        return;
+
     m_bhvrManager.Update(deltaTime);
     Character::Update(deltaTime);
 }
 
 void Enemy::Render(sf::RenderWindow* window)
 {
+    if (m_state == CharacterState::Dead)
+        return;
+
     m_bhvrManager.Render();
     Character::Render(window);
 }
