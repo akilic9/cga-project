@@ -42,6 +42,7 @@ public:
     inline unsigned int GetID() const { return m_id; }
     inline std::string GetName() const { return m_name; }
     inline sf::FloatRect GetBoundingBox() const { return m_boundingBox; }
+    inline sf::Vector2f GetPosition() const { return m_position; }
     inline EntityType GetType() const { return m_type; }
 
     inline void SetID(const unsigned int& id) { m_id = id; }

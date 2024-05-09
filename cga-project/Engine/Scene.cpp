@@ -2,7 +2,7 @@
 #include "SceneManager.h"
 
 Scene::Scene(const std::string& name, const int& id, SceneManager* sceneManager)
-    : StateBase(name, id, sceneManager)
+    : StateBase(name, id)
     , m_sceneManager(sceneManager) {}
 
 Scene::~Scene() {}

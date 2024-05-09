@@ -38,6 +38,8 @@
     <ClInclude Include="Game\Enemy.h" />
     <ClInclude Include="Game\Player.h" />
     <ClInclude Include="Game\StateMachines\Enemy\EnemyIdle.h" />
+    <ClInclude Include="Game\StateMachines\Enemy\EnemyStateBase.h" />
+    <ClInclude Include="Game\StateMachines\Enemy\EnemyStateManager.h" />
     <ClInclude Include="Game\StateMachines\Scenes\GameState.h" />
     <ClInclude Include="Game\StateMachines\Scenes\MainMenuState.h" />
   </ItemGroup>
@@ -57,6 +59,8 @@
     <ClCompile Include="Game\Enemy.cpp" />
     <ClCompile Include="Game\Player.cpp" />
     <ClCompile Include="Game\StateMachines\Enemy\EnemyIdle.cpp" />
+    <ClCompile Include="Game\StateMachines\Enemy\EnemyStateBase.cpp" />
+    <ClCompile Include="Game\StateMachines\Enemy\EnemyStateManager.cpp" />
     <ClCompile Include="Game\StateMachines\Scenes\GameState.cpp" />
     <ClCompile Include="Game\StateMachines\Scenes\MainMenuState.cpp" />
   </ItemGroup>

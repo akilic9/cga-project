@@ -1,11 +1,11 @@
 #pragma once
-#include "../../Engine/StateBase.h"
+#include "EnemyStateBase.h"
 
 //The enemy for this game doesn't really have an "idle" state. So this state will instead be a cooldown between transitions.
-class EnemyIdle : public StateBase
+class EnemyIdle : public EnemyStateBase
 {
 public:
-    EnemyIdle(const std::string& name, const int& id, StateManager* stateManager);
+    EnemyIdle(const std::string& name, const int& id, EnemyStateManager* stateManager);
     ~EnemyIdle();
 
     void OnCreate() override;
@@ -15,14 +15,10 @@ public:
     void OnExit() override;
     void OnDelete() override;
 
-    void SetCooldownTime(const float& time) { if (time == m_cooldownTimer) return; m_cooldownTimer = time; }
-    void SetBaseLocation(const sf::Vector2f& location) { if (location == m_baseLocation) return; m_baseLocation = location; }
-    inline void SetPlayerLocation(const sf::Vector2f& location) { if (location == m_playerLocation) return; m_playerLocation = location; }
+    void SelectNextState();
 
 private:
     float m_cooldownTimer;
     float m_cooldownCounter;
-    sf::Vector2f m_playerLocation;
-    sf::Vector2f m_baseLocation;
 };
 

@@ -16,7 +16,7 @@ public:
 	virtual ~Character();
 
 	virtual void Update(float deltaTime);
-	void Render(sf::RenderWindow* window);
+	virtual void Render(sf::RenderWindow* window);
     virtual void Die();
 
 	virtual void OnEntityCollision(EntityBase* collidingEntity) = 0;

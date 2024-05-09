@@ -6,7 +6,7 @@ class SceneManager;
 class Scene : public StateBase
 {
 public:
-    Scene(const std::string& name, const int& id, SceneManager* stateManager);
+    Scene(const std::string& name, const int& id, SceneManager* sceneManager);
     ~Scene();
 
     virtual void OnCreate();

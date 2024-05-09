@@ -1,6 +1,7 @@
 #pragma once
 #include "StateManager.h"
 #include "SharedContext.h"
+#include "Scene.h"
 class SceneManager : public StateManager
 {
 public:
@@ -12,7 +13,7 @@ public:
     void RegisterState(const std::string& stateName) {
         int stateId = m_stateCount++;
         m_nameToIdMap[stateName] = stateId;
-        m_factory[stateId] = [stateName, stateId, this]() -> StateBase*
+        m_factory[stateId] = [stateName, stateId, this]() -> Scene*
             { return new T(stateName, stateId, this); };
     }
 
