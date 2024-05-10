@@ -12,5 +12,9 @@ public:
     void Render() override;
     void OnExit() override;
     void OnDelete() override;
+
+private:
+    float m_serialShootingCounter;
+    float m_serialShootTimer;
 };
 

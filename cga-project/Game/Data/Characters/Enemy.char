@@ -1,0 +1,7 @@
+Name Enemy
+SpriteID Enemy
+MovementSpeed 100
+AttackSpeed 1
+Direction 0
+IdleCooldown 2
+SerialShootCooldown 2

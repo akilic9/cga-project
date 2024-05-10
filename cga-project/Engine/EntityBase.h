@@ -1,6 +1,7 @@
 #pragma once
 #include "SFML/Graphics/Rect.hpp"
 #include "SFML/Graphics/RenderWindow.hpp"
+#include "Direction.h"
 #include <string>
 
 struct TileInfo;
@@ -64,6 +65,8 @@ protected:
 
     Collisions m_collisions;
     EntityManager* m_entityManager;
+
+    std::vector<Direction> m_illegalDirections;
 
     void UpdateBoundingBox();
     void CheckTileCollisions();

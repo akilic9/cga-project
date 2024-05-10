@@ -15,8 +15,6 @@ public:
     void OnExit() override;
     void OnDelete() override;
 
-    void SelectNextState();
-
 private:
     float m_cooldownTimer;
     float m_cooldownCounter;

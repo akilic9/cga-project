@@ -48,15 +48,16 @@ void EntityBase::Update(float deltaTime)
         sf::Vector2u mapSize = m_entityManager->GetSharedContext()->m_mapManager->GetMapSize();
         unsigned int tileSize = m_entityManager->GetSharedContext()->m_mapManager->GetSheetInfo()->m_defaultTileSize.x;
 
-        if (m_position.x < 0)
-            m_position.x = 0;
-        else if (m_position.x > mapSize.x * tileSize)
-            m_position.x = (mapSize.x - 1) * tileSize;
+        auto a = mapSize.x * tileSize;
+        if (m_position.x < 0 + (m_size.x / 2.f))
+            m_position.x = m_size.x / 2.f;
+        else if (m_position.x > (mapSize.x * tileSize) - (m_size.x / 2.f))
+            m_position.x = (mapSize.x * tileSize) - (m_size.x / 2.f);
 
-        if (m_position.y < 0)
-            m_position.y = 0;
-        else if (m_position.y > mapSize.y * tileSize)
-            m_position.y = (mapSize.y - 1) * tileSize;
+        if (m_position.y < 0 + (m_size.y / 2.f))
+            m_position.y = m_size.y / 2.f;
+        else if (m_position.y > (mapSize.y * tileSize) - (m_size.y / 2.f))
+            m_position.y = (mapSize.y * tileSize) - (m_size.y / 2.f);
 
         UpdateBoundingBox();
         m_movement = sf::Vector2f(0.f, 0.f);
@@ -99,6 +100,7 @@ void EntityBase::CheckTileCollisions()
 
 void EntityBase::ResolveTileCollisions()
 {
+    m_illegalDirections.clear();
     if (!m_collisions.empty()) {
         std::sort(m_collisions.begin(), m_collisions.end(), [](CollisionInfo c1, CollisionInfo c2) 
             { 
@@ -117,20 +119,28 @@ void EntityBase::ResolveTileCollisions()
             float resolve = 0;
 
             if (abs(xDiff) > abs(yDiff)) {
-                if (xDiff > 0)
+                if (xDiff > 0) {
+                    m_illegalDirections.push_back(Direction::Left);
                     resolve = (itr.m_tileBounds.left + tileSize) - m_boundingBox.left;
-                else
+                }
+                else {
+                    m_illegalDirections.push_back(Direction::Right);
                     resolve = -((m_boundingBox.left + m_boundingBox.width) - itr.m_tileBounds.left);
+                }
 
                 sf::Vector2f correction = sf::Vector2f(resolve, 0.f);
                 m_position += correction;
                 UpdateBoundingBox();
             }
             else {
-                if (yDiff > 0)
-                    resolve = (itr.m_tileBounds.top + tileSize)- m_boundingBox.top;
-                else
+                if (yDiff > 0) {
+                    m_illegalDirections.push_back(Direction::Up);
+                    resolve = (itr.m_tileBounds.top + tileSize) - m_boundingBox.top;
+                }
+                else {
+                    m_illegalDirections.push_back(Direction::Down);
                     resolve = -((m_boundingBox.top + m_boundingBox.height) - itr.m_tileBounds.top);
+                }
 
                 sf::Vector2f correction = sf::Vector2f(0.f, resolve);
                 m_position += correction;

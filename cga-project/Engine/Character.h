@@ -18,6 +18,7 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Render(sf::RenderWindow* window);
     virtual void Die();
+    void Shoot();
 
 	virtual void OnEntityCollision(EntityBase* collidingEntity) = 0;
 
@@ -30,7 +31,6 @@ protected:
     Direction m_defaultDirection;
 
     void Move(sf::Vector2f& movement, Direction& direction);
-    void Shoot();
     virtual void LoadCharacterSpecs(const std::string& fileName);
 };
 

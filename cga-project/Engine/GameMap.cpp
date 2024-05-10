@@ -48,6 +48,16 @@ sf::Vector2f& GameMap::GetPlayerStartLocation()
     return m_playerSpawnLoc;
 }
 
+sf::Vector2f& GameMap::GetBaseLocation()
+{
+    return m_baseLoc;
+}
+
+std::vector<sf::Vector2f>& GameMap::GetEnemyStartLocs()
+{
+    return m_enemySpawnLocs;
+}
+
 void GameMap::LoadMap(const std::string& mapName)
 {
     std::ifstream mapDataFile;
@@ -129,9 +139,13 @@ void GameMap::LoadMap(const std::string& mapName)
         else if (type == "ENEMYSPAWN") {
             sf::Vector2f loc;
             keystream >> loc.x >> loc.y;
-            for (auto &l : m_enemySpawnLocs)
-                if (l.x != loc.x && l.y != loc.y) //No duplicates
-                    m_enemySpawnLocs.push_back(l);
+            if (m_enemySpawnLocs.empty())
+                m_enemySpawnLocs.push_back(loc);
+            else {
+                for (auto& l : m_enemySpawnLocs)
+                    if (l.x != loc.x || l.y != loc.y) //No duplicates
+                        m_enemySpawnLocs.push_back(loc);
+            }
         }
         else if (type == "NEXTMAP")
             keystream >> m_nextMapName;

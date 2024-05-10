@@ -6,6 +6,7 @@ EntityManager::EntityManager(SharedContext* sContext)
     , m_entityCount(0)
 {
     RegisterEntity<Player>(EntityType::Player);
+    RegisterEntity<Enemy>(EntityType::Enemy);
 }
 
 EntityManager::~EntityManager()

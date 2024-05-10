@@ -3,3 +3,5 @@ SpriteID Player
 MovementSpeed 100
 AttackSpeed 2
 Direction 2
+RespawnTimer 2
+InvincibilityTimer 3

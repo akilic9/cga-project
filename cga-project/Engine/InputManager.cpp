@@ -10,7 +10,16 @@ InputManager::InputManager()
     LoadBindings();
 }
 
-InputManager::~InputManager() {}
+InputManager::~InputManager()
+{
+    for (auto& b : m_inputBindings) {
+        for (auto& i : b.second) {
+            delete i;
+            i = nullptr;
+        }
+        b.second.clear();
+    }
+}
 
 void InputManager::HandleInputs(sf::Event event)
 {
