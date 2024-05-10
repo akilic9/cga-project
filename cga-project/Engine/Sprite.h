@@ -15,6 +15,7 @@ public:
     void SetSpriteScale(const sf::Vector2f& scale);
     void SetSpritePosition(const sf::Vector2f& position);
     void SetSpriteDirection(const Direction& dirention);
+    Direction& GetSpriteDirection() { return m_spriteDirection;  }
 
     sf::Vector2i GetSpriteSize();
 

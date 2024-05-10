@@ -18,7 +18,8 @@ public:
 private:
     float m_serialShootingCounter;
     float m_serialShootTimer;
-    Direction m_currentDirection;
+
+    Direction GetRandownDirection();
 
     std::unordered_map<Direction, sf::Vector2f> m_directionsMap = { {Direction::Down,  sf::Vector2f(0.f,  1.f)},
                                                                     {Direction::Up,    sf::Vector2f(0.f, -1.f)},

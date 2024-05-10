@@ -1,6 +1,9 @@
 #include "Enemy.h"
+#include "../../Engine/EntityManager.h"
+#include "../../Engine/SharedContext.h"
 #include "StateMachines/Enemy/EnemyIdle.h"
 #include "StateMachines/Enemy/EnemyAttack.h"
+#include "../../Engine/GameMap.h"
 
 Enemy::Enemy(EntityManager* entityManager)
     : Character(entityManager)
@@ -28,7 +31,46 @@ void Enemy::Update(float deltaTime)
         return;
 
     m_bhvrManager.Update(deltaTime);
-    Character::Update(deltaTime);
+
+    if (!m_canShoot) {
+        m_attackTimeCounter += deltaTime;
+        if (m_attackTimeCounter >= m_attackTimer)
+            m_canShoot = true;
+    }
+    m_sprite.Update(deltaTime);
+    m_sprite.SetSpritePosition(m_position);
+
+    if (m_movement.x != 0 || m_movement.y != 0) {
+        m_prevPosition = m_position;
+        m_position += (m_movement * deltaTime);
+
+        sf::Vector2u mapSize = m_entityManager->GetSharedContext()->m_mapManager->GetMapSize();
+        unsigned int tileSize = m_entityManager->GetSharedContext()->m_mapManager->GetSheetInfo()->m_defaultTileSize.x;
+
+        if (m_position.x < 0 + (m_size.x / 2.f)) {
+            m_position.x = m_size.x / 2.f;
+            SetCurrentDirection(Direction::None);
+        }
+        else if (m_position.x > (mapSize.x * tileSize) - (m_size.x / 2.f)) {
+            m_position.x = (mapSize.x * tileSize) - (m_size.x / 2.f);
+            SetCurrentDirection(Direction::None);
+        }
+
+        if (m_position.y < 64.f + (m_size.y / 2.f)) {
+            m_position.y = 64.f + m_size.y / 2.f;
+            SetCurrentDirection(Direction::None);
+        }
+        else if (m_position.y > (mapSize.y * tileSize) - (m_size.y / 2.f)) {
+            m_position.y = (mapSize.y * tileSize) - (m_size.y / 2.f);
+            SetCurrentDirection(Direction::None);
+        }
+
+        UpdateBoundingBox();
+        m_movement = sf::Vector2f(0.f, 0.f);
+    }
+
+    CheckTileCollisions();
+    ResolveTileCollisions();
 }
 
 void Enemy::Render(sf::RenderWindow* window)
@@ -46,6 +88,15 @@ void Enemy::Die()
 }
 
 void Enemy::OnEntityCollision(EntityBase* collidingEntity) {}
+
+inline void Enemy::SetCurrentDirection(Direction direction)
+{
+    if (m_currentDirection == direction) 
+        return; 
+
+    m_prevDirection = m_currentDirection;
+    m_currentDirection = direction;
+}
 
 void Enemy::LoadCharacterSpecs(const std::string& fileName)
 {
@@ -76,10 +127,6 @@ void Enemy::LoadCharacterSpecs(const std::string& fileName)
 void Enemy::ResolveTileCollisions()
 {
     if (!m_collisions.empty())
-        OnCollidedWithTile();
+        SetCurrentDirection(Direction::None);
     Character::ResolveTileCollisions();
-}
-
-void Enemy::OnCollidedWithTile()
-{
 }

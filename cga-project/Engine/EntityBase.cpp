@@ -48,14 +48,13 @@ void EntityBase::Update(float deltaTime)
         sf::Vector2u mapSize = m_entityManager->GetSharedContext()->m_mapManager->GetMapSize();
         unsigned int tileSize = m_entityManager->GetSharedContext()->m_mapManager->GetSheetInfo()->m_defaultTileSize.x;
 
-        auto a = mapSize.x * tileSize;
         if (m_position.x < 0 + (m_size.x / 2.f))
             m_position.x = m_size.x / 2.f;
         else if (m_position.x > (mapSize.x * tileSize) - (m_size.x / 2.f))
             m_position.x = (mapSize.x * tileSize) - (m_size.x / 2.f);
 
-        if (m_position.y < 0 + (m_size.y / 2.f))
-            m_position.y = m_size.y / 2.f;
+        if (m_position.y < 64.f + (m_size.y / 2.f))
+            m_position.y = 64.f + m_size.y / 2.f;
         else if (m_position.y > (mapSize.y * tileSize) - (m_size.y / 2.f))
             m_position.y = (mapSize.y * tileSize) - (m_size.y / 2.f);
 
