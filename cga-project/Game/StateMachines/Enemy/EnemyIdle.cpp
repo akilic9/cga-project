@@ -16,7 +16,6 @@ void EnemyIdle::OnCreate()
 
 void EnemyIdle::OnEnter()
 {
-    m_parent->SetBhvrState(EnemyTarget::None);
     m_cooldownCounter = 0.f;
 }
 

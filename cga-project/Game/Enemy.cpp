@@ -7,7 +7,6 @@ Enemy::Enemy(EntityManager* entityManager)
     , m_bhvrManager(this)
     , m_playerLocation(0.f, 0.f)
     , m_baseLocation(0.f, 0.f)
-    , m_bhvrState(EnemyTarget::None)
     , m_serialShootingTimer(0.f)
     , m_idleCooldownTimer(0.f)
 {
@@ -28,77 +27,8 @@ void Enemy::Update(float deltaTime)
     if (m_state == CharacterState::Dead)
         return;
 
-    sf::Vector2f movementVector(0.f, 0.f);
-    Direction direction = Direction::None;
-
-    //Aboslutely disgusting but it's 2am and I have no brain power left.
-    switch (m_bhvrState)
-    {
-    case EnemyTarget::None:
-        break;
-    case EnemyTarget::Player:
-        if (m_playerLocation.x < m_position.x && std::find(m_illegalDirections.begin(), m_illegalDirections.end(), Direction::Left) == m_illegalDirections.end()) {
-            movementVector = sf::Vector2f(-1.f, 0.f);
-            direction = Direction::Left;
-        }
-        else if (m_playerLocation.y < m_position.y && std::find(m_illegalDirections.begin(), m_illegalDirections.end(), Direction::Up) == m_illegalDirections.end()) {
-            movementVector = sf::Vector2f(0.f, -1.f);
-            direction = Direction::Up;
-        }
-        else if (std::find(m_illegalDirections.begin(), m_illegalDirections.end(), Direction::Down) == m_illegalDirections.end()) {
-            movementVector = sf::Vector2f(0.f, 1.f);
-            direction = Direction::Down;
-        }
-        else if (std::find(m_illegalDirections.begin(), m_illegalDirections.end(), Direction::Right) == m_illegalDirections.end()) {
-            movementVector = sf::Vector2f(1.f, 0.f);
-            direction = Direction::Right;
-        }
-        break;
-    case EnemyTarget::Base:
-        if (m_baseLocation.x < m_position.x && std::find(m_illegalDirections.begin(), m_illegalDirections.end(), Direction::Left) == m_illegalDirections.end()) {
-            movementVector = sf::Vector2f(-1.f, 0.f);
-            direction = Direction::Left;
-        }
-        else if (m_baseLocation.y < m_position.y && std::find(m_illegalDirections.begin(), m_illegalDirections.end(), Direction::Up) == m_illegalDirections.end()) {
-            movementVector = sf::Vector2f(0.f, -1.f);
-            direction = Direction::Up;
-        }
-        else if (std::find(m_illegalDirections.begin(), m_illegalDirections.end(), Direction::Down) == m_illegalDirections.end()) {
-            movementVector = sf::Vector2f(0.f, 1.f);
-            direction = Direction::Down;
-        }
-        else if (std::find(m_illegalDirections.begin(), m_illegalDirections.end(), Direction::Right) == m_illegalDirections.end()) {
-            movementVector = sf::Vector2f(1.f, 0.f);
-            direction = Direction::Right;
-        }
-        break;
-    case EnemyTarget::Run:
-        if (m_playerLocation.x < m_position.x && std::find(m_illegalDirections.begin(), m_illegalDirections.end(), Direction::Right) == m_illegalDirections.end()) {
-            movementVector = sf::Vector2f(1.f, 0.f);
-            direction = Direction::Right;
-        }
-        else if (m_playerLocation.y > m_position.y && std::find(m_illegalDirections.begin(), m_illegalDirections.end(), Direction::Up) == m_illegalDirections.end()) {
-            movementVector = sf::Vector2f(0.f, -1.f);
-            direction = Direction::Up;
-        }
-        else if (std::find(m_illegalDirections.begin(), m_illegalDirections.end(), Direction::Left) == m_illegalDirections.end()) {
-            movementVector = sf::Vector2f(-1.f, 0.f);
-            direction = Direction::Left;
-        }
-        else if (std::find(m_illegalDirections.begin(), m_illegalDirections.end(), Direction::Down) == m_illegalDirections.end()) {
-            movementVector = sf::Vector2f(0.f, 1.f);
-            direction = Direction::Down;
-        }
-        break;
-    default:
-        break;
-    }
-
-    if (movementVector.x != 0 || movementVector.y != 0)
-        Move(movementVector, direction);
-
-    Character::Update(deltaTime);
     m_bhvrManager.Update(deltaTime);
+    Character::Update(deltaTime);
 }
 
 void Enemy::Render(sf::RenderWindow* window)
@@ -141,4 +71,15 @@ void Enemy::LoadCharacterSpecs(const std::string& fileName)
         }
     }
     file.close();
+}
+
+void Enemy::ResolveTileCollisions()
+{
+    if (!m_collisions.empty())
+        OnCollidedWithTile();
+    Character::ResolveTileCollisions();
+}
+
+void Enemy::OnCollidedWithTile()
+{
 }

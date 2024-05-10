@@ -66,10 +66,8 @@ protected:
     Collisions m_collisions;
     EntityManager* m_entityManager;
 
-    std::vector<Direction> m_illegalDirections;
-
     void UpdateBoundingBox();
     void CheckTileCollisions();
-    void ResolveTileCollisions();
+    virtual void ResolveTileCollisions();
 };
 

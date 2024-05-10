@@ -68,7 +68,6 @@ public:
     SheetInfo* GetSheetInfo();
     sf::Vector2u& GetMapSize();
     sf::Vector2f& GetPlayerStartLocation();
-    sf::Vector2f& GetBaseLocation();
     std::vector<sf::Vector2f>& GetEnemyStartLocs();
     void LoadMap(const std::string& mapName);
     void LoadNext();

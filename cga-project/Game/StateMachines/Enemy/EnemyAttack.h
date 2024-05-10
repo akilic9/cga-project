@@ -1,5 +1,7 @@
 #pragma once
 #include "EnemyStateBase.h"
+#include "../../Engine/Direction.h"
+#include <unordered_map>
 class EnemyAttack : public EnemyStateBase
 {
 public:
@@ -16,5 +18,11 @@ public:
 private:
     float m_serialShootingCounter;
     float m_serialShootTimer;
+    Direction m_currentDirection;
+
+    std::unordered_map<Direction, sf::Vector2f> m_directionsMap = { {Direction::Down,  sf::Vector2f(0.f,  1.f)},
+                                                                    {Direction::Up,    sf::Vector2f(0.f, -1.f)},
+                                                                    {Direction::Left,  sf::Vector2f(-1.f, 0.f)},
+                                                                    {Direction::Right, sf::Vector2f(1.f,  0.f)} };
 };
 

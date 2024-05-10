@@ -19,6 +19,7 @@ public:
 	virtual void Render(sf::RenderWindow* window);
     virtual void Die();
     void Shoot();
+    void Move(sf::Vector2f& movement, Direction& direction);
 
 	virtual void OnEntityCollision(EntityBase* collidingEntity) = 0;
 
@@ -30,7 +31,6 @@ protected:
     bool m_canShoot;
     Direction m_defaultDirection;
 
-    void Move(sf::Vector2f& movement, Direction& direction);
     virtual void LoadCharacterSpecs(const std::string& fileName);
 };
 

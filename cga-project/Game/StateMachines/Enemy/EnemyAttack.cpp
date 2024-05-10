@@ -5,7 +5,8 @@
 EnemyAttack::EnemyAttack(const std::string& name, const int& id, EnemyStateManager* stateManager, Enemy* enemy)
     : EnemyStateBase(name, id, stateManager, enemy)
     , m_serialShootingCounter(0.f)
-    , m_serialShootTimer(0.f) {}
+    , m_serialShootTimer(0.f)
+    , m_currentDirection(Direction::None) {}
 
 EnemyAttack::~EnemyAttack() {}
 
@@ -16,30 +17,19 @@ void EnemyAttack::OnCreate()
 
 void EnemyAttack::OnEnter() 
 {
-    float distPlayer = 0.f;
-    float distBase = 0.f;
-
-
-    std::cout << m_parent->GetPosition().x << " " << m_parent->GetPosition().y << std::endl;
-    sf::Vector2f distVecPlayer = m_parent->GetPlayerPos() - m_parent->GetPosition();
-    std::cout << m_parent->GetPlayerPos().x << " " << m_parent->GetPlayerPos().y << std::endl;
-    std::cout << distVecPlayer.x << " " << distVecPlayer.y << std::endl;
-    sf::Vector2f distVecBase = m_parent->GetBasePos() - m_parent->GetPosition();
-    std::cout << distVecBase.x << " " << distVecBase.y << std::endl;
-    std::cout << m_parent->GetBasePos().x << " " << m_parent->GetBasePos().y << std::endl;
-    distPlayer = sqrt(pow(distVecPlayer.x, 2) + pow(distVecPlayer.y, 2));
-    distBase = sqrt(pow(distVecBase.x, 2) + pow(distVecBase.y, 2));
-
-    if (distBase <= distPlayer) //Prioritize objective play.
-        m_parent->SetBhvrState(EnemyTarget::Base);
-    else
-        m_parent->SetBhvrState(EnemyTarget::Player);
-
     m_serialShootingCounter = 0.f;
 }
 
 void EnemyAttack::Update(float deltaTime)
 {
+    if (m_parent. == Direction::None) {
+        m_currentDirection = (Direction)(rand() % 3);
+        sf::Vector2f movementVector(m_directionsMap[m_currentDirection]);
+    }
+
+    sf::Vector2f movementVector(m_directionsMap[m_currentDirection]);
+    m_parent->Move(movementVector, m_currentDirection);
+
     if (m_serialShootingCounter < m_serialShootTimer) {
         m_serialShootingCounter += deltaTime;
         return;
@@ -49,9 +39,6 @@ void EnemyAttack::Update(float deltaTime)
 
 void EnemyAttack::Render() {}
 
-void EnemyAttack::OnExit()
-{
-    m_parent->SetBhvrState(EnemyTarget::None);
-}
+void EnemyAttack::OnExit() {}
 
 void EnemyAttack::OnDelete() {}

@@ -48,11 +48,6 @@ sf::Vector2f& GameMap::GetPlayerStartLocation()
     return m_playerSpawnLoc;
 }
 
-sf::Vector2f& GameMap::GetBaseLocation()
-{
-    return m_baseLoc;
-}
-
 std::vector<sf::Vector2f>& GameMap::GetEnemyStartLocs()
 {
     return m_enemySpawnLocs;

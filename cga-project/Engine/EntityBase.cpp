@@ -100,7 +100,6 @@ void EntityBase::CheckTileCollisions()
 
 void EntityBase::ResolveTileCollisions()
 {
-    m_illegalDirections.clear();
     if (!m_collisions.empty()) {
         std::sort(m_collisions.begin(), m_collisions.end(), [](CollisionInfo c1, CollisionInfo c2) 
             { 
@@ -119,28 +118,22 @@ void EntityBase::ResolveTileCollisions()
             float resolve = 0;
 
             if (abs(xDiff) > abs(yDiff)) {
-                if (xDiff > 0) {
-                    m_illegalDirections.push_back(Direction::Left);
+                if (xDiff > 0)
                     resolve = (itr.m_tileBounds.left + tileSize) - m_boundingBox.left;
-                }
-                else {
-                    m_illegalDirections.push_back(Direction::Right);
+                
+                else
                     resolve = -((m_boundingBox.left + m_boundingBox.width) - itr.m_tileBounds.left);
-                }
+                
 
                 sf::Vector2f correction = sf::Vector2f(resolve, 0.f);
                 m_position += correction;
                 UpdateBoundingBox();
             }
             else {
-                if (yDiff > 0) {
-                    m_illegalDirections.push_back(Direction::Up);
+                if (yDiff > 0)
                     resolve = (itr.m_tileBounds.top + tileSize) - m_boundingBox.top;
-                }
-                else {
-                    m_illegalDirections.push_back(Direction::Down);
+                else 
                     resolve = -((m_boundingBox.top + m_boundingBox.height) - itr.m_tileBounds.top);
-                }
 
                 sf::Vector2f correction = sf::Vector2f(0.f, resolve);
                 m_position += correction;
