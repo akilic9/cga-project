@@ -24,6 +24,7 @@
     <ClInclude Include="Engine\Direction.h" />
     <ClInclude Include="Engine\EntityBase.h" />
     <ClInclude Include="Engine\EntityManager.h" />
+    <ClInclude Include="Engine\EventManager.h" />
     <ClInclude Include="Engine\Game.h" />
     <ClInclude Include="Engine\GameMap.h" />
     <ClInclude Include="Engine\InputManager.h" />

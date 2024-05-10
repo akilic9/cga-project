@@ -87,6 +87,9 @@
     <ClInclude Include="Game\StateMachines\Enemy\EnemyAttack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\EventManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Character.cpp">

@@ -22,7 +22,7 @@ void EnemyAttack::OnEnter()
 
 void EnemyAttack::Update(float deltaTime)
 {
-    if (m_parent. == Direction::None) {
+    if (m_currentDirection == Direction::None) {
         m_currentDirection = (Direction)(rand() % 3);
         sf::Vector2f movementVector(m_directionsMap[m_currentDirection]);
     }
