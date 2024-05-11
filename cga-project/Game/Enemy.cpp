@@ -87,15 +87,22 @@ void Enemy::Die()
     Character::Die();
 }
 
-void Enemy::OnEntityCollision(EntityBase* collidingEntity) {}
+void Enemy::OnEntityCollision(EntityBase* collidingEntity) {
 
-inline void Enemy::SetCurrentDirection(Direction direction)
+}
+
+void Enemy::SetCurrentDirection(Direction direction)
 {
     if (m_currentDirection == direction) 
         return; 
 
     m_prevDirection = m_currentDirection;
     m_currentDirection = direction;
+}
+
+void Enemy::SetSpawnLoc(sf::Vector2f& loc)
+{
+    m_spawnLoc = loc;
 }
 
 void Enemy::LoadCharacterSpecs(const std::string& fileName)

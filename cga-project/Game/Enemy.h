@@ -20,7 +20,8 @@ public:
     inline float& GetIdleCooldownTimer() { return m_idleCooldownTimer; }
     inline Direction& GetCurrentDirection() { return m_currentDirection; }
     inline Direction& GetPrevDirection() { return m_prevDirection; }
-    inline void SetCurrentDirection(Direction direction);
+    void SetCurrentDirection(Direction direction);
+    void SetSpawnLoc(sf::Vector2f& loc);
 
 
 private:
@@ -31,6 +32,7 @@ private:
     float m_idleCooldownTimer; //Helps give the player a break.
     Direction m_currentDirection;
     Direction m_prevDirection;
+    sf::Vector2f m_spawnLoc;
 
     void LoadCharacterSpecs(const std::string& fileName) override;
     void ResolveTileCollisions() override;

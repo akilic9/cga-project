@@ -21,7 +21,7 @@ Player::Player(EntityManager* entityManager)
     for (auto& [action, movement] : m_inputToMovement)
         m_entityManager->GetSharedContext()->m_inputManager->AddCallback(id, action, &Player::OnMovementKeyPressed, this);
 
-    m_entityManager->GetSharedContext()->m_inputManager->AddCallback(id, "player_attack", &Player::OnMovementKeyPressed, this);
+    m_entityManager->GetSharedContext()->m_inputManager->AddCallback(id, "player_attack", &Player::OnAttackKeyPressed, this);
 }
 
 Player::~Player()

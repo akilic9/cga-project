@@ -66,11 +66,11 @@ TILE Brick 17 12
 TILE Brick 21 10
 TILE Brick 21 11
 TILE Brick 21 12
-TILE Brick 11 12
-TILE Brick 11 13
-TILE Brick 12 12
-TILE Brick 13 12
-TILE Brick 13 13
+//TILE Brick 11 12
+//TILE Brick 11 13
+//TILE Brick 12 12
+//TILE Brick 13 12
+//TILE Brick 13 13
 TILE Concrete 1 8
 TILE Concrete 2 8
 TILE Concrete 11 4
