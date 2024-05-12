@@ -32,8 +32,10 @@ void StateManager::Render()
 //Switch to another state.
 void StateManager::SwitchState(const int& stateId)
 {
-    if (auto s = m_states.find(stateId); s != m_states.end()) {
+    if (m_activeState > -1)
         m_states[m_activeState]->OnExit();
+
+    if (auto s = m_states.find(stateId); s != m_states.end()) {
         m_activeState = stateId;
         m_states[m_activeState]->OnEnter();
     }

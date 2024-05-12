@@ -2,11 +2,11 @@
 #include "../../Engine/Scene.h"
 #include "../../Engine/InputManager.h"
 
-class MainMenuState : public Scene
+class GameEndState : public Scene
 {
-public:
-    MainMenuState(std::string name, int id, SceneManager* sceneManager);
-    ~MainMenuState();
+public:    
+    GameEndState(std::string name, int id, SceneManager* sceneManager);
+    ~GameEndState();
 
     void OnCreate() override;
     void OnEnter() override;
@@ -15,13 +15,11 @@ public:
     void OnExit() override;
     void OnDelete() override;
 
-    void OnStartPressed(InputBinding* binding);
-
+    void OnRestartPressed(InputBinding* binding);
 private:
-    sf::Text m_textTitle;
-    sf::Text m_textControls;
-    sf::Text m_movement;
-    sf::Text m_start;
     sf::Font m_font;
+
+    sf::Text m_textTitle;
+    sf::Text m_textReturn;
 };
 

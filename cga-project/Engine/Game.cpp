@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "../Game/StateMachines/Scenes/MainMenuState.h"
 #include "../Game/StateMachines/Scenes/GameState.h"
+#include "../Game/StateMachines/Scenes/GameEndState.h"
 
 Game::Game()
     : m_window("CGA Project")
@@ -14,8 +15,10 @@ Game::Game()
     m_sharedContext.m_entityManager = &m_entityManager;
 
     //Register and set the scenes.
+    m_sceneManager.RegisterState<MainMenuState>("MainMenu");
     m_sceneManager.RegisterState<GameState>("Game");
-    m_sceneManager.SwitchState("Game");
+    m_sceneManager.RegisterState<GameEndState>("End");
+    m_sceneManager.SwitchState("MainMenu");
 }
 
 Game::~Game() {}

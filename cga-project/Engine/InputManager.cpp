@@ -33,7 +33,7 @@ void InputManager::HandleInputs(sf::Event event)
                     return;
                 if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased) {
                     if (event.type != sf::Event::Closed && b->m_inputMap.second != event.key.code)
-                        return;
+                        continue;
 
                     auto sceneItr = m_callbacks.find(m_currentSceneId);
                     if (sceneItr != m_callbacks.end())

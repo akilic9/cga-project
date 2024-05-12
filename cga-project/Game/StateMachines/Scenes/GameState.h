@@ -17,5 +17,7 @@ public:
 
 private:
     GameMap* m_map;
+    float m_mapTimer;
+    float m_mapTimerCounter;
 };
 

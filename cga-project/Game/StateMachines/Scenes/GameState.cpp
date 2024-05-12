@@ -4,6 +4,8 @@
 GameState::GameState(std::string name, int id, SceneManager* sceneManager)
     : Scene(name, id, sceneManager)
     , m_map(nullptr)
+    , m_mapTimer(5.f)
+    , m_mapTimerCounter(0.f)
 {
 }
 
@@ -14,6 +16,8 @@ void GameState::OnCreate()
 }
 
 void GameState::OnEnter() {
+    m_mapTimerCounter = 0.f;
+
     m_map = new GameMap(m_sceneManager->GetSharedContext());
     m_map->LoadMap("Map1.map");
 
@@ -27,6 +31,11 @@ void GameState::OnEnter() {
 
 void GameState::Update(float deltaTime)
 {
+    m_mapTimerCounter += deltaTime;
+
+    if (m_mapTimerCounter >= m_mapTimer)
+        m_sceneManager->SwitchState("End");
+
     m_map->Update(deltaTime);
 }
 
@@ -35,7 +44,9 @@ void GameState::Render()
     m_map->Render();
 }
 
-void GameState::OnExit() {}
+void GameState::OnExit() {
+    m_sceneManager->GetSharedContext()->m_entityManager->Purge();
+}
 
 void GameState::OnDelete() {
     delete m_map;

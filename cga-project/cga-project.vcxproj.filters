@@ -90,6 +90,9 @@
     <ClInclude Include="Engine\EventManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game\StateMachines\Scenes\GameEndState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\Character.cpp">
@@ -144,6 +147,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\StateMachines\Enemy\EnemyAttack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\StateMachines\Scenes\GameEndState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
