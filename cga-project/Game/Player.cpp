@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "../Engine/EntityManager.h"
 #include "../Engine/SceneManager.h"
+#include "../../Engine/GameMap.h"
 
 Player::Player(EntityManager* entityManager)
 	: Character(entityManager)
@@ -94,6 +95,10 @@ void Player::Update(float deltaTime)
 void Player::Respawn()
 {
     m_attackTimeCounter = 0;
+    m_position = m_entityManager->GetSharedContext()->m_mapManager->GetPlayerStartLocation();
+    UpdateBoundingBox();
+    m_sprite.SetSpriteDirection(Direction::Up);
+    m_state = CharacterState::None;
 }
 
 void Player::LoadCharacterSpecs(const std::string& fileName)

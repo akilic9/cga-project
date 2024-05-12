@@ -4,7 +4,7 @@
 GameState::GameState(std::string name, int id, SceneManager* sceneManager)
     : Scene(name, id, sceneManager)
     , m_map(nullptr)
-    , m_mapTimer(5.f)
+    , m_mapTimer(10.f)
     , m_mapTimerCounter(0.f)
 {
 }
