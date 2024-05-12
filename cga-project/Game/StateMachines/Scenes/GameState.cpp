@@ -5,7 +5,7 @@
 GameState::GameState(std::string name, int id, SceneManager* sceneManager)
     : Scene(name, id, sceneManager)
     , m_map(nullptr)
-    , m_mapTimer(10.f)
+    , m_mapTimer(120.f)
     , m_score(0)
 {
 }
@@ -26,7 +26,7 @@ void GameState::OnCreate()
 }
 
 void GameState::OnEnter() {
-    m_mapTimer = 10.f;
+    m_mapTimer = 120.f;
 
     m_map = new GameMap(m_sceneManager->GetSharedContext());
     m_map->LoadMap("Map1.map");
@@ -100,6 +100,8 @@ void GameState::OnNuked()
 {
     EntityManager* eMng = m_sceneManager->GetSharedContext()->m_entityManager;
     static_cast<Enemy*>(eMng->Find("Enemy"))->Die();
+    static_cast<Enemy*>(eMng->Find("Enemy1"))->Die();
+    static_cast<Enemy*>(eMng->Find("Enemy2"))->Die();
     unsigned int id = eMng->Find("PowerUp")->GetID();
     eMng->QueueForRemoval(id);
 }
