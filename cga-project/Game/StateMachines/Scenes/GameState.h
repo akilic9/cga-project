@@ -17,6 +17,7 @@ public:
     void OnDelete() override;
 
     void OnPlayerScored();
+    void OnNuked();
 
 private:
     GameMap* m_map;

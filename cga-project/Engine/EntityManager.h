@@ -4,6 +4,7 @@
 #include "../Game/Player.h"
 #include "../Game/Enemy.h"
 #include "../Game/Bullet.h"
+#include "../Game/PowerUpNuke.h"
 
 using EntityContainer = std::unordered_map<unsigned int, EntityBase*>;
 using EntityFactory = std::unordered_map<EntityType, std::function<EntityBase* (void)>>;

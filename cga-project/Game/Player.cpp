@@ -41,7 +41,7 @@ Player::~Player()
 
 void Player::OnEntityCollision(EntityBase* collidingEntity)
 {
-    if (m_state == CharacterState::Dead)
+    if (m_state == CharacterState::Dead || collidingEntity->GetType() == EntityType::PowerUp)
         return;
 
     if (m_state == CharacterState::Invincible) {

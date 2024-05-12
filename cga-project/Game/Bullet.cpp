@@ -2,6 +2,7 @@
 #include "../Engine/EntityManager.h"
 #include "../Engine/SharedContext.h"
 #include "../Engine/GameMap.h"
+#include "../Engine/SceneManager.h"
 #include <SFML/Graphics/RectangleShape.hpp>
 
 Bullet::Bullet(EntityManager* entityManager, EntityType type)
@@ -68,8 +69,8 @@ void Bullet::Render(sf::RenderWindow* window)
 
 void Bullet::OnEntityCollision(EntityBase* collidingEntity)
 {
-    //m_movement = sf::Vector2f(0.f, 0.f);
-    //m_active = false;
+    m_movement = sf::Vector2f(0.f, 0.f);
+    m_active = false;
 }
 
 void Bullet::CheckTileCollisions()
@@ -87,6 +88,9 @@ void Bullet::CheckTileCollisions()
 
             if (!tile || !tile->m_info->m_isCollidable)
                 continue;
+
+            if (tile->m_info->m_isBase)
+                m_entityManager->GetSharedContext()->m_sceneManager->SwitchState("End");
 
             m_movement = sf::Vector2f(0.f, 0.f);
 

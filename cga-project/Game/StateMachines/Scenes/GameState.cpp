@@ -1,5 +1,6 @@
 #include "GameState.h"
-#include "../../../Engine/SceneManager.h"
+#include "../../Engine/SceneManager.h"
+#include "../../PowerUpNuke.h"
 
 GameState::GameState(std::string name, int id, SceneManager* sceneManager)
     : Scene(name, id, sceneManager)
@@ -38,6 +39,9 @@ void GameState::OnEnter() {
     eMng->Find("Enemy")->SetPosition(m_map->GetEnemyStartLocs()[0]);
     static_cast<Enemy*>(eMng->Find("Enemy"))->SetSpawnLoc(m_map->GetEnemyStartLocs()[0]);
     static_cast<Enemy*>(eMng->Find("Enemy"))->m_OnDeath.Subscribe(this, &GameState::OnPlayerScored);
+
+    eMng->Add(EntityType::PowerUp, "PowerUp");
+    static_cast<PowerUpNuke*>(eMng->Find("PowerUp"))->m_OnCollected.Subscribe(this, &GameState::OnNuked);
 }
 
 void GameState::Update(float deltaTime)
@@ -78,4 +82,12 @@ void GameState::OnDelete() {
 void GameState::OnPlayerScored()
 {
     m_score += 100;
+}
+
+void GameState::OnNuked()
+{
+    EntityManager* eMng = m_sceneManager->GetSharedContext()->m_entityManager;
+    static_cast<Enemy*>(eMng->Find("Enemy"))->Die();
+    unsigned int id = eMng->Find("PowerUp")->GetID();
+    eMng->QueueForRemoval(id);
 }

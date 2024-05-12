@@ -11,7 +11,8 @@ enum class EntityType {
     Base,
     Player,
     Enemy,
-    Bullet
+    Bullet,
+    PowerUp
 };
 
 struct CollisionInfo {
