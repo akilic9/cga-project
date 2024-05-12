@@ -28,9 +28,6 @@ void GameState::OnEnter() {
     eMng->Add(EntityType::Enemy, "Enemy");
     eMng->Find("Enemy")->SetPosition(m_map->GetEnemyStartLocs()[0]);
     static_cast<Enemy*>(eMng->Find("Enemy"))->SetSpawnLoc(m_map->GetEnemyStartLocs()[0]);
-
-    eMng->Add(EntityType::Bullet, "Bullet");
-    eMng->Find("Bullet")->SetPosition(m_map->GetEnemyStartLocs()[1]);
 }
 
 void GameState::Update(float deltaTime)

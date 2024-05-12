@@ -100,6 +100,22 @@ void EntityManager::EntityCollisionCheck()
             if (entity->first == nextEntity->first)
                 continue;
 
+            if ((entity->second->GetType() == EntityType::Player || entity->second->GetType() == EntityType::Enemy))
+                if (static_cast<Character*>(entity->second)->GetCurrentState() == CharacterState::Dead)
+                    continue;
+
+            if ((nextEntity->second->GetType() == EntityType::Player || nextEntity->second->GetType() == EntityType::Enemy))
+                if (static_cast<Character*>(nextEntity->second)->GetCurrentState() == CharacterState::Dead)
+                    continue;
+
+            if (entity->second->GetType() == EntityType::Bullet)
+                if (!static_cast<Bullet*>(entity->second)->GetActive())
+                    continue;
+
+            if (nextEntity->second->GetType() == EntityType::Bullet)
+                if (!static_cast<Bullet*>(nextEntity->second)->GetActive())
+                    continue;
+
             if (entity->second->GetBoundingBox().intersects(nextEntity->second->GetBoundingBox())) {
                 entity->second->OnEntityCollision(nextEntity->second);
                 nextEntity->second->OnEntityCollision(entity->second);

@@ -11,7 +11,7 @@ enum class OwnerEntity {
 class Bullet : public EntityBase
 {
 public:
-    Bullet(EntityManager* entityManager);
+    Bullet(EntityManager* entityManager, EntityType type);
     ~Bullet();
 
     void OnEntityCollision(EntityBase* collidingEntity) override;
@@ -19,6 +19,10 @@ public:
     void Update(float deltaTime) override;
     
     inline OwnerEntity GetOwnerEntity() { return m_owner; }
+    inline bool GetActive() { return m_active; }
+    void SetOwnerEntity(OwnerEntity entity) { m_owner = entity;  }
+    void SetActive(bool active) { m_active = active;  }
+    void SetDirection(Direction dir) { m_sprite.SetSpriteDirection(dir); }
 
 private:
     Sprite m_sprite;

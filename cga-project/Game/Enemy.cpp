@@ -5,8 +5,8 @@
 #include "StateMachines/Enemy/EnemyAttack.h"
 #include "../../Engine/GameMap.h"
 
-Enemy::Enemy(EntityManager* entityManager)
-    : Character(entityManager)
+Enemy::Enemy(EntityManager* entityManager, EntityType type)
+    : Character(entityManager, type)
     , m_bhvrManager(this)
     , m_playerLocation(0.f, 0.f)
     , m_baseLocation(0.f, 0.f)

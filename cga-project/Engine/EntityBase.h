@@ -32,7 +32,7 @@ class EntityManager;
 class EntityBase
 {
 public:
-    EntityBase(EntityManager* entityManager);
+    EntityBase(EntityManager* entityManager, EntityType type);
     virtual ~EntityBase();
 
     virtual void Move(sf::Vector2f& movement);

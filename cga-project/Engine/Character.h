@@ -3,6 +3,8 @@
 #include "Sprite.h"
 #include "Direction.h"
 
+class Bullet;
+
 enum class CharacterState {
     None,
     Dead,
@@ -12,7 +14,7 @@ enum class CharacterState {
 class Character : public EntityBase
 {
 public:
-	Character(EntityManager* entityManager);
+	Character(EntityManager* entityManager, EntityType type);
 	virtual ~Character();
 
 	virtual void Update(float deltaTime);
@@ -20,6 +22,8 @@ public:
     virtual void Die();
     void Shoot();
     void Move(sf::Vector2f& movement, Direction& direction);
+
+    inline CharacterState GetCurrentState() { return m_state; }
 
 	virtual void OnEntityCollision(EntityBase* collidingEntity) = 0;
 
@@ -30,6 +34,7 @@ protected:
 	float m_attackTimeCounter;
     bool m_canShoot;
     Direction m_defaultDirection;
+    std::vector<Bullet*> m_bullets;
 
     virtual void LoadCharacterSpecs(const std::string& fileName);
 };

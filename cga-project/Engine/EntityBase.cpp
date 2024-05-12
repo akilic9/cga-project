@@ -2,9 +2,9 @@
 #include "GameMap.h"
 #include "EntityManager.h"
 
-EntityBase::EntityBase(EntityManager* entityManager)
+EntityBase::EntityBase(EntityManager* entityManager, EntityType type)
     : m_name("")
-    , m_type(EntityType::Base)
+    , m_type(type)
     , m_id(0)
     , m_position(0.f, 0.f)
     , m_prevPosition(m_position)

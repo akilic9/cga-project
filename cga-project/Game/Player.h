@@ -7,7 +7,7 @@
 class Player : public Character
 {
 public:
-	Player(EntityManager* entityManager);
+	Player(EntityManager* entityManager, EntityType type);
 	~Player();
 
 	void OnEntityCollision(EntityBase* collidingEntity) override;

@@ -2,15 +2,30 @@
 #include "EntityManager.h"
 #include "SharedContext.h"
 #include <SFML/Graphics/RectangleShape.hpp>
+#include "../Game/Bullet.h"
 
-Character::Character(EntityManager* entityManager)
-	: EntityBase(entityManager)
+Character::Character(EntityManager* entityManager, EntityType type)
+	: EntityBase(entityManager, type)
 	, m_sprite(m_entityManager->GetSharedContext()->m_textureLoader)
     , m_state(CharacterState::None)
 	, m_attackTimer(0)
 	, m_attackTimeCounter(0)
     , m_canShoot(true)
-    , m_defaultDirection(Direction::Down) {}
+    , m_defaultDirection(Direction::Down)
+{
+    m_bullets.reserve(5);
+
+    for (int i = 0; i < 5; i++) {
+        m_entityManager->Add(EntityType::Bullet, std::to_string((int)m_type) + "Bullet" + std::to_string(i));
+        Bullet* bullet = static_cast<Bullet*>(m_entityManager->Find(std::to_string((int)m_type) + "Bullet" + std::to_string(i)));
+        if (m_type == EntityType::Player)
+            bullet->SetOwnerEntity(OwnerEntity::Player);
+        else if (m_type == EntityType::Enemy)
+            bullet->SetOwnerEntity(OwnerEntity::Enemy);
+
+        m_bullets.push_back(bullet);
+    }
+}
 
 Character::~Character() {}
 
@@ -30,6 +45,15 @@ void Character::Shoot() {
     if (!m_canShoot)
         return;
 
+    for (auto& bullet : m_bullets)
+        if (!bullet->GetActive()) {
+            auto pos = m_position + (m_directionsMap[m_sprite.GetSpriteDirection()] * 2.f);
+            bullet->SetDirection(m_sprite.GetSpriteDirection());
+            bullet->SetPosition(pos);
+            bullet->SetActive(true);
+            bullet->Move(m_directionsMap[m_sprite.GetSpriteDirection()]);
+        }
+    
     m_attackTimeCounter = 0.f;
     m_canShoot = false;
 }

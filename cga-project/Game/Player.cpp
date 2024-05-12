@@ -3,14 +3,13 @@
 #include "../Engine/SceneManager.h"
 #include "../../Engine/GameMap.h"
 
-Player::Player(EntityManager* entityManager)
-	: Character(entityManager)
+Player::Player(EntityManager* entityManager, EntityType type)
+	: Character(entityManager, type)
     , m_respawnTimeCounter(0)
     , m_respawnTimer(0)
     , m_invincibleTimer(0)
     , m_invincibleTimeCounter(0)
 {
-	m_type = EntityType::Player;
 	LoadCharacterSpecs("Player.char");
     auto id = m_entityManager->GetSharedContext()->m_sceneManager->GetIdFromName("Game");
 
@@ -50,6 +49,8 @@ void Player::OnEntityCollision(EntityBase* collidingEntity)
             static_cast<Character*>(collidingEntity)->Die();
         return;
     }
+
+    auto a = static_cast<Bullet*>(collidingEntity)->GetOwnerEntity();
 
     if (collidingEntity->GetType() == EntityType::Bullet &&
         static_cast<Bullet*>(collidingEntity)->GetOwnerEntity() == OwnerEntity::Player)

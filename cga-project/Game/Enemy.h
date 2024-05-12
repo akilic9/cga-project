@@ -7,7 +7,7 @@ class EnemyStateManager;
 class Enemy : public Character
 {
 public:
-    Enemy(EntityManager* entityManager);
+    Enemy(EntityManager* entityManager, EntityType type);
     ~Enemy();
 
     void Update(float deltaTime) override;
