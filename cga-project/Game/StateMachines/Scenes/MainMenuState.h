@@ -21,6 +21,7 @@ private:
     sf::Text m_textTitle;
     sf::Text m_textControls;
     sf::Text m_movement;
+    sf::Text m_shoot;
     sf::Text m_start;
     sf::Font m_font;
 };

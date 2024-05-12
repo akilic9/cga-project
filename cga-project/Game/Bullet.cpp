@@ -93,9 +93,6 @@ void Bullet::CheckTileCollisions()
             if (!tile || !tile->m_info->m_isCollidable)
                 continue;
 
-            if (tile->m_info->m_isBase)
-                m_entityManager->GetSharedContext()->m_sceneManager->SwitchState("End");
-
             m_movement = sf::Vector2f(0.f, 0.f);
 
             m_active = false;

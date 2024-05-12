@@ -31,7 +31,14 @@ void MainMenuState::OnCreate()
     m_movement.setCharacterSize(50);
     sf::FloatRect textRect3 = m_movement.getLocalBounds();
     m_movement.setOrigin(textRect3.left + textRect3.width / 2.0f, textRect3.top + textRect3.height / 2.0f);
-    m_movement.setPosition(800, 450.f);
+    m_movement.setPosition(800, 350.f);
+
+    m_shoot.setFont(m_font);
+    m_shoot.setString({ "SAPCE = Shoot" });
+    m_shoot.setCharacterSize(50);
+    sf::FloatRect textRect5 = m_shoot.getLocalBounds();
+    m_shoot.setOrigin(textRect5.left + textRect5.width / 2.0f, textRect5.top + textRect5.height / 2.0f);
+    m_shoot.setPosition(800, 450.f);
 
     m_start.setFont(m_font);
     m_start.setString({ "PRESS B TO START" });
@@ -53,6 +60,7 @@ void MainMenuState::Render()
     window->draw(m_textTitle);
     window->draw(m_textControls);
     window->draw(m_movement);
+    window->draw(m_shoot);
     window->draw(m_start);
 }
 

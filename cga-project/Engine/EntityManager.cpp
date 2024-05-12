@@ -69,8 +69,11 @@ void EntityManager::Render()
 
 void EntityManager::Purge()
 {
-    for (auto& itr : m_entities)
+    for (auto& itr : m_entities) {
         delete itr.second;
+        itr.second = nullptr;
+
+    }
 
     m_entities.clear();
     m_entityCount = 0;
