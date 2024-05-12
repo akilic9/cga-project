@@ -50,6 +50,7 @@ void GameEndState::OnExit()
 
 void GameEndState::OnDelete()
 {
+    m_sceneManager->GetSharedContext()->m_inputManager->RemoveCallback(m_id, "restart_key");
 }
 
 void GameEndState::OnRestartPressed(InputBinding* binding)

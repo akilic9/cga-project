@@ -45,12 +45,16 @@ void Player::OnEntityCollision(EntityBase* collidingEntity)
     if (m_state == CharacterState::Dead)
         return;
 
-    if (m_state == CharacterState::Invincible && collidingEntity->GetType() == EntityType::Enemy) {
-        static_cast<Character*>(collidingEntity)->Die();
+    if (m_state == CharacterState::Invincible) {
+        if (collidingEntity->GetType() == EntityType::Enemy)
+            static_cast<Character*>(collidingEntity)->Die();
         return;
     }
 
-    m_respawnTimer = 0;
+    if (collidingEntity->GetType() == EntityType::Bullet &&
+        static_cast<Bullet*>(collidingEntity)->GetOwnerEntity() == OwnerEntity::Player)
+        return;
+
     Die();
 }
 

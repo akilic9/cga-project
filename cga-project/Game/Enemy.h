@@ -33,7 +33,10 @@ private:
     Direction m_currentDirection;
     Direction m_prevDirection;
     sf::Vector2f m_spawnLoc;
+    float m_respawnTimeCounter;
+    float m_respawnTimer;
 
+    void Respawn();
     void LoadCharacterSpecs(const std::string& fileName) override;
     void ResolveTileCollisions() override;
 };

@@ -7,6 +7,7 @@ EntityManager::EntityManager(SharedContext* sContext)
 {
     RegisterEntity<Player>(EntityType::Player);
     RegisterEntity<Enemy>(EntityType::Enemy);
+    RegisterEntity<Bullet>(EntityType::Bullet);
 }
 
 EntityManager::~EntityManager()

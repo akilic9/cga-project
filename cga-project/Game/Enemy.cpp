@@ -12,6 +12,8 @@ Enemy::Enemy(EntityManager* entityManager)
     , m_baseLocation(0.f, 0.f)
     , m_serialShootingTimer(0.f)
     , m_idleCooldownTimer(0.f)
+    , m_respawnTimeCounter(0)
+    , m_respawnTimer(2.f)
 {
     m_type = EntityType::Enemy;
     LoadCharacterSpecs("Enemy.char");
@@ -27,6 +29,12 @@ Enemy::~Enemy()
 
 void Enemy::Update(float deltaTime)
 {
+    if (m_state == CharacterState::Dead) {
+        m_respawnTimeCounter += deltaTime;
+        if (m_respawnTimeCounter >= m_respawnTimer)
+            Respawn();
+    }
+
     if (m_state == CharacterState::Dead)
         return;
 
@@ -87,8 +95,11 @@ void Enemy::Die()
     Character::Die();
 }
 
-void Enemy::OnEntityCollision(EntityBase* collidingEntity) {
-
+void Enemy::OnEntityCollision(EntityBase* collidingEntity)
+{
+    if (collidingEntity->GetType() == EntityType::Bullet &&
+        static_cast<Bullet*>(collidingEntity)->GetOwnerEntity() == OwnerEntity::Player)
+        Die();
 }
 
 void Enemy::SetCurrentDirection(Direction direction)
@@ -103,6 +114,15 @@ void Enemy::SetCurrentDirection(Direction direction)
 void Enemy::SetSpawnLoc(sf::Vector2f& loc)
 {
     m_spawnLoc = loc;
+}
+
+void Enemy::Respawn()
+{
+    m_attackTimeCounter = 0;
+    m_position = m_spawnLoc;
+    UpdateBoundingBox();
+    m_sprite.SetSpriteDirection(Direction::Down);
+    m_state = CharacterState::None;
 }
 
 void Enemy::LoadCharacterSpecs(const std::string& fileName)

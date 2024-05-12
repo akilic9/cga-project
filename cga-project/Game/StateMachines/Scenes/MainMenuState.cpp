@@ -58,7 +58,10 @@ void MainMenuState::Render()
 
 void MainMenuState::OnExit() {}
 
-void MainMenuState::OnDelete() {}
+void MainMenuState::OnDelete()
+{
+    m_sceneManager->GetSharedContext()->m_inputManager->RemoveCallback(m_id, "start_key");
+}
 
 void MainMenuState::OnStartPressed(InputBinding* binding)
 {

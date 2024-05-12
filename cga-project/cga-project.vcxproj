@@ -36,6 +36,7 @@
     <ClInclude Include="Engine\StateBase.h" />
     <ClInclude Include="Engine\StateManager.h" />
     <ClInclude Include="Engine\TextureLoader.h" />
+    <ClInclude Include="Game\Bullet.h" />
     <ClInclude Include="Game\Enemy.h" />
     <ClInclude Include="Game\Player.h" />
     <ClInclude Include="Game\StateMachines\Enemy\EnemyAttack.h" />
@@ -58,6 +59,7 @@
     <ClCompile Include="Engine\SceneManager.cpp" />
     <ClCompile Include="Engine\Sprite.cpp" />
     <ClCompile Include="Engine\StateManager.cpp" />
+    <ClCompile Include="Game\Bullet.cpp" />
     <ClCompile Include="Game\Enemy.cpp" />
     <ClCompile Include="Game\Player.cpp" />
     <ClCompile Include="Game\StateMachines\Enemy\EnemyAttack.cpp" />
