@@ -40,6 +40,18 @@ void GameState::OnEnter() {
     static_cast<Enemy*>(eMng->Find("Enemy"))->SetSpawnLoc(m_map->GetEnemyStartLocs()[0]);
     static_cast<Enemy*>(eMng->Find("Enemy"))->m_OnDeath.Subscribe(this, &GameState::OnPlayerScored);
 
+
+    eMng->Add(EntityType::Enemy, "Enemy1");
+    eMng->Find("Enemy1")->SetPosition(m_map->GetEnemyStartLocs()[1]);
+    static_cast<Enemy*>(eMng->Find("Enemy1"))->SetSpawnLoc(m_map->GetEnemyStartLocs()[1]);
+    static_cast<Enemy*>(eMng->Find("Enemy1"))->m_OnDeath.Subscribe(this, &GameState::OnPlayerScored);
+
+
+    eMng->Add(EntityType::Enemy, "Enemy2");
+    eMng->Find("Enemy2")->SetPosition(m_map->GetEnemyStartLocs()[2]);
+    static_cast<Enemy*>(eMng->Find("Enemy2"))->SetSpawnLoc(m_map->GetEnemyStartLocs()[2]);
+    static_cast<Enemy*>(eMng->Find("Enemy2"))->m_OnDeath.Subscribe(this, &GameState::OnPlayerScored);
+
     eMng->Add(EntityType::PowerUp, "PowerUp");
     static_cast<PowerUpNuke*>(eMng->Find("PowerUp"))->m_OnCollected.Subscribe(this, &GameState::OnNuked);
 }

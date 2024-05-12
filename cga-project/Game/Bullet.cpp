@@ -15,7 +15,7 @@ Bullet::Bullet(EntityManager* entityManager, EntityType type)
     m_sprite.Load("Bullet");
     auto characterSize = sf::Vector2f(m_sprite.GetSpriteSize().x, m_sprite.GetSpriteSize().y);
     SetSize(characterSize);
-    m_movementSpeed = 200.f;
+    m_movementSpeed = 300.f;
 }
 
 Bullet::~Bullet()
@@ -69,6 +69,10 @@ void Bullet::Render(sf::RenderWindow* window)
 
 void Bullet::OnEntityCollision(EntityBase* collidingEntity)
 {
+    if ((collidingEntity->GetType() == EntityType::Player && m_owner == OwnerEntity::Player) ||
+        (collidingEntity->GetType() == EntityType::Enemy && m_owner == OwnerEntity::Enemy))
+        return;
+
     m_movement = sf::Vector2f(0.f, 0.f);
     m_active = false;
 }
