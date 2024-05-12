@@ -1,8 +1,10 @@
 #pragma once
 #include "../Engine/Character.h"
 #include "StateMachines/Enemy/EnemyStateManager.h"
+#include "../Engine/EventManager.h"
 
 class EnemyStateManager;
+class GameState;
 
 class Enemy : public Character
 {
@@ -23,6 +25,7 @@ public:
     void SetCurrentDirection(Direction direction);
     void SetSpawnLoc(sf::Vector2f& loc);
 
+    Event<GameState> m_OnDeath;
 
 private:
     sf::Vector2f m_playerLocation;

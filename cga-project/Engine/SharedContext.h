@@ -3,6 +3,7 @@
 #include "InputManager.h"
 #include "TextureLoader.h"
 #include "EntityManager.h"
+#include "EventManager.h"
 
 class GameMap;
 class SceneManager;
@@ -13,7 +14,8 @@ struct SharedContext {
         , m_inputManager(nullptr)
         , m_mapManager(nullptr)
         , m_textureLoader(nullptr)
-        , m_sceneManager(nullptr) {}
+        , m_sceneManager(nullptr)
+        , m_entityManager(nullptr) {}
 
     CWindow * m_window;
     InputManager* m_inputManager;

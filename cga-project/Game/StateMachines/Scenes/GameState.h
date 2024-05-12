@@ -1,6 +1,7 @@
 #pragma once
 #include "../../Engine/Scene.h"
 #include "../../Engine/GameMap.h"
+#include "../../Engine/EventManager.h"
 
 class GameState : public Scene
 {
@@ -15,9 +16,15 @@ public:
     void OnExit() override;
     void OnDelete() override;
 
+    void OnPlayerScored();
+
 private:
     GameMap* m_map;
     float m_mapTimer;
-    float m_mapTimerCounter;
+    int m_score;
+
+    sf::Font m_font;
+    sf::Text m_time;
+    sf::Text m_scoreText;
 };
 

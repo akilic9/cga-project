@@ -1,9 +1,9 @@
 #include "Enemy.h"
-#include "../../Engine/EntityManager.h"
-#include "../../Engine/SharedContext.h"
+#include "../Engine/EntityManager.h"
+#include "../Engine/SharedContext.h"
 #include "StateMachines/Enemy/EnemyIdle.h"
 #include "StateMachines/Enemy/EnemyAttack.h"
-#include "../../Engine/GameMap.h"
+#include "../Engine/GameMap.h"
 
 Enemy::Enemy(EntityManager* entityManager, EntityType type)
     : Character(entityManager, type)
@@ -93,6 +93,7 @@ void Enemy::Render(sf::RenderWindow* window)
 void Enemy::Die()
 {
     Character::Die();
+    m_OnDeath.Notify();
 }
 
 void Enemy::OnEntityCollision(EntityBase* collidingEntity)
@@ -123,6 +124,7 @@ void Enemy::Respawn()
     UpdateBoundingBox();
     m_sprite.SetSpriteDirection(Direction::Down);
     m_state = CharacterState::None;
+    m_respawnTimeCounter = 0.f;
 }
 
 void Enemy::LoadCharacterSpecs(const std::string& fileName)
