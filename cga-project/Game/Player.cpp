@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "../Engine/EntityManager.h"
 #include "../Engine/SceneManager.h"
-#include "../../Engine/GameMap.h"
+#include "../Engine/GameMap.h"
 
 Player::Player(EntityManager* entityManager, EntityType type)
 	: Character(entityManager, type)

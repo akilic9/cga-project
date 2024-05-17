@@ -1,5 +1,5 @@
 #include "GameEndState.h"
-#include "../../Engine/SceneManager.h"
+#include "../../../Engine/SceneManager.h"
 
 GameEndState::GameEndState(std::string name, int id, SceneManager* sceneManager)
     : Scene(name, id, sceneManager) {}

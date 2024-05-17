@@ -1,6 +1,6 @@
 #pragma once
-#include "../../Engine/Scene.h"
-#include "../../Engine/InputManager.h"
+#include "../../../Engine/Scene.h"
+#include "../../../Engine/InputManager.h"
 
 class GameEndState : public Scene
 {

@@ -1,7 +1,7 @@
 #pragma once
-#include "../../Engine/Scene.h"
-#include "../../Engine/GameMap.h"
-#include "../../Engine/EventManager.h"
+#include "../../../Engine/Scene.h"
+#include "../../../Engine/GameMap.h"
+#include "../../../Engine/EventManager.h"
 
 class GameState : public Scene
 {

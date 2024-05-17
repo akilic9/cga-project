@@ -1,5 +1,5 @@
 #include "MainMenuState.h"
-#include "../../Engine/SceneManager.h"
+#include "../../../Engine/SceneManager.h"
 
 MainMenuState::MainMenuState(std::string name, int id, SceneManager* sceneManager)
     : Scene(name, id, sceneManager) {}
@@ -34,7 +34,7 @@ void MainMenuState::OnCreate()
     m_movement.setPosition(800, 350.f);
 
     m_shoot.setFont(m_font);
-    m_shoot.setString({ "SAPCE = Shoot" });
+    m_shoot.setString({ "SPACE = Shoot" });
     m_shoot.setCharacterSize(50);
     sf::FloatRect textRect5 = m_shoot.getLocalBounds();
     m_shoot.setOrigin(textRect5.left + textRect5.width / 2.0f, textRect5.top + textRect5.height / 2.0f);

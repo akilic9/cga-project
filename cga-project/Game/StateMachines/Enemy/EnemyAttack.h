@@ -1,6 +1,6 @@
 #pragma once
 #include "EnemyStateBase.h"
-#include "../../Engine/Direction.h"
+#include "../../../Engine/Direction.h"
 #include <unordered_map>
 class EnemyAttack : public EnemyStateBase
 {
