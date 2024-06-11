@@ -1,9 +1,9 @@
 Ongoing project. A 2D simple engine built on SFML. It started out as coursework but I'm expanding it becasue it's a fun project. 
 
 TODO:
-1. Complete GameObject systems.
-2. Add an event system.
-3. Complete the game side to be submitted for coursework.
+1. Complete GameObject systems. :white_check_mark:
+2. Add an event system. :white_check_mark: (Will be reworked.)
+3. Complete the game side to be submitted for coursework. :white_check_mark: (Coursework simple prototype in coursework-version branch.)
 4. Implement ECS fully.
 5. Add animation system.
 6. Implement audio system.
