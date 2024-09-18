@@ -12,4 +12,3 @@ TODO:
 8. Rework map loading system to make it more user friendly.
 9. Add physics.
 7. Add a logger utility.
-9. More comments.
