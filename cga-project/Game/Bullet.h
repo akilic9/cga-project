@@ -2,7 +2,8 @@
 #include "../Engine/EntityBase.h"
 #include "../Engine/Sprite.h"
 
-enum class OwnerEntity {
+enum class OwnerEntity
+{
     None,
     Player,
     Enemy

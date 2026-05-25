@@ -5,7 +5,8 @@
 
 class Bullet;
 
-enum class CharacterState {
+enum class CharacterState
+{
     None,
     Dead,
     Invincible

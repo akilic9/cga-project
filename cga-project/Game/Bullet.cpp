@@ -25,12 +25,15 @@ Bullet::~Bullet()
 void Bullet::Update(float deltaTime)
 {
     if (!m_active)
+    {
         return;
+    }
 
     m_sprite.Update(deltaTime);
     m_sprite.SetSpritePosition(m_position);
 
-    if (m_movement.x != 0 || m_movement.y != 0) {
+    if (m_movement.x != 0 || m_movement.y != 0)
+    {
         m_prevPosition = m_position;
         m_position += (m_movement * deltaTime * m_movementSpeed);
 
@@ -38,7 +41,8 @@ void Bullet::Update(float deltaTime)
         unsigned int tileSize = m_entityManager->GetSharedContext()->m_mapManager->GetSheetInfo()->m_defaultTileSize.x;
 
         if (m_position.x < 0 + (m_size.x / 2.f) || m_position.x >(mapSize.x * tileSize) - (m_size.x / 2.f) ||
-            m_position.y < 64.f + (m_size.y / 2.f) || m_position.y >(mapSize.y * tileSize) - (m_size.y / 2.f)) {
+            m_position.y < 64.f + (m_size.y / 2.f) || m_position.y >(mapSize.y * tileSize) - (m_size.y / 2.f))
+        {
             m_movement = sf::Vector2f(0.f, 0.f);
             m_active = false;
         }
@@ -52,7 +56,9 @@ void Bullet::Update(float deltaTime)
 void Bullet::Render(sf::RenderWindow* window)
 {
     if (!m_active)
+    {
         return;
+    }
 
     m_sprite.Render(window);
 
@@ -71,7 +77,9 @@ void Bullet::OnEntityCollision(EntityBase* collidingEntity)
 {
     if ((collidingEntity->GetType() == EntityType::Player && m_owner == OwnerEntity::Player) ||
         (collidingEntity->GetType() == EntityType::Enemy && m_owner == OwnerEntity::Enemy))
+    {
         return;
+    }
 
     m_movement = sf::Vector2f(0.f, 0.f);
     m_active = false;
@@ -86,12 +94,16 @@ void Bullet::CheckTileCollisions()
     int fromY = floor(m_boundingBox.top / tileSize);
     int toY = floor((m_boundingBox.top + m_boundingBox.height) / tileSize);
 
-    for (int x = fromX; x <= toX; ++x) {
-        for (int y = fromY; y <= toY; ++y) {
+    for (int x = fromX; x <= toX; ++x)
+    {
+        for (int y = fromY; y <= toY; ++y)
+        {
             Tile* tile = gameMap->GetTileByLocation(sf::Vector2f(x, y));
 
             if (!tile || !tile->m_info->m_isCollidable)
+            {
                 continue;
+            }
 
             m_movement = sf::Vector2f(0.f, 0.f);
 

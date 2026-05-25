@@ -7,8 +7,9 @@ class StateBase
 public:
     StateBase(const std::string& name, const int& id)
         : m_name(name)
-        , m_id(id) {};
-    virtual ~StateBase() {};
+        , m_id(id) {}
+    
+    virtual ~StateBase() {}
 
     virtual void OnCreate() = 0;
     virtual void OnEnter() = 0;

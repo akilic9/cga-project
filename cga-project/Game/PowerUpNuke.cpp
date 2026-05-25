@@ -20,7 +20,8 @@ PowerUpNuke::~PowerUpNuke()
 
 void PowerUpNuke::OnEntityCollision(EntityBase* collidingEntity)
 {
-    if (collidingEntity->GetType() == EntityType::Player) {
+    if (collidingEntity->GetType() == EntityType::Player)
+    {
         m_OnCollected.Notify();
     }
 }

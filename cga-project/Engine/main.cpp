@@ -26,7 +26,8 @@ int main()
         game.Update(deltaTime);
 
         elapsedTime += deltaTime;
-        if (elapsedTime >= fixedFrameTime) {
+        if (elapsedTime >= fixedFrameTime)
+        {
             game.FixedUpdate();
             elapsedTime -= fixedFrameTime;
         }

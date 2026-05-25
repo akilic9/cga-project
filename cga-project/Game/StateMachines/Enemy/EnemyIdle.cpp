@@ -21,11 +21,14 @@ void EnemyIdle::OnEnter()
 
 void EnemyIdle::Update(float deltaTime)
 {
-    if (m_cooldownCounter < m_cooldownTimer) {
+    if (m_cooldownCounter < m_cooldownTimer)
+    {
         m_cooldownCounter += deltaTime;
     }
     else
+    {
         m_stateManager->SwitchState("Attack");
+    }
 }
 
 void EnemyIdle::Render() {}

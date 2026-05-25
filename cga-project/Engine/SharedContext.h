@@ -8,7 +8,8 @@
 class GameMap;
 class SceneManager;
 
-struct SharedContext {
+struct SharedContext
+{
     SharedContext()
         : m_window(nullptr)
         , m_inputManager(nullptr)

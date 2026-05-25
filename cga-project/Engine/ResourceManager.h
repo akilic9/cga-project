@@ -8,30 +8,37 @@
     Source: Pupius, R. (2015) SFML Game Development By Example. Birmingham: Packt Publishing Ltd.
 */
 template<typename Derived, typename T>
-class ResourceManager {
+class ResourceManager
+{
 public:
-    ResourceManager(const std::string& cfgFile) {
+    ResourceManager(const std::string& cfgFile)
+    {
         LoadFilePaths(cfgFile);
     }
+    
     virtual ~ResourceManager() { ClearAllResources(); }
 
     //Get resource by id.
-    T* GetResource(const std::string& resId) {
+    T* GetResource(const std::string& resId)
+    {
         auto res = Find(resId);
         return(res ? res->first : nullptr);
     }
 
     //Get resource path by id.
-    std::string GetPath(const std::string& resId) {
+    std::string GetPath(const std::string& resId)
+    {
         auto path = m_paths.find(resId);
         return(path != m_paths.end() ? path->second : "");
     }
 
     //Load specific resource using its id.
-    bool AllocateResource(const std::string& resId) {
+    bool AllocateResource(const std::string& resId)
+    {
         //Does the resouce already exist?
         auto res = Find(resId);
-        if (res) {
+        if (res)
+        {
             ++res->second; //If yes, increment usage amount
             return true;
         }
@@ -39,12 +46,16 @@ public:
         //Resource does not exist, get the path.
         auto path = m_paths.find(resId);
         if (path == m_paths.end())
+        {
             return false; //Path does not exist, allocation failed.
+        }
 
         T* resource = Load(path->second); //Load file.
 
         if (!resource)
+        {
             return false; //File load failed, return.
+        }
 
         //Insert loaded resource to the map.
         m_resources.emplace(resId, std::make_pair(resource, 1));
@@ -52,31 +63,42 @@ public:
     }
 
     //Release a specific resource using id.
-    bool ReleaseResource(const std::string& resId) {
+    bool ReleaseResource(const std::string& resId)
+    {
         if (m_resources.empty())
+        {
             return true;
+        }
+        
         auto res = Find(resId);
         if (!res) //There isn't any instance of this to release.
+        {
             return false;
+        }
 
         --res->second; //Decrement usage amount.
 
         if (res->second == 0) //Is it still being used?
+        {
             Unload(resId); //If not, release it.
+        }
 
         return true;
     }
 
     //Delete everything.
-    void ClearAllResources() {
-        while (m_resources.begin() != m_resources.end()) {
+    void ClearAllResources()
+    {
+        while (m_resources.begin() != m_resources.end())
+        {
             delete m_resources.begin()->second.first;
             m_resources.erase(m_resources.begin());
         }
     }
 
     //Override this method for type specific loading.
-    virtual T* Load(const std::string& resPath) {
+    virtual T* Load(const std::string& resPath)
+    {
         return static_cast<Derived*>(this)->Load(resPath);
     }
 
@@ -87,16 +109,20 @@ private:
     std::unordered_map<std::string, std::string> m_paths;
 
 
-    std::pair<T*, unsigned int>* Find(const std::string& resId) {
+    std::pair<T*, unsigned int>* Find(const std::string& resId)
+    {
         auto itr = m_resources.find(resId);
         return (itr == m_resources.end() ? nullptr : &itr->second);
     }
 
-    bool Unload(const std::string& resId) {
+    bool Unload(const std::string& resId)
+    {
         auto itr = m_resources.find(resId);
 
         if (itr == m_resources.end())
+        {
             return false;
+        }
 
         delete itr->second.first;
         m_resources.erase(itr);
@@ -104,12 +130,15 @@ private:
     }
 
     //Load resource item's name(id) and path from file.
-    void LoadFilePaths(const std::string& filePath) {
+    void LoadFilePaths(const std::string& filePath)
+    {
         std::ifstream pathsFile;
         pathsFile.open("Game/Data/" + filePath);
-        if (pathsFile.is_open()) {
+        if (pathsFile.is_open())
+        {
             std::string line;
-            while (std::getline(pathsFile, line)) {
+            while (std::getline(pathsFile, line)) 
+            {
                 std::stringstream keystream(line);
                 std::string reourceName;
                 std::string resourcePath;

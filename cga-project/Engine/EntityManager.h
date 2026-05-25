@@ -37,9 +37,12 @@ private:
     unsigned int m_entityCount;
     std::vector<unsigned int> m_removalQueue;
 
-    template<class T>void RegisterEntity(const EntityType& type) {
+    template<class T>void RegisterEntity(const EntityType& type)
+    {
         m_entityFactory[type] = [this, type]() -> EntityBase*
-            { return new T(this, type); };
+        {
+            return new T(this, type);
+        };
     }
     void EntityCollisionCheck();
 };

@@ -12,8 +12,10 @@ InputManager::InputManager()
 
 InputManager::~InputManager()
 {
-    for (auto& b : m_inputBindings) {
-        for (auto& i : b.second) {
+    for (auto& b : m_inputBindings)
+    {
+        for (auto& i : b.second)
+        {
             delete i;
             i = nullptr;
         }
@@ -24,26 +26,45 @@ InputManager::~InputManager()
 void InputManager::HandleInputs(sf::Event event)
 {
     if (!m_hasFocus)
+    {
         return;
+    }
 
-    for (auto& binding : m_inputBindings) {
-        for (auto& b : binding.second) {
-            if (b->m_inputMap.first == (InputType)event.type) {
+    for (auto& binding : m_inputBindings)
+    {
+        for (auto& b : binding.second)
+        {
+            if (b->m_inputMap.first == (InputType)event.type)
+            {
                 if (event.type == sf::Event::MouseButtonReleased)
+                {
                     return;
-                if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased) {
+                }
+                
+                if (event.type == sf::Event::Closed || event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased)
+                {
                     if (event.type != sf::Event::Closed && b->m_inputMap.second != event.key.code)
+                    {
                         continue;
+                    }
 
                     auto sceneItr = m_callbacks.find(m_currentSceneId);
                     if (sceneItr != m_callbacks.end())
+                    {
                         if (auto key = sceneItr->second.find(binding.first); key != sceneItr->second.end())
+                        {
                             key->second(b);
+                        }
+                    }
 
                     auto indItr = m_callbacks.find(-1); //-1 is callbacks that are scene independent.
                     if (indItr != m_callbacks.end())
+                    {
                         if (auto key = indItr->second.find(binding.first); key != indItr->second.end())
+                        {
                             key->second(b);
+                        }
+                    }
                 }
             }
         }
@@ -53,23 +74,36 @@ void InputManager::HandleInputs(sf::Event event)
 void InputManager::Update()
 {
     if (!m_hasFocus)
+    {
         return;
+    }
 
-    for (auto& binding : m_inputBindings) {
-        for (auto& b : binding.second) {
+    for (auto& binding : m_inputBindings)
+    {
+        for (auto& b : binding.second)
+        {
             switch (b->m_inputMap.first)
             {
             case(InputType::Keyboard):
-                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(b->m_inputMap.second))) {
+                if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key(b->m_inputMap.second)))
+                {
                     auto sceneItr = m_callbacks.find(m_currentSceneId);
                     if (sceneItr != m_callbacks.end())
+                    {
                         if (auto key = sceneItr->second.find(binding.first); key != sceneItr->second.end())
+                        {
                             key->second(b);
+                        }
+                    }
 
                     auto indItr = m_callbacks.find(-1); //-1 is callbacks that are scene independent.
                     if (indItr != m_callbacks.end())
+                    {
                         if (auto key = indItr->second.find(binding.first); key != indItr->second.end())
+                        {
                             key->second(b);
+                        }
+                    }
                 }
                 break;
             default:
@@ -89,9 +123,14 @@ bool InputManager::AddBinding(const std::string& name, std::pair<InputType, int>
 bool InputManager::RemoveBinding(const std::string& bindingName)
 {
     if (auto binding = m_inputBindings.find(bindingName); binding == m_inputBindings.end())
+    {
         return false;
-    else {
-        for (auto& b : binding->second) { //Delete the binding pointers in vector.
+    }
+    else
+    {
+        for (auto& b : binding->second)
+        {
+            //Delete the binding pointers in vector.
             delete b;
             b = nullptr;
         }
@@ -106,12 +145,16 @@ void InputManager::RemoveCallback(const int& sceneId, const std::string& callbac
     //Check if callbacks for this scene exist.
     auto sceneItr = m_callbacks.find(sceneId);
     if (sceneItr == m_callbacks.end())
+    {
         return; //If not return.
+    }
 
     //Check if a keybind by this name exist in this scene's callbacks.
     auto keyItr = sceneItr->second.find(callbackName);
     if (keyItr == sceneItr->second.end())
+    {
         return; //If not return.
+    }
 
     //Finally delete the binding callback you found.
     sceneItr->second.erase(callbackName);
@@ -125,27 +168,33 @@ void InputManager::LoadBindings()
 
     // Can't open file.
     if (!bindingsStream.is_open())
+    {
         return;
+    }
 
     std::string line;
-    while (std::getline(bindingsStream, line)) {
+    while (std::getline(bindingsStream, line))
+    {
         std::string eqSep = "=";
 
-        if (int sepIndex = line.find(eqSep); sepIndex != std::string::npos) {
+        if (int sepIndex = line.find(eqSep); sepIndex != std::string::npos)
+        {
             std::string actionName = line.substr(0, sepIndex);
             std::string actionCodes = line.substr(sepIndex + eqSep.length(), line.length());
 
             std::string actionSep = "/";
             int index = actionCodes.find(actionSep);
 
-            while (index != std::string::npos) {
+            while (index != std::string::npos)
+            {
                 std::string actionEvent = actionCodes.substr(0, index);
                 std::string eventSep = ":";
                 
                 actionCodes = actionCodes.substr(index + actionSep.length(), actionCodes.length());
                 index = actionCodes.find(actionSep);
 
-                if (int i = actionEvent.find(eventSep); i != std::string::npos) {
+                if (int i = actionEvent.find(eventSep); i != std::string::npos)
+                {
                     int eventType = stoi(actionEvent.substr(0, i));
                     int eventData = stoi(actionEvent.substr(i + eventSep.length(), actionEvent.length()));
 

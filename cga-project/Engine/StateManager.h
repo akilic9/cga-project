@@ -20,7 +20,8 @@ public:
 
     /*Register a state to create the state object.*/
     template<class T>
-    void RegisterState(const std::string& stateName) {
+    void RegisterState(const std::string& stateName)
+{
         int stateId = m_stateCount++;
         m_nameToIdMap[stateName] = stateId;
         m_factory[stateId] = [stateName, stateId, this]() -> StateBase*

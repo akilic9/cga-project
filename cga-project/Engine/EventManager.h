@@ -21,7 +21,8 @@ public:
     inline void Unsubscribe(T* instance, void (T::* func)())
     {
         auto iter = std::remove_if(m_observers.begin(), m_observers.end(),
-            [=](const auto& observer) {
+            [=](const auto& observer)
+            {
                 return observer.first == instance && observer.second == func;
             });
 
@@ -31,7 +32,9 @@ public:
     inline void Notify()
     {
         if (m_observers.size() == 0)
+        {
             return;
+        }
 
         for (const auto& observer : m_observers)
         {

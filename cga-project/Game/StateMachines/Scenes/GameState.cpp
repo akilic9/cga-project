@@ -25,7 +25,8 @@ void GameState::OnCreate()
     m_scoreText.setCharacterSize(50);
 }
 
-void GameState::OnEnter() {
+void GameState::OnEnter()
+{
     m_mapTimer = 120.f;
 
     m_map = new GameMap(m_sceneManager->GetSharedContext());
@@ -61,7 +62,9 @@ void GameState::Update(float deltaTime)
     m_mapTimer -= deltaTime;
 
     if (m_mapTimer < 0.f)
+    {
         m_sceneManager->SwitchState("End");
+    }
 
     m_map->Update(deltaTime);
 }
@@ -82,11 +85,13 @@ void GameState::Render()
     window->draw(m_scoreText);
 }
 
-void GameState::OnExit() {
+void GameState::OnExit()
+{
     m_sceneManager->GetSharedContext()->m_entityManager->Purge();
 }
 
-void GameState::OnDelete() {
+void GameState::OnDelete()
+{
     delete m_map;
     m_map = nullptr;
 }

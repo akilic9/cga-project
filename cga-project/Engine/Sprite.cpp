@@ -17,9 +17,12 @@ void Sprite::CropSprite(const sf::IntRect& rectangle)
     m_sprite.setTextureRect(rectangle);
 }
 
-void Sprite::SetSpriteSize(const sf::Vector2i& size) {
+void Sprite::SetSpriteSize(const sf::Vector2i& size)
+{
     if (m_spriteSize == size)
+    {
         return;
+    }
 
     m_spriteSize = size;
     m_sprite.setOrigin(m_spriteSize.x / 2.f, m_spriteSize.y / 2.f);
@@ -28,7 +31,9 @@ void Sprite::SetSpriteSize(const sf::Vector2i& size) {
 void Sprite::SetSpriteScale(const sf::Vector2f& scale)
 {
     if (m_spriteScale == scale)
+    {
         return;
+    }
 
     m_spriteScale = scale;
     m_sprite.setScale(scale);
@@ -37,7 +42,9 @@ void Sprite::SetSpriteScale(const sf::Vector2f& scale)
 void Sprite::SetSpritePosition(const sf::Vector2f& position)
 {
     if (m_sprite.getPosition() == position)
+    {
         return;
+    }
 
     m_sprite.setPosition(position);    
 }
@@ -45,7 +52,9 @@ void Sprite::SetSpritePosition(const sf::Vector2f& position)
 void Sprite::SetSpriteDirection(const Direction& direction)
 {
     if (m_spriteDirection == direction)
+    {
         return;
+    }
 
     m_spriteDirection = direction;
     m_sprite.setRotation(int(m_spriteDirection) * 90.f);
@@ -59,7 +68,8 @@ sf::Vector2i Sprite::GetSpriteSize()
 //Load the sprite data. Only one sprite and no animations for now. TODO: expand.
 bool Sprite::Load(const std::string& spriteID)
 {
-    if (!m_textureLoader->AllocateResource(spriteID)) {
+    if (!m_textureLoader->AllocateResource(spriteID))
+    {
         std::cerr << "Texture loader can't load the texture: " << spriteID << std::endl;
         return false;
     }

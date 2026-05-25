@@ -3,12 +3,14 @@
 #include <SFML/Graphics/Sprite.hpp>
 #include "SharedContext.h"
 
-struct SheetInfo {
+struct SheetInfo
+{
     sf::Vector2u m_sheetSize;
     sf::Vector2u m_defaultTileSize;
 };
 
-struct TileInfo {
+struct TileInfo
+{
     TileInfo(SharedContext* sContext, SheetInfo& sInfo, const std::string& textureId = "",
              const sf::Vector2u& tilesheetLocation = sf::Vector2u(0, 0))
         : m_context(sContext)
@@ -20,19 +22,25 @@ struct TileInfo {
         TextureLoader* texLoader = sContext->m_textureLoader;
         
         if (textureId == "" || !texLoader->AllocateResource(textureId))
+        {
             return;
+        }
 
         m_textureId = textureId;
         m_sprite.setTexture(*texLoader->GetResource(textureId));
         
         sf::IntRect tileBox(tilesheetLocation.x, tilesheetLocation.y,
                             sInfo.m_defaultTileSize.x, sInfo.m_defaultTileSize.y);
+        
         m_sprite.setTextureRect(tileBox);
     }
 
-    ~TileInfo() {
+    ~TileInfo()
+    {
         if (m_textureId == "")
+        {
             return;
+        }
 
         m_context->m_textureLoader->ReleaseResource(m_textureId);
     }
@@ -46,7 +54,8 @@ struct TileInfo {
     sf::Vector2f m_tilePosition;
 };
 
-struct Tile {
+struct Tile
+{
     unsigned int m_id;
     TileInfo* m_info;
     sf::Vector2u m_position;

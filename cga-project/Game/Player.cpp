@@ -13,13 +13,16 @@ Player::Player(EntityManager* entityManager, EntityType type)
 	LoadCharacterSpecs("Player.char");
     auto id = m_entityManager->GetSharedContext()->m_sceneManager->GetIdFromName("Game");
 
-    if (id == -1) {
+    if (id == -1)
+    {
         std::cerr << "Cannot find id for scene name!" << __FUNCSIG__ << std::endl;
         return;
     }
 
     for (auto& [action, movement] : m_inputToMovement)
+    {
         m_entityManager->GetSharedContext()->m_inputManager->AddCallback(id, action, &Player::OnMovementKeyPressed, this);
+    }
 
     m_entityManager->GetSharedContext()->m_inputManager->AddCallback(id, "player_attack", &Player::OnAttackKeyPressed, this);
 }
@@ -28,13 +31,16 @@ Player::~Player()
 {
     auto id = m_entityManager->GetSharedContext()->m_sceneManager->GetIdFromName("Game");
 
-    if (id == -1) {
+    if (id == -1)
+    {
         std::cerr << "Cannot find id for scene name!" << __FUNCSIG__ << std::endl;
         return;
     }
 
     for (auto& [action, movement] : m_inputToMovement)
+    {
         m_entityManager->GetSharedContext()->m_inputManager->RemoveCallback(id, action);
+    }
 
     m_entityManager->GetSharedContext()->m_inputManager->RemoveCallback(id, "player_attack");
 }
@@ -42,11 +48,16 @@ Player::~Player()
 void Player::OnEntityCollision(EntityBase* collidingEntity)
 {
     if (m_state == CharacterState::Dead || collidingEntity->GetType() == EntityType::PowerUp)
+    {
         return;
+    }
 
-    if (m_state == CharacterState::Invincible) {
+    if (m_state == CharacterState::Invincible)
+    {
         if (collidingEntity->GetType() == EntityType::Enemy)
+        {
             static_cast<Character*>(collidingEntity)->Die();
+        }
         return;
     }
 
@@ -54,7 +65,9 @@ void Player::OnEntityCollision(EntityBase* collidingEntity)
 
     if (collidingEntity->GetType() == EntityType::Bullet &&
         static_cast<Bullet*>(collidingEntity)->GetOwnerEntity() == OwnerEntity::Player)
+    {
         return;
+    }
 
     Die();
 }
@@ -62,7 +75,9 @@ void Player::OnEntityCollision(EntityBase* collidingEntity)
 void Player::OnMovementKeyPressed(InputBinding* binding)
 {
     if (m_state == CharacterState::Dead)
+    {
         return;
+    }
 
     sf::Vector2f movementVector;
     Direction direction = Direction::None;
@@ -75,7 +90,9 @@ void Player::OnMovementKeyPressed(InputBinding* binding)
 void Player::OnAttackKeyPressed(InputBinding* binding)
 {
     if (m_state == CharacterState::Dead)
+    {
         return;
+    }
 
     Shoot();
 }
@@ -88,10 +105,13 @@ void Player::Die()
 
 void Player::Update(float deltaTime)
 {
-    if (m_state == CharacterState::Dead) {
+    if (m_state == CharacterState::Dead)
+    {
         m_respawnTimeCounter += deltaTime;
         if (m_respawnTimeCounter >= m_respawnTimer)
+        {
             Respawn();
+        }
     }
 
     Character::Update(deltaTime);
@@ -111,21 +131,28 @@ void Player::LoadCharacterSpecs(const std::string& fileName)
     Character::LoadCharacterSpecs(fileName);
     std::ifstream file;
     file.open("Game/Data/Characters/" + fileName);
-    if (!file.is_open()) {
+    if (!file.is_open())
+    {
         std::cout << "Cannot open character file: " << fileName << std::endl;
         return;
     }
     std::string line;
-    while (std::getline(file, line)) {
+    while (std::getline(file, line))
+    {
         if (line[0] == '<') //Comment line.
+        {
             continue;
+        }
+        
         std::stringstream keystream(line);
         std::string type;
         keystream >> type;
-        if (type == "RespawnTimer") {
+        if (type == "RespawnTimer")
+        {
             keystream >> m_respawnTimer;
         }
-        else if (type == "InvincibilityTimer") {
+        else if (type == "InvincibilityTimer")
+        {
             keystream >> m_invincibleTimer;
         }
     }

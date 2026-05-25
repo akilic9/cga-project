@@ -7,7 +7,8 @@
 struct TileInfo;
 
 //TODO: This depends on the game, how to generalize?
-enum class EntityType {
+enum class EntityType
+{
     Base,
     Player,
     Enemy,
@@ -15,7 +16,8 @@ enum class EntityType {
     PowerUp
 };
 
-struct CollisionInfo {
+struct CollisionInfo
+{
     CollisionInfo(float area, TileInfo* tile, const sf::FloatRect& bounds)
         : m_area(area)
         , m_tile(tile)

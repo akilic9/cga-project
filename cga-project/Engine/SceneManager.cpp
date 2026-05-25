@@ -17,5 +17,7 @@ void SceneManager::SwitchState(const int& stateId)
 void SceneManager::SwitchState(const std::string& stateName)
 {
     if (auto itr = m_nameToIdMap.find(stateName); itr != m_nameToIdMap.end())
+    {
         SwitchState(m_nameToIdMap[stateName]);
+    }
 }

@@ -15,13 +15,18 @@ Character::Character(EntityManager* entityManager, EntityType type)
 {
     m_bullets.reserve(5);
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 5; i++)
+    {
         m_entityManager->Add(EntityType::Bullet, std::to_string((int)m_type) + "Bullet" + std::to_string(i));
         Bullet* bullet = static_cast<Bullet*>(m_entityManager->Find(std::to_string((int)m_type) + "Bullet" + std::to_string(i)));
         if (m_type == EntityType::Player)
-            bullet->SetOwnerEntity(OwnerEntity::Player);
+        {
+	        bullet->SetOwnerEntity(OwnerEntity::Player);
+        }
         else if (m_type == EntityType::Enemy)
-            bullet->SetOwnerEntity(OwnerEntity::Enemy);
+        {
+	        bullet->SetOwnerEntity(OwnerEntity::Enemy);
+        }
 
         m_bullets.push_back(bullet);
     }
@@ -32,27 +37,36 @@ Character::~Character() {}
 void Character::Move(sf::Vector2f& movementVector, Direction& direction)
 {
     if (direction != Direction::None)
+    {
 	    m_sprite.SetSpriteDirection(direction);
+    }
     sf::Vector2f movementAmount = movementVector * m_movementSpeed;
 	EntityBase::Move(movementAmount);
 }
 
-void Character::Die() {
+void Character::Die()
+{
     m_state = CharacterState::Dead;
 }
 
-void Character::Shoot() {
+void Character::Shoot()
+{
     if (!m_canShoot)
-        return;
+    {
+	    return;
+    }
 
     for (auto& bullet : m_bullets)
-        if (!bullet->GetActive()) {
-            auto pos = m_position + (m_directionsMap[m_sprite.GetSpriteDirection()] * 2.f);
-            bullet->SetDirection(m_sprite.GetSpriteDirection());
-            bullet->SetPosition(pos);
-            bullet->SetActive(true);
-            bullet->Move(m_directionsMap[m_sprite.GetSpriteDirection()]);
-        }
+    {
+	    if (!bullet->GetActive())
+	    {
+	    	auto pos = m_position + (m_directionsMap[m_sprite.GetSpriteDirection()] * 2.f);
+	    	bullet->SetDirection(m_sprite.GetSpriteDirection());
+	    	bullet->SetPosition(pos);
+	    	bullet->SetActive(true);
+	    	bullet->Move(m_directionsMap[m_sprite.GetSpriteDirection()]);
+	    }
+    }
     
     m_attackTimeCounter = 0.f;
     m_canShoot = false;
@@ -62,40 +76,53 @@ void Character::LoadCharacterSpecs(const std::string& fileName)
 {
 	std::ifstream file;
 	file.open("Game/Data/Characters/" + fileName);
-	if (!file.is_open()) {
+	if (!file.is_open())
+	{
 		std::cout << "Cannot open character file: " << fileName << std::endl;
 		return;
 	}
+	
 	std::string line;
-	while (std::getline(file, line)) {
+	while (std::getline(file, line))
+	{
 		if (line[0] == '<') //Comment line.
+		{
 			continue;
+		}
+		
 		std::stringstream keystream(line);
 		std::string type;
 		keystream >> type;
-		if (type == "Name") {
+		
+		if (type == "Name")
+		{
 			keystream >> m_name;
 		}
-		else if (type == "SpriteID") {
+		else if (type == "SpriteID")
+		{
 			std::string id;
 			keystream >> id;
 			m_sprite.Load(id);
             auto characterSize = sf::Vector2f(m_sprite.GetSpriteSize().x, m_sprite.GetSpriteSize().y);
             SetSize(characterSize);
 		}
-		else if (type == "MovementSpeed") {
+		else if (type == "MovementSpeed")
+		{
 			keystream >> m_movementSpeed;
 		}
-		else if (type == "AttackSpeed") {
+		else if (type == "AttackSpeed")
+		{
 			keystream >> m_attackTimer;
 		}
-        else if (type == "Direction") {
+        else if (type == "Direction")
+        {
             int direction = -1;
             keystream >> direction;
             m_defaultDirection = (Direction)direction;
             m_sprite.SetSpriteDirection(m_defaultDirection);
         }
-		else {
+		else
+		{
 			std::cout << "Unknown specification parameter in character file: " << type << std::endl;
 		}
 	}
@@ -105,12 +132,17 @@ void Character::LoadCharacterSpecs(const std::string& fileName)
 void Character::Update(float deltaTime)
 {
     if (m_state == CharacterState::Dead)
-        return;
+    {
+	    return;
+    }
 
-    if (!m_canShoot) {
+    if (!m_canShoot)
+    {
         m_attackTimeCounter += deltaTime;
         if (m_attackTimeCounter >= m_attackTimer)
-            m_canShoot = true;
+        {
+	        m_canShoot = true;
+        }
     }
     m_sprite.Update(deltaTime);
     m_sprite.SetSpritePosition(m_position);
@@ -120,7 +152,9 @@ void Character::Update(float deltaTime)
 void Character::Render(sf::RenderWindow* window)
 {
     if (m_state == CharacterState::Dead)
-        return;
+    {
+	    return;
+    }
 
 	m_sprite.Render(window);
 

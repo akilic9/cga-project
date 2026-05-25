@@ -36,11 +36,16 @@ void CWindow::InitWindowEvents()
 void CWindow::Update()
 {
     sf::Event event;
-    while (m_window.pollEvent(event)) {
+    while (m_window.pollEvent(event))
+    {
         if (event.type == sf::Event::LostFocus)
+        {
             m_inputManager.SetHasFocus(false);
+        }
         else if (event.type == sf::Event::GainedFocus)
+        {
             m_inputManager.SetHasFocus(true);
+        }
 
         m_inputManager.HandleInputs(event);
     }

@@ -5,7 +5,8 @@ StateManager::StateManager()
 
 StateManager::~StateManager()
 {
-    for (auto& itr : m_states) {
+    for (auto& itr : m_states)
+    {
         itr.second->OnDelete();
         delete itr.second;
     }
@@ -15,7 +16,9 @@ StateManager::~StateManager()
 void StateManager::Update(float deltaTime)
 {
     if (m_states.empty())
+    {
         return;
+    }
 
     m_states[m_activeState]->Update(deltaTime);
 }
@@ -24,7 +27,9 @@ void StateManager::Update(float deltaTime)
 void StateManager::Render()
 {
     if (m_states.empty())
+    {
         return;
+    }
 
     m_states[m_activeState]->Render();
 }
@@ -33,13 +38,17 @@ void StateManager::Render()
 void StateManager::SwitchState(const int& stateId)
 {
     if (m_activeState > -1)
+    {
         m_states[m_activeState]->OnExit();
+    }
 
-    if (auto s = m_states.find(stateId); s != m_states.end()) {
+    if (auto s = m_states.find(stateId); s != m_states.end())
+    {
         m_activeState = stateId;
         m_states[m_activeState]->OnEnter();
     }
-    else {
+    else
+    {
         CreateState(stateId);
         m_activeState = stateId;
         m_states[m_activeState]->OnEnter();
@@ -50,15 +59,19 @@ void StateManager::SwitchState(const int& stateId)
 void StateManager::SwitchState(const std::string& stateName)
 {
     if (auto itr = m_nameToIdMap.find(stateName); itr != m_nameToIdMap.end())
+    {
         SwitchState(m_nameToIdMap[stateName]);
+    }
 }
 
 int StateManager::GetIdFromName(const std::string& name)
 {
     if (auto itr = m_nameToIdMap.find(name); itr != m_nameToIdMap.end())
+    {
         return m_nameToIdMap[name];
-    else
-        return -1;
+    }
+
+    return -1;
 }
 
 //Queue a state to be removed.
@@ -70,7 +83,8 @@ void StateManager::QueueForRemoval(const int& stateId)
 //Handle removals.
 void StateManager::ProcessRemovals()
 {
-    while (m_removalQueue.begin() != m_removalQueue.end()) {
+    while (m_removalQueue.begin() != m_removalQueue.end())
+    {
         RemoveState(*m_removalQueue.begin());
         m_removalQueue.erase(m_removalQueue.begin());
     }
@@ -79,7 +93,8 @@ void StateManager::ProcessRemovals()
 //Add a state and add it to the states list.
 void StateManager::CreateState(const int& stateId)
 {
-    if (auto s = m_factory.find(stateId); s != m_factory.end()) {
+    if (auto s = m_factory.find(stateId); s != m_factory.end())
+    {
         StateBase* state = s->second();
         m_states[stateId] = state;
         state->OnCreate();
@@ -89,7 +104,8 @@ void StateManager::CreateState(const int& stateId)
 //Remove a state from the list.
 void StateManager::RemoveState(const int& stateId)
 {
-    if (auto s = m_states.find(stateId); s != m_states.end()) {
+    if (auto s = m_states.find(stateId); s != m_states.end())
+    {
         s->second->OnDelete();
         delete s->second;
         m_states.erase(s->first);

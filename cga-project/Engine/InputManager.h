@@ -5,7 +5,8 @@
 #include <unordered_map>
 #include <functional>
 
-enum class InputType {
+enum class InputType
+{
     KeyDown = sf::Event::KeyPressed,
     KeyUp = sf::Event::KeyReleased,
     MButtonDown = sf::Event::MouseButtonPressed,
@@ -24,7 +25,8 @@ enum class InputType {
 
 //TODO: Only designed for keyboard input and close button as a start, needs to be expanded to work with other types.
 //Input type -> key code(if any)
-struct InputBinding {
+struct InputBinding
+{
     InputBinding(const std::string& name, std::pair<InputType, int> map) : m_name(name), m_inputMap(map) {}
 
     std::pair<InputType, int> m_inputMap;
